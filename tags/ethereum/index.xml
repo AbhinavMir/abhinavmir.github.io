@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ethereum on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/ethereum/</link>
+    <description>Recent content in Ethereum on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How does an Ethereum transaction take place</title>
+      <link>/posts/eth-tx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/eth-tx/</guid>
+      <description>A Blockchain is essentially a public database in which the data is shared and synchronized across multiple nodes connected in a network. A Blockchain is built up of Block Data structures arranged in a Chain like cryptographic sequence.
+Ethereum is no different, when you commit any transaction on the chain, the data must be added to the network for it to be successful. The verification process is similar to Bitcoin, which uses Proof of Work.</description>
+    </item>
+    
+  </channel>
+</rss>

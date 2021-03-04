@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Linux Cheat Sheet - Abhinav Srivastava / @abhinavmir</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Linux Cheat Sheet" />
+<meta property="og:description" content="The Linux Beginner&rsquo;s Guide What is Linux 🤔 Linux is a family of Unix-like OSs based on the Linux Kernel. Linux Kernel is a monolithic kernel with a modular design. Here is a a simplified architecture of the Linux Operating System.
+When you boot up your own Linux Distro system (more on this later), you are utilizing the User Space which is were your User Applications and glibc (Used for implementing functions such as fopen(), calloc(),open()) exist." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/linux-cheat-sheet/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Cheat Sheet"/>
+<meta name="twitter:description" content="The Linux Beginner&rsquo;s Guide What is Linux 🤔 Linux is a family of Unix-like OSs based on the Linux Kernel. Linux Kernel is a monolithic kernel with a modular design. Here is a a simplified architecture of the Linux Operating System.
+When you boot up your own Linux Distro system (more on this later), you are utilizing the User Space which is were your User Applications and glibc (Used for implementing functions such as fopen(), calloc(),open()) exist."/>
+<script src="/js/feather.min.js"></script>
+	
+	<link href="/css/fonts.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/">Abhinav Srivastava / @abhinavmir</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Linux Cheat Sheet</h1>
+		</div>
+		
+
+		<section class="body">
+			<h2 id="the-linux-beginners-guide">The Linux Beginner&rsquo;s Guide</h2>
+<h3 id="what-is-linux-">What is Linux 🤔</h3>
+<p>Linux is a family of Unix-like OSs based on the Linux Kernel. Linux Kernel is a monolithic kernel with a modular design. Here is a a simplified architecture of the Linux Operating System.</p>
+<p><img src="https://developer.ibm.com/developer/default/articles/l-linux-kernel/images/figure2.jpg" alt="The fundamental architecture of the GNU/Linux operating system"></p>
+<p>When you boot up your own Linux Distro system (more on this later), you are utilizing the User Space which is were your User Applications and <a href="https://www.gnu.org/software/libc/libc.html">glibc</a> (Used for implementing functions such as fopen(), calloc(),open()) exist. User Space interacts with the Kernel Space mainly via the System Call Interface.</p>
+<p>System Call is how Userspace software requests service from the Kernel. Interface implements basic functions such as <code>read</code> and <code>write</code> . Typically, Sys Calls rely on Software Interrupts (SI). The SI will transfer control to the Kernel. If you&rsquo;ve studied Computer Architecture and Organization, you might recall Software Interrupts as a signal to the kernel signaling that a certain even has taken place. You can read more about Software Interrupts <a href="http://www.linfo.org/software_interrupt.html#:~:text=A%20software%20interrupt%2C%20also%20called,a%20program%20in%20user%20mode.">here</a> and about how Sys Calls are implemented <a href="https://en.wikipedia.org/wiki/System_call#Typical_implementations">here</a>.</p>
+<p>Below that is your Kernel, which has a number of subsystems. We have used the term Kernel quite a few times, let&rsquo;s talk a little bit about what a Kernel is.</p>
+<p>Kernels are computer programs that are responsible for low-level tasks: Disk Management, Task Management and stuff. It provides an interface between the user and the hardware components of the system.</p>
+<p><img src="Architecture-of-Linux-removebg-preview.png" alt="Architecture of Linux"></p>
+<p>There are various different types of Kernels, here&rsquo;s a few:</p>
+<ol>
+<li>
+<p>Monolithic: MS-DOS, Unix, Linux</p>
+</li>
+<li>
+<p>Microkernel: GNU Hurd</p>
+</li>
+<li>
+<p>Hybrid Kernel: Windows NT (The kernel behind Windows Operating Systems)</p>
+</li>
+<li>
+<p>Nanokernel: KeyKOS</p>
+</li>
+</ol>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/OS-structure2.svg/1024px-OS-structure2.svg.png" alt="img"></p>
+<p>One of my favorite pieces on this topic is <a href="https://developer.ibm.com/technologies/linux/articles/l-linux-kernel/#:~:text=Architecture%2Ddependent%20code,-While%20much%20of&amp;text=For%20a%20typical%20desktop%2C%20the,in%20.%2Flinux%2Farch.">this article</a> by IBM. Some of the material found here is a condensed version of the that article.</p>
+<p>Finally, the architecture dependent code: Majority of Linux Code is architecture-independent, there are certain parts of the Linux Codebase which needs to be optimized to the architecture it runs on. This part of the code does exactly that.</p>
+<p><img src="https://knowstuffs.files.wordpress.com/2012/06/linux_kernel2.png" alt="img"></p>
+<p><strong>So why Linux</strong>?</p>
+<p>We assume that if you&rsquo;ve read thus far, you might have some answer to this question, but we will try to convince you a little more.</p>
+<p>Servers, Gaming Consoles, Spaceships - all use Linux in some way or another. Our Chairperson &lsquo;21, Tej wrote a piece discussing the <a href="https://medium.com/vit-linux-user-group/can-linux-be-used-for-everyday-purpose-369bb739c3ad">utility of Linux in everyday life</a> and the founder of VIT Linux User Group has written an article introducing Linux from a User&rsquo;s perspective <a href="https://medium.com/vit-linux-user-group/im-a-cs-undergraduate-and-i-haven-t-used-windows-in-two-years-e79c6a8ac948">here</a>. Our Core Committee Member, Sarthak has written a 2-part article on <a href="https://medium.com/vit-linux-user-group/introduction-to-linux-part-1-first-blood-3cd248b8ede0">how to get started with Linux</a>.</p>
+<!-- raw HTML omitted -->
+<p><strong>How is it different from Windows</strong></p>
+<ul>
+<li>Linux is Open Source, Windows is not. It is secure, and it is easy to detect and fix bugs.</li>
+<li>Linux File System works differently than Windows. Where Windows has different data drives (C drive, E drive etc.), in Linux files are ordered in a tree structure as such.</li>
+</ul>
+<p><img src="https://www.guru99.com/images/FolderStructure.png" alt="Linux Vs Windows"></p>
+<p>Even Peripherals in Linux are treated as files, unlike Windows, who classifies    devices as devices and so on and so forth and</p>
+<ul>
+<li>Windows has 4 types of Users: Admin, Std, Child &amp; Guest, where Linux has Root, Regular and Service.</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>Now that you have a basic idea about Linux, let&rsquo;s choose a Linux Distro for you.</p>
+<p><strong>Linux Distros</strong>: Linux Operating System isn&rsquo;t developed or copyrighted by one single organization. There are lots of parts to a Linux System: Terminal, xServer, Desktop Environment etc. are all developed independently, sometimes by different organizations. If you wanted, you could build everything from source and get yourself a new Linux Distro, but we discourage that when you&rsquo;re just starting off since it requires a mammoth amount of work.</p>
+<p>Instead, you could go with one of the many Linux Distros (Short for Distributions). These Linux Distros take all the code, build it and combine them into a single Operating System for you.</p>
+<p><img src="image-removebg-preview.png" alt="image-removebg-preview"></p>
+<p>To find the right Distro for you, you can use: <a href="https://librehunt.org/">https://librehunt.org/</a></p>
+<p>Be sure to consult other people in Linux forums and subreddits for your doubts. You can also leave a message to VIT Linux User Group via the Issues page on this Repo and we will try to get back to you.</p>
+<p><strong>Installing a Linux Distro</strong></p>
+<p>Once you have chosen your first distro, you will now have to install it. There are multitude of ways to do so. To first try out the operating system, you can use <a href="https://www.howtogeek.com/196060/beginner-geek-how-to-create-and-use-virtual-machines/">Virtual Machines</a> or if you&rsquo;re on Windows, you can try the <a href="https://devblogs.microsoft.com/commandline/wsl2-will-be-generally-available-in-windows-10-version-2004/">WSL2</a>. It is suggested that for any serious use, you install your chosen Distro natively. To do so, you can refer to the following <a href="https://www.educba.com/install-linux/">article</a>. Do not keep passwords that are too complex since you will need them frequently, but do not keep it too simple either.</p>
+<!-- raw HTML omitted -->
+<h2 id="the-linux-cheat-sheet">The Linux Cheat Sheet</h2>
+<h3 id="the-terminal">The Terminal</h3>
+<p><img src="image-20201225200409678.png" alt="image-20201225200409678"></p>
+<p>The terminal in Linux is where most of the work happens (apart from your Browser where you will spend hours on Reddit 😛). The Terminal has a lot of useful tools, but we will start by doing the silly things.</p>
+<p>What you see in the picture above is the locomotive command that drives a train through your screen. To install it, open your terminal (usually pretty easy) and type the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$  apt-get install sl
+</code></pre></div><p>It might give you one of two errors: <code>Permission Denied</code> or <code>Command Not Found</code>.</p>
+<p><code>Permission denied</code> occurs when your terminal does not have the privilege to access certain files or perform certain commands. To deal with this, you can use <code>sudo</code> here, but <strong>do not</strong> always <a href="https://www.beyondtrust.com/blog/entry/unix-linux-privileged-management-should-you-sudo#:~:text=Whenever%20a%20user%20tries%20to,to%20give%20system%20based%20permissions.">depend on <code>sudo</code></a>.</p>
+<p><code>Sudo</code> is a command that allows you to run programs with the security privileges of another user, but by default, that other user is <code>root</code>, the &ldquo;superuser&rdquo; of the Linux System. You will be prompted for your password that you kept while installing.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$  sudo apt-get install sl
+</code></pre></div><p><code>Command Not Found</code> occurs when your Distro does not use apt-get and uses some other method. I personally use Debiam, for which <code>apt-get</code> works fine, but CentOS for example uses <code>dnf</code>. An easy way to figure out your system&rsquo;s packaging tool is to Google it. In fact that will be your solution to everything.</p>
+<p><img src="image-20201225201554363.png" alt="image-20201225201554363"></p>
+<p>Once installed, you should type in the following.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sl
+</code></pre></div><p>And you will find the locomotive running through your screen. Congratulations!</p>
+<p>Now, you have learned about the following</p>
+<ol>
+<li>Sudo</li>
+<li>Installing stuff and Package Management (apt-get, dnf etc.)</li>
+<li>Running a command on the terminal</li>
+</ol>
+<h4 id="now-lets-play-around-with-the-files">Now let&rsquo;s play around with the Files</h4>
+<p>We already talked a little about <a href="https://opensource.com/life/16/10/introduction-linux-filesystems">Linux File Systems</a>, now let&rsquo;s wander around the directories in our system. The first thing you want to know is which directory you are in.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ pwd
+</code></pre></div><p>This will return your current terminal directory. Now let&rsquo;s make a new folder.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir newFolder
+</code></pre></div><p>That&rsquo;s it! You have a new folder called &ldquo;newFolder&rdquo;, now let&rsquo;s navigate into it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd newFolder
+</code></pre></div><p>Now you&rsquo;re inside the new folder, let&rsquo;s cross-check that.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ pwd
+</code></pre></div><p>To go back to your original directory, type</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd ..
+</code></pre></div><!-- raw HTML omitted -->
+<p>This pretty much covers the absolute basics of Linux, going forth, you will need to familiarize yourself with Vim and other such tools. To get such regular updates from us, follow our <a href="https://www.instagram.com/vit_lug/">Instagram</a> and join our <a href="https://www.reddit.com/r/VITLUG/">Subreddit</a>.</p>
+<!-- raw HTML omitted -->
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					
+					
+					
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+
+        </div>
+    </body>
+</html>

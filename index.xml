@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abhinav Srivastava / @abhinavmir</title>
+    <link>/</link>
+    <description>Recent content on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A caveman introduction to Yield Farming</title>
+      <link>/posts/yield-farming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/yield-farming/</guid>
+      <description>&amp;ldquo;But you know what I like more than materialistic things? Knowledge.&amp;rdquo; - Tai Lopez
+ A wise man once said: &amp;ldquo;Days are sunny, for those who HODL their money&amp;rdquo;. Okay, I made it up but looking at my career trajectory, you&amp;rsquo;re free to quote it to my name once I make it big.
+Unfortunalely, HODLing is on hold with the new entrants: Liquidity Pools and Yield Farming.
+In Summary: Yield Farming is a way to provide liquid to a certain liquidity pool, and be rewarded for it.</description>
+    </item>
+    
+    <item>
+      <title>Bitcoin and the claim of Total Turingness [OLD]</title>
+      <link>/posts/bsv-turing-old/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bsv-turing-old/</guid>
+      <description>Craig Wright is a very controversial man — Bitcoin SV, Claims of being Satoshi Nakamoto, major plagiarism accusations- Overall, not the face of Blockchain you&amp;rsquo;d want. But Craig Wright is also a very smart man, much more than the Twitter handles in the Crypto Community would have you believe. His degrees and years of experience are something you cannot ignore, or at least that&amp;rsquo;s what the BSV community and Wright himself want you to believe.</description>
+    </item>
+    
+    <item>
+      <title>Building Iroha from Source on your Linux System</title>
+      <link>/posts/build-iroha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/build-iroha/</guid>
+      <description>Hyperledger Iroha is a Blockchain platform written in C++ that uses YAC Consensus. Iroha mainly helps create, verify and manage fungible assets and user accounts.
+Installing Iroha with Docker is a lot easier, but for a lot of purposes, installing Iroha natively makes a lot more sense.
+Pre-requisites The first thing to do would be to update package lists.
+apt-get update Remember that while I&amp;rsquo;m using sudo, you should only use it after ensuring that it&amp;rsquo;s A-ok to give root permissions to install the modules required.</description>
+    </item>
+    
+    <item>
+      <title>Gameboy -- Everything under the hood.</title>
+      <link>/posts/gameboy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/gameboy/</guid>
+      <description>I don&amp;rsquo;t like consumerism. One of my favorite Scholars, Bertrand Russell, once said
+ &amp;ldquo;It is preoccupation with possessions, more than anything else, that prevents us from living freely and nobly.&amp;quot;
+ But you can bet I have a soft spot in my heart for Nintendo products. Pokemon on Game Boy Advance was one the only games I have ever truly enjoyed before being dragged by the dark, drab realities of life.</description>
+    </item>
+    
+    <item>
+      <title>hello!</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Currently working on Blockchain, DLTs, DeFi/Crypto, Distributed Storage. Also (casually) learning Cryptography and CyberSecurity. I have experience with Web Development (Especially with JavaScript, C#, Python and PHP frameworks). I’m currently interning @ Persistence as a Blockchain Developer / Protocol Researcher. Also researching CBDCs with Prof. Henry Kim @ Blockchain Lab at York University  formerly  Project Head @ VIT Linux User Group. Fellow @ Ethereum India Fellowship. Intern @ Superbolter, Punar Rehab, ACS Business Digital GirlScript Summer of Code (Ext) and UpLift Mentor Youth Red Cross VIT volunteer  Contact  How to reach me: abhinavmir@protonmail.</description>
+    </item>
+    
+    <item>
+      <title>How does an Ethereum transaction take place</title>
+      <link>/posts/eth-tx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/eth-tx/</guid>
+      <description>A Blockchain is essentially a public database in which the data is shared and synchronized across multiple nodes connected in a network. A Blockchain is built up of Block Data structures arranged in a Chain like cryptographic sequence.
+Ethereum is no different, when you commit any transaction on the chain, the data must be added to the network for it to be successful. The verification process is similar to Bitcoin, which uses Proof of Work.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Interblockchain Communication and the Cosmos SDK</title>
+      <link>/posts/cosmos-sdk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cosmos-sdk/</guid>
+      <description>What is Interblockchain Communication? Today there are thousands of networks, permissioned and permissionless. These networks work great on their own, but to realize their true potential, we need communication between Blockchains. From Atomic Swaps to Shared Contracts, there is a lot of potential. Interblockchain Communication are just a set of protocols that allow for communication between Blockchain networks.
+ Cosmos is a decentralized network of independent parallel blockchains, each powered by BFT consensus algorithms like Tendermint consensus.</description>
+    </item>
+    
+    <item>
+      <title>Kanye West taught me how to live</title>
+      <link>/posts/kanye/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/kanye/</guid>
+      <description>I’ve never had a harsh childhood. My parents were very good parents, God Bless, and have always wanted the best for me. There’s been a fair share of living the typical Asian kid lifestyle: Curfews to return home, focus on academics, submission to authority — but in hindsight, it came from a place of love. Discipline, Peace, and Respect are what I’d call the pillars of Asian or at least Indian style of parenting.</description>
+    </item>
+    
+    <item>
+      <title>Linux Cheat Sheet</title>
+      <link>/posts/linux-cheat-sheet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/linux-cheat-sheet/</guid>
+      <description>The Linux Beginner&amp;rsquo;s Guide What is Linux 🤔 Linux is a family of Unix-like OSs based on the Linux Kernel. Linux Kernel is a monolithic kernel with a modular design. Here is a a simplified architecture of the Linux Operating System.
+When you boot up your own Linux Distro system (more on this later), you are utilizing the User Space which is were your User Applications and glibc (Used for implementing functions such as fopen(), calloc(),open()) exist.</description>
+    </item>
+    
+    <item>
+      <title>The journey of a C&#43;&#43; program</title>
+      <link>/posts/cpp-journey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cpp-journey/</guid>
+      <description>If you couldn&amp;rsquo;t already tell, I love Bjarne, and by extension, I love C++. In this article, I go over how C++ compiles a program to binaries, and why I love C++. This is partially to understand how C++ works. Documentation helps me understand.
+ There are only two kinds of languages: the ones people complain about and the ones nobody uses. ― Bjarne Stroustrup, The C++ Programming Language
+ I got pretty inspired by HaoranWang&amp;rsquo;s CRUSTand thus wanted to write my own Compiler for C.</description>
+    </item>
+    
+  </channel>
+</rss>

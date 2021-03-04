@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IBC on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/ibc/</link>
+    <description>Recent content in IBC on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/ibc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to Interblockchain Communication and the Cosmos SDK</title>
+      <link>/posts/cosmos-sdk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cosmos-sdk/</guid>
+      <description>What is Interblockchain Communication? Today there are thousands of networks, permissioned and permissionless. These networks work great on their own, but to realize their true potential, we need communication between Blockchains. From Atomic Swaps to Shared Contracts, there is a lot of potential. Interblockchain Communication are just a set of protocols that allow for communication between Blockchain networks.
+ Cosmos is a decentralized network of independent parallel blockchains, each powered by BFT consensus algorithms like Tendermint consensus.</description>
+    </item>
+    
+  </channel>
+</rss>

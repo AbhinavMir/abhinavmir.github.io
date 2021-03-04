@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Building Iroha from Source on your Linux System - Abhinav Srivastava / @abhinavmir</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Building Iroha from Source on your Linux System" />
+<meta property="og:description" content="Hyperledger Iroha is a Blockchain platform written in C&#43;&#43; that uses YAC Consensus. Iroha mainly helps create, verify and manage fungible assets and user accounts.
+Installing Iroha with Docker is a lot easier, but for a lot of purposes, installing Iroha natively makes a lot more sense.
+Pre-requisites The first thing to do would be to update package lists.
+apt-get update Remember that while I&rsquo;m using sudo, you should only use it after ensuring that it&rsquo;s A-ok to give root permissions to install the modules required." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/build-iroha/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Building Iroha from Source on your Linux System"/>
+<meta name="twitter:description" content="Hyperledger Iroha is a Blockchain platform written in C&#43;&#43; that uses YAC Consensus. Iroha mainly helps create, verify and manage fungible assets and user accounts.
+Installing Iroha with Docker is a lot easier, but for a lot of purposes, installing Iroha natively makes a lot more sense.
+Pre-requisites The first thing to do would be to update package lists.
+apt-get update Remember that while I&rsquo;m using sudo, you should only use it after ensuring that it&rsquo;s A-ok to give root permissions to install the modules required."/>
+<script src="/js/feather.min.js"></script>
+	
+	<link href="/css/fonts.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/">Abhinav Srivastava / @abhinavmir</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Building Iroha from Source on your Linux System</h1>
+		</div>
+		
+
+		<section class="body">
+			<p>Hyperledger Iroha is a Blockchain platform written in C++ that uses <a href="https://arxiv.org/abs/1809.00554">YAC Consensus</a>. Iroha mainly helps create, verify and manage fungible assets and user accounts.</p>
+<p>Installing Iroha with Docker is a lot easier, but for a lot of purposes, installing Iroha natively makes a lot more sense.</p>
+<h3 id="pre-requisites">Pre-requisites</h3>
+<p>The first thing to do would be to update package lists.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apt-get update
+</code></pre></div><p>Remember that while I&rsquo;m using <code>sudo</code>, you should only use it after ensuring that it&rsquo;s A-ok to give root permissions to install the modules required.</p>
+<p>You can go ahead and install the pre-requsites using the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apt-get -y --no-install-recommends install build-essential ninja-build git ca-certificates tar curl unzip cmake
+</code></pre></div><p>Here&rsquo;s the list of the pre-requisites needed.</p>
+<p><code>build-essential</code> references the tools needed to compile a Debian packge, such as GCC/G++ etc.</p>
+<p><code>ninja-build</code> is a build system.</p>
+<p><code>git</code> is version control.</p>
+<p><code>ca-certificates</code> are authority tools used to issue digital certificates.</p>
+<p><code>tar</code>, <code>curl</code>, <code>unzip</code> are tools to download and work with certain types of file.</p>
+<p><code>cmake</code> is another build system.</p>
+<h3 id="installing-the-dependencies">Installing the dependencies</h3>
+<p>Here you&rsquo;ll need to install a bunch of dependencies Iroha uses. This one is pretty straightforward. Fair warning: This might take a minute or two to be done with.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/hyperledger/iroha.git
+iroha/vcpkg/build_iroha_deps.sh
+vcpkg/vcpkg integrate install
+</code></pre></div><p>At the end, you&rsquo;ll get a build parameter such as <code>-DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake</code>, you might want to save it somewhere for later.</p>
+<h3 id="building-iroha">Building Iroha</h3>
+<p>Check the number of threads on your system using <code>nproc</code>. Now go ahead and build Iroha using the resources we have!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd iroha
+cmake -H. -Bbuild -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake -G &#34;Ninja&#34;
+cmake --build build --target irohad -- -j&lt;number of threads&gt;
+</code></pre></div><p>And you&rsquo;re done! Tune in to find our some tutorials on Iroha soon enough. Let me in the comments if anything isn&rsquo;t clear.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					
+					
+					
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+
+        </div>
+    </body>
+</html>

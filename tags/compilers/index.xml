@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>compilers on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/compilers/</link>
+    <description>Recent content in compilers on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/compilers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bitcoin and the claim of Total Turingness [OLD]</title>
+      <link>/posts/bsv-turing-old/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bsv-turing-old/</guid>
+      <description>Craig Wright is a very controversial man — Bitcoin SV, Claims of being Satoshi Nakamoto, major plagiarism accusations- Overall, not the face of Blockchain you&amp;rsquo;d want. But Craig Wright is also a very smart man, much more than the Twitter handles in the Crypto Community would have you believe. His degrees and years of experience are something you cannot ignore, or at least that&amp;rsquo;s what the BSV community and Wright himself want you to believe.</description>
+    </item>
+    
+    <item>
+      <title>The journey of a C&#43;&#43; program</title>
+      <link>/posts/cpp-journey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cpp-journey/</guid>
+      <description>If you couldn&amp;rsquo;t already tell, I love Bjarne, and by extension, I love C++. In this article, I go over how C++ compiles a program to binaries, and why I love C++. This is partially to understand how C++ works. Documentation helps me understand.
+ There are only two kinds of languages: the ones people complain about and the ones nobody uses. ― Bjarne Stroustrup, The C++ Programming Language
+ I got pretty inspired by HaoranWang&amp;rsquo;s CRUSTand thus wanted to write my own Compiler for C.</description>
+    </item>
+    
+  </channel>
+</rss>

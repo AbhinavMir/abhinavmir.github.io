@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Bitcoin and the claim of Total Turingness [OLD] - Abhinav Srivastava / @abhinavmir</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Bitcoin and the claim of Total Turingness [OLD]" />
+<meta property="og:description" content="Craig Wright is a very controversial man — Bitcoin SV, Claims of being Satoshi Nakamoto, major plagiarism accusations- Overall, not the face of Blockchain you&rsquo;d want. But Craig Wright is also a very smart man, much more than the Twitter handles in the Crypto Community would have you believe. His degrees and years of experience are something you cannot ignore, or at least that&rsquo;s what the BSV community and Wright himself want you to believe." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bsv-turing-old/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bitcoin and the claim of Total Turingness [OLD]"/>
+<meta name="twitter:description" content="Craig Wright is a very controversial man — Bitcoin SV, Claims of being Satoshi Nakamoto, major plagiarism accusations- Overall, not the face of Blockchain you&rsquo;d want. But Craig Wright is also a very smart man, much more than the Twitter handles in the Crypto Community would have you believe. His degrees and years of experience are something you cannot ignore, or at least that&rsquo;s what the BSV community and Wright himself want you to believe."/>
+<script src="/js/feather.min.js"></script>
+	
+	<link href="/css/fonts.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/">Abhinav Srivastava / @abhinavmir</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Bitcoin and the claim of Total Turingness [OLD]</h1>
+		</div>
+		
+
+		<section class="body">
+			<p>Craig Wright is a very controversial man — Bitcoin SV, Claims of being Satoshi Nakamoto, major plagiarism accusations- Overall, not the face of Blockchain you&rsquo;d want. But Craig Wright is also a very smart man, much more than the Twitter handles in the Crypto Community would have you believe. His degrees and years of experience are something you cannot ignore, or at least that&rsquo;s what the BSV community and Wright himself want you to believe.</p>
+<p>We give Dr. Wright the benefit of doubt today. In 2014, Dr. Wright came out with a paper titled “Bitcoin: A total Turing machine” [1] and today we talk will about it.</p>
+<p>If you don’t know about Turing Machines, now is a good time to talk about it. Turing machines are theoretical models of computation that represent an abstract machine. Turing machines are tapes divided into cells.</p>
+<p><img src="https://miro.medium.com/max/621/0*2PykOMQs3Y3lwoe8.gif" alt="Image for TMs"></p>
+<p><em>A Universal Turing Machine</em></p>
+<p>Turing machine was put forth by the legendary Alan Turing in ’36 and it proved something very important: the uncomputability of the Entscheidungsproblem. Turing Machines cannot be implemented in real life of course, because we don’t have infinite tapes in real life, and because these machines aren’t optimized for real-life implementations. For example. Real Life computers use RAMs, which TMs don’t. But TMs can compute anything a real computer can, given duration of computation is not an issue.</p>
+<p>Turing Completeness is the idea that any program that is Turing Complete will halt. And any program that halts will not tend to infinity. From here we deduce that a Turing Machine should run infinite time.
+How does this all relate to Bitcoin?</p>
+<p>Bitcoin’s Script is a stack-based, non-Turing Complete programming language. And there is a lot of conversation about this, especially attacking the Ethereum community for being Turing complete, and the lack of need to be Turing complete because “Post’s theorem”.</p>
+<p><img src="https://miro.medium.com/max/875/0*X3TkogsLcWPG0cR6.png" alt="Image for Stack">
+<em>Representation of a Stack Data Structure</em></p>
+<p>Post’s theorem posits the connection between Arithmetical Hierarchy and Turing degrees [2]. It is often stated defending the lack of need of Turing Completeness, and safety of decidability as another.</p>
+<p>Wright proposes Bitcoin has been what he proposes to call a “Probabilistic Total Turing machine”. Let me try to summarize Craig’s claims</p>
+<ul>
+<li>Wright proposes that Bitcoin is equivalent to the machine proposed in Wolfram’s conjecture, which states that a 2 state, 3 symbol Turing Machine is a Universal Turing Machine. By this, a proposition establishes that Bitcoin Script must also be a Universal Turing Script.</li>
+<li>Wright states that Bitcoin is Turing Complete and proves so using the Ackermann functions.</li>
+</ul>
+<p>Wright proposes that Bitcoin Script is a Probabilistic Total Turing Machine, which is something he proposes earlier. PTTM is different from PTMs. The alternate stack in the Script makes it Turing Complete.
+Lack of looping in Bitcoin Script does not it non-Turing Incomplete. Since Bitcoin is formed using Primitive Recursion Functions, the script construct is Turing Complete.</p>
+<p>Let’s try to dissect all this. Bitcoin does not support loops: This by itself does not make the script Turing Complete or Incomplete, but this does mean that the script lacks Control Structures. Sure, if-else is there, but without For loops, there is a lack of Control. This is not a bug in the language, it is a feature. A small script such as Busy Beaver [3] will cause the Bitcoin network to return DoS overtime at worst, and slow down the hash rate at best. This was implemented to increase decidability and safety.</p>
+<p>Two stacks don’t make a Turing Complete Machine: To Simulate a Two-Stack PDA (Which is Turing complete), you need a control structure. As I said in, Bitcoin lacks For loops.
+Bitcoin limits the number of non-Push operations you can do per script: If you look at Bitcoin’s Github, you will see the following piece of code</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX_OPS_PER_SCRIPT <span style="color:#f92672">=</span> <span style="color:#ae81ff">201</span>;
+</code></pre></div><p>This means that you can do 201 non-Push ops per script. This is  to safeguard against undecidable problems. So even if you implemented a 2PDA, you would be practically limited by this.
+Whether or not Bitcoin is Turing Complete is a futile discussion. Bitcoin Network is “more” Turing than other networks because of its size (That statement holds no scientific value, I said it as a figure of speech). Bitcoin Script is better off Turing incomplete by design, even though there might be some “proof” of it being otherwise. P2P consensus networks need to implement some form of decidability in their scripts. Ethereum, for example, has a Gas-system. It’s quasi-Turing Complete for that reason. Bitcoin Script, if used outside of the Bitcoin network, would have issues because it is Turing Incomplete by design, but a few modifications, and you can build it to be Turing Complete. But in practicality, no system is truly Turing Complete. I would love your comments about this!</p>
+<p><em>Further Reading</em></p>
+<p>[1] <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3265146">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3265146</a></p>
+<p>[2] <a href="https://youtu.be/TGE6jrVmt_I">https://youtu.be/TGE6jrVmt_I</a></p>
+<p>[3] <a href="https://en.wikipedia.org/wiki/Busy_beaver">https://en.wikipedia.org/wiki/Busy_beaver</a></p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+
+        </div>
+    </body>
+</html>

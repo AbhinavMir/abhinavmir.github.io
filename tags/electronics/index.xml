@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Electronics on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/electronics/</link>
+    <description>Recent content in Electronics on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/electronics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gameboy -- Everything under the hood.</title>
+      <link>/posts/gameboy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/gameboy/</guid>
+      <description>I don&amp;rsquo;t like consumerism. One of my favorite Scholars, Bertrand Russell, once said
+ &amp;ldquo;It is preoccupation with possessions, more than anything else, that prevents us from living freely and nobly.&amp;quot;
+ But you can bet I have a soft spot in my heart for Nintendo products. Pokemon on Game Boy Advance was one the only games I have ever truly enjoyed before being dragged by the dark, drab realities of life.</description>
+    </item>
+    
+  </channel>
+</rss>

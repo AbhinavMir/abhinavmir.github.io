@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Gameboy -- Everything under the hood. - Abhinav Srivastava / @abhinavmir</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Gameboy -- Everything under the hood." />
+<meta property="og:description" content="I don&rsquo;t like consumerism. One of my favorite Scholars, Bertrand Russell, once said
+ &ldquo;It is preoccupation with possessions, more than anything else, that prevents us from living freely and nobly.&quot;
+ But you can bet I have a soft spot in my heart for Nintendo products. Pokemon on Game Boy Advance was one the only games I have ever truly enjoyed before being dragged by the dark, drab realities of life." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/gameboy/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gameboy -- Everything under the hood."/>
+<meta name="twitter:description" content="I don&rsquo;t like consumerism. One of my favorite Scholars, Bertrand Russell, once said
+ &ldquo;It is preoccupation with possessions, more than anything else, that prevents us from living freely and nobly.&quot;
+ But you can bet I have a soft spot in my heart for Nintendo products. Pokemon on Game Boy Advance was one the only games I have ever truly enjoyed before being dragged by the dark, drab realities of life."/>
+<script src="/js/feather.min.js"></script>
+	
+	<link href="/css/fonts.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/">Abhinav Srivastava / @abhinavmir</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Gameboy -- Everything under the hood.</h1>
+		</div>
+		
+
+		<section class="body">
+			<p>I don&rsquo;t like consumerism. One of my favorite Scholars, Bertrand Russell, once said</p>
+<blockquote>
+<p><em>&ldquo;It is preoccupation with possessions, more than anything else, that prevents us from living freely and nobly.&quot;</em></p>
+</blockquote>
+<p>But you can bet I have a soft spot in my heart for Nintendo products. Pokemon on Game Boy Advance was one the only games I have ever truly enjoyed before being dragged by the dark, drab realities of life. I&rsquo;d love to have a shelf with Pokemon merch, but I digress.</p>
+<p>Now that we are done with that segment, let&rsquo;s get started by looking at the beautiful, beautiful Game Boy Classic!</p>
+<p>The Game Boy is as old as me, and it has more processing power than me. It has an 8-bit processor called the SHARP LR35902, which is a &ldquo;hybrid&rdquo; between Intel 8080 and Zilog Z80. Z80 is considered an enhancement of the 8080. Z80 had an enhanced instruction set that had single-bit addressing, shifts/rotates on memory and registers other than accumulator. You had program looping, program counter relative jumps, block I/O and byte search instructions. Z80 also had new IX and IY index registers and a better interrupt system. SHARP LR3590 had a little bit of both.</p>
+<ul>
+<li>8080&rsquo;s registers are used (Single Register file)</li>
+<li>Z80&rsquo;s Coding Syntax and Instruction Extender was used.</li>
+<li>However, neither IX, IY nor 8080&rsquo;s I/O scheme were used. SHARP used a completely memory scheme, so these were not needed.</li>
+<li>Like 8080, a 8-bit data bus and 16-bit address were used, where a memory of 64 KB of Memory could be addressed.</li>
+<li>The memory map had: Cartridge ROM, WRAM, Display RAM, I/O and interrupt enabler.</li>
+</ul>
+<p>We had a clock speed of about 4.2 MHz, which is achieved by a Crystal Oscillator. All of this worked on 3V DC, 0.6W supply.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/ow7di4xzp038t0qsqnl2.png" alt="Alt Text">
+<em>(That&rsquo;s CPU + Power Processing Unit + Audio Processing Unit)</em></p>
+<p>Gameboy&rsquo;s 8-bit CPU is called DMG CPU, equipped with 6 registers of 16 bit each: AF, BC, DE, HL, SP and PC. Here&rsquo;s what they mean -</p>
+<ul>
+<li>AF: AF are two 8-bit registers, A and F. A is the Accumulator (arithmetic operations usually take place here)</li>
+</ul>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/laxzpvjr3djtgc2w3wvv.jpg" alt="Alt Text"></p>
+<p><em>If you dial back to your Microcontrollers class, this is the Von Neumann Architecture and there is the accumulator</em>
+F is the Flag Register, it&rsquo;s a special purpose register where each of the 8-bit have different purposes.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/ouj0pccxsl71hxl6cyi5.png" alt="Flag Register"></p>
+<pre><code>- Zero Flag (Z):
+</code></pre>
+<p>This bit is set when the result of a math operation
+is zero or two values match when using the CP (call If Positive)
+instruction.
+- Subtract Flag (N):
+This bit is set if a subtraction was performed in the
+last math instruction.
+- Half Carry Flag (H):
+This bit is set if a carry occurred from the lower
+nibble in the last math operation.
+- Carry Flag (C):
+This bit is set if a carry occurred from the last
+math operation or if register A is the smaller value
+when executing the CP instruction.</p>
+<ul>
+<li>
+<p>BC, HL, DE are General Purpose Registers. They&rsquo;re used for 16-bit operations such as temporary storage, copy during execution of the program. Mostly memory stuff.</p>
+</li>
+<li>
+<p>PC is the program counter, which points to the next instruction in the memory. The CPU uses PC to fetch the next operation that needs to be executed.</p>
+</li>
+<li>
+<p>SP is the Stack Pointer, which points to the current stack position in the memory. This can get a little hairy, grab your closest notebook if it gets overwhelming. With a fair bit of Googling, if you&rsquo;ve followed the article thus far, I&rsquo;m sure you know what a <!-- raw HTML omitted -->Stack<!-- raw HTML omitted --> is.
+<img src="https://dev-to-uploads.s3.amazonaws.com/i/r6ipzpqc6pbsecljzb4o.jpg" alt="Stack">
+The stack in GameBoy usually keeps the variables and return addresses. It is also used to pass arguments to subroutines. So, to push information to the stack you would use PUSH, CALL and RST instructions. POP, RET and RETI are used to take information off the stack. The GameBoy stack pointer (SP) is used to keep track of the top of Stack. Remember, the Stack is a first-in, first-out data structure, so the top of the Stack will be the most recent data.</p>
+</li>
+</ul>
+<p>Now in GameBoy, execution starts at location 0, which is where GameBoy&rsquo;s boot ROM is located. You&rsquo;ll find the first instruction for the cartridges at the location <code>0000000100000000</code> , and we&rsquo;ll talk more about this in a minute.</p>
+<p>A typical way to fetch the instruction from memory would look like this charming little self-explanatory pseudocode.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#ae81ff">1.</span> <span style="color:#a6e22e">variable</span> <span style="color:#a6e22e">program_Counter</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0100</span> 
+<span style="color:#ae81ff">2.</span> <span style="color:#a6e22e">variable</span> <span style="color:#a6e22e">operation</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fetch_Operation</span>(<span style="color:#a6e22e">PC</span>)
+<span style="color:#ae81ff">3.</span> <span style="color:#66d9ef">switch</span>(<span style="color:#a6e22e">operation</span>){ <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">no_Operation</span>{<span style="color:#66d9ef">break</span>}; <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">operation</span>{<span style="color:#a6e22e">operation</span>; <span style="color:#66d9ef">break</span>;}
+
+<span style="color:#75715e">//The fetch_Operation would be
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">define</span> <span style="color:#a6e22e">operation</span>{<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">memory</span>[<span style="color:#a6e22e">program_Counter</span><span style="color:#f92672">++</span>]
+</code></pre></div><p>Now, remember, Z80 and GB&rsquo;s CPU use syntactically similar languages, so when we look at some real GB codes, don&rsquo;t be too surprised to discover that Z80 and LR35902 have similar looking codes. For example, the instruction extender is same in both (opcode 0xcb).</p>
+<h3 id="an-important-note-on-commands">An important note on commands</h3>
+<p>Alright, now that these commands have been fetched, we need to execute these commands. There are 8-bit load commands and 16-bit load commands. They do the work of loading things from place A to place B (eg. loading the content of a register to a stack). Finally, there are 8-bit Arithmetical and Logical Operations (eg. increment a value stored in register). In the DMG CPU, there&rsquo;s not a lot of 16-bit arithmetical operations to start with, and they just operate on the 16-bit registers. There&rsquo;s also shifting and rotation (shifting but the bits wrap around the edges) commands (eg. <code>00010000</code> -&gt; <code>00100000</code>).</p>
+<p>There are a few couple other control operations as well: <em>HALT</em> (Halt until interrupt), <em>NOP</em> (Don&rsquo;t do anything), Enable/Disable Interrupts. Then you&rsquo;ve got Jump operations, using which you can jump to any location in the memory.</p>
+<h2 id="lets-talk-about-memory">Let&rsquo;s talk about memory</h2>
+<p>Data is a bit obscure to the CPU. All this hullabaloo of wires we deal with in real world is irrelevant to the CPU. It is a processing unit, it gets data and it processes it. CPUs process all data, some correctly, some wrongly, but it is a heartless, agnostic machine, that takes in data, churns out data.</p>
+<p>Address Bus is that good friend of the CPU that delivers it just that: Data. Address Bus are Read/Write lines that are used to transfer data.</p>
+<p>Address Bus is also everyone else&rsquo;s friend! The peripherals and cartridge are all on the address bus! Let&rsquo;s dig a little bit deeper now.</p>
+<h4 id="memory-and-memory-mapped-io">Memory and Memory-Mapped I/O</h4>
+<p>Memory Mapped I/Os (MMIO) tend to share the memory space with the external memory. MMIO are just methods of connecting the CPU and the peripheries.
+<img src="https://dev-to-uploads.s3.amazonaws.com/i/c7tfejeq04zp4xul27ex.png" alt="Alt Text">
+What you see above is the general memory map of GameBoy, that I took from <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. They write in depth about GameBoy and I&rsquo;ve used their article among others (linked below) to research for this article, shout out!</p>
+<p>We will be looking specifically at ROM and Switchable ROM bank, which are the first two regions of the memory.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  0000-3FFF   16KB ROM Bank 00     (in cartridge, fixed at bank 00)
+  4000-7FFF   16KB ROM Bank 01..NN (in cartridge, switchable bank number)
+  8000-9FFF   8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
+  A000-BFFF   8KB External RAM     (in cartridge, switchable bank, if any)
+  C000-CFFF   4KB Work RAM Bank 0 (WRAM)
+  D000-DFFF   4KB Work RAM Bank 1 (WRAM)  (switchable bank 1-7 in CGB Mode)
+  E000-FDFF   Same as C000-DDFF (ECHO)    (typically not used)
+  FE00-FE9F   Sprite Attribute Table (OAM)
+  FEA0-FEFF   Not Usable
+  FF00-FF7F   I/O Ports
+  FF80-FFFE   High RAM (HRAM)
+  FFFF        Interrupt Enable Register
+</code></pre></div><p>The memory you see at 0100-014F is the internal information area. It has the Nintendo Logo, from here the entry point is established, the boot procedure then jumps to the main cartridge program. Now there are other metadata codes and flags that we will skip right now.</p>
+<p>Now that&rsquo;s all about the CPU of the GameBoy. I dug a little into how cartridges work, but nothing too much in depth. One day when I understand the cartridge system, I&rsquo;ll be back here!</p>
+<p>To read more about display in GameBoy, refer to Rodrigo&rsquo;s blogs <a href="https://www.copetti.org/projects/consoles/game-boy/">here</a>. A lot of the research for the article, was done by reading Raphael&rsquo;s GameBoy building Series, which you can read <a href="https://medium.com/@raphaelstaebler/building-a-gameboy-from-scratch-part-1-51d05496783e">here</a>. Of course, with this I leave you with my other two favorite resources, <a href="http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf">Game Boy CPU Manual</a> and Pan Doc&rsquo;s <a href="http://bgb.bircd.org/pandocs.htm#aboutthepandocs">Everything You Always Wanted To Know About GameBoy</a>.</p>
+<hr>
+<p>If you enjoyed reading the article, show some love with those funky like buttons. Let me know where could I improve, or if you have any questions. I&rsquo;ll be doing more such &ldquo;Under the Hood&rdquo; articles inspired by Rodrigo, so stick around!</p>
+<p>Mir, signing off.</p>
+<p><em>Credits for images</em>:
+[1] <a href="http://meseec.ce.rit.edu/551-projects/spring2014/4-1.pdf">http://meseec.ce.rit.edu/551-projects/spring2014/4-1.pdf</a>
+[2] <a href="https://www.quora.com/What-is-an-accumulator-in-computer-science">https://www.quora.com/What-is-an-accumulator-in-computer-science</a>
+[3] GameBoy CPU Manual
+[4] FreeCode Camp on Stacks
+[5] Raphael&rsquo;s Building GameBoy article</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					
+					
+					
+					
+					
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beginner on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/beginner/</link>
+    <description>Recent content in Beginner on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/beginner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A caveman introduction to Yield Farming</title>
+      <link>/posts/yield-farming/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/yield-farming/</guid>
+      <description>&amp;ldquo;But you know what I like more than materialistic things? Knowledge.&amp;rdquo; - Tai Lopez
+ A wise man once said: &amp;ldquo;Days are sunny, for those who HODL their money&amp;rdquo;. Okay, I made it up but looking at my career trajectory, you&amp;rsquo;re free to quote it to my name once I make it big.
+Unfortunalely, HODLing is on hold with the new entrants: Liquidity Pools and Yield Farming.
+In Summary: Yield Farming is a way to provide liquid to a certain liquidity pool, and be rewarded for it.</description>
+    </item>
+    
+    <item>
+      <title>Building Iroha from Source on your Linux System</title>
+      <link>/posts/build-iroha/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/build-iroha/</guid>
+      <description>Hyperledger Iroha is a Blockchain platform written in C++ that uses YAC Consensus. Iroha mainly helps create, verify and manage fungible assets and user accounts.
+Installing Iroha with Docker is a lot easier, but for a lot of purposes, installing Iroha natively makes a lot more sense.
+Pre-requisites The first thing to do would be to update package lists.
+apt-get update Remember that while I&amp;rsquo;m using sudo, you should only use it after ensuring that it&amp;rsquo;s A-ok to give root permissions to install the modules required.</description>
+    </item>
+    
+    <item>
+      <title>How does an Ethereum transaction take place</title>
+      <link>/posts/eth-tx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/eth-tx/</guid>
+      <description>A Blockchain is essentially a public database in which the data is shared and synchronized across multiple nodes connected in a network. A Blockchain is built up of Block Data structures arranged in a Chain like cryptographic sequence.
+Ethereum is no different, when you commit any transaction on the chain, the data must be added to the network for it to be successful. The verification process is similar to Bitcoin, which uses Proof of Work.</description>
+    </item>
+    
+  </channel>
+</rss>
