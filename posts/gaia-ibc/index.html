@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Install Gaia, Initiate two local chains and transact across chains - Abhinav Srivastava / @abhinavmir</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Install Gaia, Initiate two local chains and transact across chains" />
+<meta property="og:description" content="Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
+Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install
+You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Set up relayer git clone https://github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/gaia-ibc/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Install Gaia, Initiate two local chains and transact across chains"/>
+<meta name="twitter:description" content="Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
+Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install
+You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Set up relayer git clone https://github."/>
+
+	<link href="/css/fonts.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/">Abhinav Srivastava / @abhinavmir</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Install Gaia, Initiate two local chains and transact across chains</h1>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="install-golang">Install GoLang</h3>
+<p><code>wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local</code></p>
+<p>Add <code>export PATH=$PATH:/usr/local/go/bin</code> to <code>~/.profile</code> (You can access it by typing in <code>gedit ~/.profile</code>). Run <code>source ~/,profile</code>. You should have GoLang by now.</p>
+<h3 id="install-golang-1">Install GoLang</h3>
+<p><code>git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install</code></p>
+<p>You now should have <code>gaiad</code> available on your command line. (NOTE: <code>gaiad</code> and <code>gaiacli</code> are the same thing since recent releases).</p>
+<h3 id="set-up-relayer">Set up relayer</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/cosmos/relayer
+make install
+</code></pre></div><h3 id="set-up-a-local-one-node-testnet">Set up a local, one node testnet</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo rm -rf ~/.gaia
+gaiad init main --chain-id ibc-1
+gaiad keys add acc_1 --recover
+</code></pre></div><p>Use this key: <code>fluid cereal trash miracle casino menu true method exhaust pen fiber rural grape purchase rather table omit youth gain cage erase puppy sibling expand</code></p>
+<p><code>gaiad add-genesis-account acc_1 10000000000000000000stake</code>
+<code>gaiad gentx acc_1 100000000stake --chain-id ibc-1</code></p>
+<p><code>gaiad collect-gentxs</code></p>
+<p>We are going to run relayer on this chain.</p>
+<h3 id="use-a-custom-denom-xyz">Use a custom denom <code>xyz</code></h3>
+<p><code>cd $HOME/.gaia/config</code></p>
+<p>Now open <code>genesis.json</code> and replace all of <code>stake</code> with <code>xyz</code>. I use VS Code for this.</p>
+<p><code>code genesis.json</code></p>
+<p>Once done, just run the chain once.</p>
+<p><code>gaiad start</code></p>
+<h3 id="set-up-the-second-chain">Set up the second chain</h3>
+<p>On another node on the network (or a virtual machine), set up another network.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo rm -rf ~/.gaia
+gaiad init main --chain-id ibc-0
+gaiad keys add acc_0 --recover
+</code></pre></div><p>phrase: <code>wage thunder live sense resemble foil apple course spin horse glass mansion midnight laundry acoustic rhythm loan scale talent push green direct brick please</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gaiad add-genesis-account acc_0 10000000000000000000stake
+gaiad gentx acc_0 100000000stake --chain-id ibc-0
+
+gaiad collect-gentxs
+gaiad start
+</code></pre></div><p>You can use other denoms apart from <code>stake</code>. I personally use <code>xyz</code> on <code>ibc-1</code> chain.</p>
+<h3 id="set-up-relayer-on-ibc-1">Set up relayer on <code>ibc-1</code></h3>
+<p>Make a folder and inside of it, create two more folders,  <code>path</code> and <code>relayerChains</code>. For each chain, create a JSON file inside relayerChains such as this.</p>
+<h4 id="relayerhainsibc-0json">relayerhains/ibc-0.json</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;key&#34;</span>:<span style="color:#e6db74">&#34;acc_0&#34;</span>,
+   <span style="color:#f92672">&#34;chain-id&#34;</span>:<span style="color:#e6db74">&#34;ibc-0&#34;</span>,
+   <span style="color:#f92672">&#34;rpc-addr&#34;</span>:<span style="color:#e6db74">&#34;http://localhost:26657&#34;</span>,
+   <span style="color:#f92672">&#34;account-prefix&#34;</span>:<span style="color:#e6db74">&#34;cosmos&#34;</span>,
+   <span style="color:#f92672">&#34;gas-adjustment&#34;</span>:<span style="color:#ae81ff">1.5</span>,
+   <span style="color:#f92672">&#34;gas-prices&#34;</span>:<span style="color:#e6db74">&#34;0.025stake&#34;</span>,
+   <span style="color:#f92672">&#34;trusting-period&#34;</span>:<span style="color:#e6db74">&#34;336h&#34;</span>
+}
+</code></pre></div><h4 id="relayerchainsibc-1json">relayerChains/ibc-1.json</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
+   <span style="color:#f92672">&#34;key&#34;</span>:<span style="color:#e6db74">&#34;acc_1&#34;</span>,
+   <span style="color:#f92672">&#34;chain-id&#34;</span>:<span style="color:#e6db74">&#34;ibc-1&#34;</span>,
+   <span style="color:#f92672">&#34;rpc-addr&#34;</span>:<span style="color:#e6db74">&#34;http://[IP ADDRESS OF OTHER NETWORK]:26657&#34;</span>,
+   <span style="color:#f92672">&#34;account-prefix&#34;</span>:<span style="color:#e6db74">&#34;cosmos&#34;</span>,
+   <span style="color:#f92672">&#34;gas-adjustment&#34;</span>:<span style="color:#ae81ff">1.5</span>,
+   <span style="color:#f92672">&#34;gas-prices&#34;</span>:<span style="color:#e6db74">&#34;0.025xyz&#34;</span>,
+   <span style="color:#f92672">&#34;trusting-period&#34;</span>:<span style="color:#e6db74">&#34;336h&#34;</span>
+}
+</code></pre></div><p>Now in <code>path</code> folder, create a <code>path.json</code>  file.</p>
+<h4 id="pathpathjson">path/path.json</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+   <span style="color:#f92672">&#34;src&#34;</span>:{
+      <span style="color:#f92672">&#34;chain-id&#34;</span>:<span style="color:#e6db74">&#34;ibc-0&#34;</span>,
+      <span style="color:#f92672">&#34;client-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;connection-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;channel-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;port-id&#34;</span>:<span style="color:#e6db74">&#34;transfer&#34;</span>,
+      <span style="color:#f92672">&#34;order&#34;</span>:<span style="color:#e6db74">&#34;unordered&#34;</span>,
+      <span style="color:#f92672">&#34;version&#34;</span>:<span style="color:#e6db74">&#34;ics20-1&#34;</span>
+   },
+
+   <span style="color:#f92672">&#34;dst&#34;</span>:{
+      <span style="color:#f92672">&#34;chain-id&#34;</span>:<span style="color:#e6db74">&#34;ibc-1&#34;</span>,
+      <span style="color:#f92672">&#34;client-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;connection-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;channel-id&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#f92672">&#34;port-id&#34;</span>:<span style="color:#e6db74">&#34;transfer&#34;</span>,
+      <span style="color:#f92672">&#34;order&#34;</span>:<span style="color:#e6db74">&#34;unordered&#34;</span>,
+      <span style="color:#f92672">&#34;version&#34;</span>:<span style="color:#e6db74">&#34;ics20-1&#34;</span>
+   },
+
+   <span style="color:#f92672">&#34;strategy&#34;</span>:{
+      <span style="color:#f92672">&#34;type&#34;</span>:<span style="color:#e6db74">&#34;naive&#34;</span>
+   }
+}
+</code></pre></div><p>Now let&rsquo;s configure <code>relayer</code>.</p>
+<ol>
+<li>
+<p><code>rly config init</code> (If a config file already exists, delete the .relayer file in $HOME)</p>
+</li>
+<li>
+<p><code>rly config add-chains path_to_folder/relayerChains </code></p>
+</li>
+<li>
+<p><code>rly keys restore ibc-0 acc_0 &quot;wage thunder live sense resemble foil apple course spin horse glass mansion midnight laundry acoustic rhythm loan scale talent push green direct brick please</code>&quot; &ndash;coin-type 118</p>
+</li>
+<li>
+<p>`rly keys restore ibc-1 acc_1 &ldquo;fluid cereal trash miracle casino menu true method exhaust pen fiber rural grape purchase rather table omit youth gain cage erase puppy sibling expand&rdquo;  &ndash;coin-type 118</p>
+</li>
+<li>
+<p><code>rly config add-paths path_to_folder/path</code></p>
+</li>
+</ol>
+<blockquote>
+<p>TIP: You can use <code>pwd</code> to find the path of the current folder.</p>
+</blockquote>
+<ol start="6">
+<li>
+<p><code>rly light init ibc-0 -f</code></p>
+</li>
+<li>
+<p><code>rly light init ibc-1 -f</code></p>
+</li>
+<li>
+<p>See if the chains are ready to relay over: <code>rly chains list</code></p>
+</li>
+<li>
+<p>See the current status of the path you will relay over: <code>rly paths list</code></p>
+</li>
+<li>
+<p>Connect the two chains: <code>rly tx link path -d -o 3s</code></p>
+</li>
+<li>
+<p>Check balances on two chains:<code> rly q bal ibc-0</code> and <code>rly q bal ibc-1</code></p>
+</li>
+<li>
+<p><code>rly tx transfer ibc-0 ibc-1 1000000xyz $(rly chains address ibc-1)</code></p>
+</li>
+</ol>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					
+					
+					
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+
+        </div>
+    </body>
+</html>

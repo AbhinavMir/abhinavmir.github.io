@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cosmos on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/cosmos/</link>
+    <description>Recent content in Cosmos on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/cosmos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Install Gaia, Initiate two local chains and transact across chains</title>
+      <link>/posts/gaia-ibc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/gaia-ibc/</guid>
+      <description>Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
+Install GoLang git clone https://github.com/cosmos/gaia &amp;amp;&amp;amp; cd gaia &amp;amp;&amp;amp; make install
+You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Set up relayer git clone https://github.</description>
+    </item>
+    
+  </channel>
+</rss>
