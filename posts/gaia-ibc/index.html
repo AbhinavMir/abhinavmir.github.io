@@ -7,8 +7,7 @@
 	<meta property="og:title" content="Install Gaia, Initiate two local chains and transact across chains" />
 <meta property="og:description" content="Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
-Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install
-You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install You now should have gaiad available on your command line. (NOTE: gaiacli is a deprecated command, use gaiad for all purposes).
 Set up relayer git clone https://github." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/gaia-ibc/" />
@@ -17,8 +16,7 @@ Set up relayer git clone https://github." />
 <meta name="twitter:title" content="Install Gaia, Initiate two local chains and transact across chains"/>
 <meta name="twitter:description" content="Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
-Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install
-You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Install GoLang git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install You now should have gaiad available on your command line. (NOTE: gaiacli is a deprecated command, use gaiad for all purposes).
 Set up relayer git clone https://github."/>
 
 	<link href="/css/fonts.css" rel="stylesheet">
@@ -55,8 +53,8 @@ Set up relayer git clone https://github."/>
 <p><code>wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local</code></p>
 <p>Add <code>export PATH=$PATH:/usr/local/go/bin</code> to <code>~/.profile</code> (You can access it by typing in <code>gedit ~/.profile</code>). Run <code>source ~/,profile</code>. You should have GoLang by now.</p>
 <h3 id="install-golang-1">Install GoLang</h3>
-<p><code>git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install</code></p>
-<p>You now should have <code>gaiad</code> available on your command line. (NOTE: <code>gaiad</code> and <code>gaiacli</code> are the same thing since recent releases).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/cosmos/gaia &amp;&amp; cd gaia &amp;&amp; make install
+</code></pre></div><p>You now should have <code>gaiad</code> available on your command line. (NOTE: <code>gaiacli</code> is a deprecated command, use <code>gaiad</code> for all purposes).</p>
 <h3 id="set-up-relayer">Set up relayer</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/cosmos/relayer
 make install
@@ -65,16 +63,19 @@ make install
 gaiad init main --chain-id ibc-1
 gaiad keys add acc_1 --recover
 </code></pre></div><p>Use this key: <code>fluid cereal trash miracle casino menu true method exhaust pen fiber rural grape purchase rather table omit youth gain cage erase puppy sibling expand</code></p>
-<p><code>gaiad add-genesis-account acc_1 10000000000000000000stake</code>
-<code>gaiad gentx acc_1 100000000stake --chain-id ibc-1</code></p>
-<p><code>gaiad collect-gentxs</code></p>
-<p>We are going to run relayer on this chain.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gaiad add-genesis-account acc_1 10000000000000000000stake
+gaiad gentx acc_1 100000000stake --chain-id ibc-1
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gaiad collect-gentxs
+</code></pre></div><p>We are going to run relayer on this chain.</p>
 <h3 id="use-a-custom-denom-xyz">Use a custom denom <code>xyz</code></h3>
-<p><code>cd $HOME/.gaia/config</code></p>
-<p>Now open <code>genesis.json</code> and replace all of <code>stake</code> with <code>xyz</code>. I use VS Code for this.</p>
-<p><code>code genesis.json</code></p>
-<p>Once done, just run the chain once.</p>
-<p><code>gaiad start</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd $HOME/.gaia/config
+</code></pre></div><p>Now open <code>genesis.json</code> and replace all of <code>stake</code> with <code>xyz</code>. I use VS Code for this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">code genesis.json
+</code></pre></div><p>Once done, just run the chain once.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gaiad start
+</code></pre></div><blockquote>
+<p>If required, reset the chain using <code>gaiad unsafe-reset-all</code></p>
+</blockquote>
 <h3 id="set-up-the-second-chain">Set up the second chain</h3>
 <p>On another node on the network (or a virtual machine), set up another network.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo rm -rf ~/.gaia
@@ -100,7 +101,7 @@ gaiad start
    <span style="color:#f92672">&#34;trusting-period&#34;</span>:<span style="color:#e6db74">&#34;336h&#34;</span>
 }
 </code></pre></div><h4 id="relayerchainsibc-1json">relayerChains/ibc-1.json</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
    <span style="color:#f92672">&#34;key&#34;</span>:<span style="color:#e6db74">&#34;acc_1&#34;</span>,
    <span style="color:#f92672">&#34;chain-id&#34;</span>:<span style="color:#e6db74">&#34;ibc-1&#34;</span>,
    <span style="color:#f92672">&#34;rpc-addr&#34;</span>:<span style="color:#e6db74">&#34;http://[IP ADDRESS OF OTHER NETWORK]:26657&#34;</span>,

@@ -87,8 +87,7 @@ Ethereum is no different, when you commit any transaction on the chain, the data
       <guid>/posts/gaia-ibc/</guid>
       <description>Install GoLang wget -c https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 Add export PATH=$PATH:/usr/local/go/bin to ~/.profile (You can access it by typing in gedit ~/.profile). Run source ~/,profile. You should have GoLang by now.
-Install GoLang git clone https://github.com/cosmos/gaia &amp;amp;&amp;amp; cd gaia &amp;amp;&amp;amp; make install
-You now should have gaiad available on your command line. (NOTE: gaiad and gaiacli are the same thing since recent releases).
+Install GoLang git clone https://github.com/cosmos/gaia &amp;amp;&amp;amp; cd gaia &amp;amp;&amp;amp; make install You now should have gaiad available on your command line. (NOTE: gaiacli is a deprecated command, use gaiad for all purposes).
 Set up relayer git clone https://github.</description>
     </item>
     
