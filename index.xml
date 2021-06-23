@@ -90,6 +90,17 @@ Ethereum is no different, when you commit any transaction on the chain, the data
     </item>
     
     <item>
+      <title>How to be a Chad - Some advice for Indian Engineering Undergrads from a final year</title>
+      <link>/posts/ind-engg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ind-engg/</guid>
+      <description>I am not going to do disclaimers about my advice, take it or leave it, your life your choice. I&amp;rsquo;m putting this out there for you and for me.
+I promised a thread earlier in a tweet. Think of this as a tweetstorm where I talk about some ideas I&amp;rsquo;ve accumulated over the years.
+This is job-focused. I&amp;rsquo;ve done research, GRE/TOEFL, startups and MS applications too, but there are people who can tell you about that better.</description>
+    </item>
+    
+    <item>
       <title>Introduction to Interblockchain Communication and the Cosmos SDK</title>
       <link>/posts/cosmos-sdk/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -116,17 +127,6 @@ Ethereum is no different, when you commit any transaction on the chain, the data
       <guid>/posts/linux-cheat-sheet/</guid>
       <description>The Linux Beginner&amp;rsquo;s Guide What is Linux Linux is a family of Unix-like OSs based on the Linux Kernel. Linux Kernel is a monolithic kernel with a modular design. Here is a a simplified architecture of the Linux Operating System.
 When you boot up your own Linux Distro system (more on this later), you are utilizing the User Space which is were your User Applications and glibc (Used for implementing functions such as fopen(), calloc(),open()) exist.</description>
-    </item>
-    
-    <item>
-      <title>Some advice for Indian Engineering Undergrads from a final year</title>
-      <link>/posts/ind-engg/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/ind-engg/</guid>
-      <description>I am not going to do disclaimers about my advice, take it or leave it, your life your choice. I&amp;rsquo;m putting this out there for you and for me.
-I promised a thread earlier in a tweet. Think of this as a tweetstorm where I talk about some ideas I&amp;rsquo;ve accumulated over the years.
-This is job-focused. I&amp;rsquo;ve done research, GRE/TOEFL, startups and MS applications too, but there are people who can tell you about that better.</description>
     </item>
     
     <item>
