@@ -9,6 +9,8 @@
   </url><url>
     <loc>/posts/yield-farming/</loc>
   </url><url>
+    <loc>/tags/aboutme/</loc>
+  </url><url>
     <loc>/tags/beginner/</loc>
   </url><url>
     <loc>/tags/bitcoin/</loc>
@@ -72,5 +74,7 @@
     <loc>/posts/cpp-journey/</loc>
   </url><url>
     <loc>/tags/theory/</loc>
+  </url><url>
+    <loc>/posts/russian/</loc>
   </url>
 </urlset>

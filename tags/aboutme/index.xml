@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aboutme on Abhinav Srivastava / @abhinavmir</title>
+    <link>/tags/aboutme/</link>
+    <description>Recent content in aboutme on Abhinav Srivastava / @abhinavmir</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Athul</copyright><atom:link href="/tags/aboutme/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Кто такой Абхинав?</title>
+      <link>/posts/russian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/russian/</guid>
+      <description>привет!
+мой русский не слишком хорош))
+ разработка web3grants.co для @defialliance Работа на блокчейн, DLT, DeFi / Crypto, распределенным хранилищем. Изучение криптографии и кибербезопасности. У меня есть опыт веб-разработки (особенно с фреймворками JavaScript, C #, Python и PHP). В настоящее время я прохожу стажировку в @ Persistence в качестве разработчика цепочки блоков / исследователя протокола. Исследование CBDC с профессором Генри Кимом @ Blockchain Lab в Йоркском университете  До этого  Club tech lead @ VIT Linux User Group.</description>
+    </item>
+    
+  </channel>
+</rss>
