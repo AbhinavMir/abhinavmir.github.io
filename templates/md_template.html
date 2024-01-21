@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        .tag-list {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margins */
+            display: flex; /* Arrange tags in a line */
+            flex-wrap: wrap; /* Allow tags to wrap to next line */
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 2px;
+            background-color: #ddd;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        :root {
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --bg-color-dark: #282c34;
+            --bg-color-light: #fff;
+            --link-color-dark: #61dafb;
+            --link-color-light: #007bff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color-light);
+            background-color: var(--bg-color-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 { 
+            color: inherit; 
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        a {
+            color: var(--link-color-light);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--text-color-dark);
+                background-color: var(--bg-color-dark);
+            }
+
+            a {
+                color: var(--link-color-dark);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="margin: 0 auto; max-width: 800px; padding: 0 20px;">
+        <a href = "/"><< Home</a>
+    {{ navbar | safe }}
+<!-- 
+    <a href = "/"><< Back</a>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button> -->
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <ul class="tag-list">
+        {% for tag in tags %}
+            <a href = "/tag/{{ tag }}"><li class="tag">{{ tag }}</li></a> 
+        {% endfor %}
+    </ul>
+    <div class="content">
+        {{ content | safe }}
+    </div>
+    </div>
+
+</body>
+</html>
