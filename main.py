@@ -6,6 +6,8 @@ from markdown2 import markdown
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+app.mount("/templates", StaticFiles(directory="templates"), name="templates")
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 content_folder = './content'
 public_folder = './public'

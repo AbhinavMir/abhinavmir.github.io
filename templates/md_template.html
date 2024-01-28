@@ -2,6 +2,14 @@
 <html>
 <head>
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="./katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="./katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="./auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
     <style>
         .tag-list {
             list-style-type: none; /* Remove bullet points */
@@ -80,6 +88,8 @@
     </ul>
     <div class="content">
         {{ content | safe }}
+        <p>The quadratic formula is \( x = {-b \pm \sqrt{b^2-4ac} \over 2a} \).</p>
+
     </div>
     </div>
 
