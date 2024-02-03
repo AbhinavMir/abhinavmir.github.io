@@ -1,0 +1,148 @@
+---
+title: "Zero Knowledge proofs on Y-STR Data for forensic DNA analysis"
+draft: false
+---
+
+```tex
+\documentclass{article}
+\usepackage{lipsum} % For generating dummy text
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes.geometric,positioning}
+% Set up for two-column layout
+\begin{document}
+\title{Using interactive zero-knowledge proofs for negative STR DNA match proof}
+\author{\IEEEauthorblockN{Abhinav S.}\\
+\IEEEauthorblockA{Boston University\\
+Email: sabhinav@bu.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals' best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification. The paper outlines the cryptographic foundations of zero-knowledge proofs and how they can be applied to protect the confidentiality of genetic data while allowing for accurate identity verification. Case studies involving forensic applications are examined to assess the practicality and efficacy of this approach. This work aims to demonstrate that it is feasible to balance the need for secure authentication with privacy considerations in sensitive contexts like forensics.
+\end{abstract}
+
+\section{Introduction}
+The goal of this paper is to extend the idea of "Physical ZK" presented in "Physical zero-knowledge proofs of physical properties" by Ben Fisch, Freund $\And$Naor \cite{fisch2014physical}. The aim is to provide a formal proof construction, and analyse the viability via an implementation in Rust. The approach itself it quite different, where the original paper presents a protocol called "Bins and Balls Quadruples", this paper focuses on using interactive zero-knowledge protocols specifically.
+
+\section{Related Work}
+\subsubsection{Efforts by NIH on privacy preservation of genetics}
+Several laws and policies aim to protect the privacy of participants in genomics research. The Common Rule requires informed consent so participants understand the risks, including to their privacy. The NIH Genomic Data Sharing Policy allows controlled researcher access to databases with sensitive genomic data. Certificates of Confidentiality let researchers withhold identifying participant information. GINA prohibits discrimination by health insurers and employers based on genetic data. HIPAA protects patients' health information, including genetic data. While FOIA gives access to federal records, the Cures Act exempts identifiable biomedical research data to protect privacy. Together, these measures establish safeguards for genetic privacy in research, clinical, insurance, employment, and other contexts.
+
+However, this does not focus on privacy issues surrounding genetic data sharing. 
+
+\subsection{Zero-Knowledge Proofs of Physical Properties}
+The paper \cite{fisch2014physical} presents a physical protocol that allows a suspect to prove their DNA profile does not match a target DNA profile, such as from a crime scene, without revealing any additional information about the actual profiles. This could protect genetic privacy in criminal investigations. The protocol involves the police and a public defender forensics team representing the suspect. The police provide the defender with the crime scene sample and one of the suspect's samples, randomly chosen. The defender checks the sample does not match the crime scene using PCR amplification and capillary electrophoresis, which are standard DNA profiling techniques. To prevent the police from sneakily substituting a third sample, tamper-evident seals with random patterns are placed on the tubes, which are checked before and after the test. Additionally, a modified electrophoresis device is used that can only run for a short time window, preventing the defender from learning more than whether the profiles match. If they don't match in at least one of the 13 CODIS STR loci, the defender commits to this result, and then opens the seal to prove which sample was tested. The paper sketches how this technique could be adapted using randomized PCR primers to give a zero-knowledge protocol for parental testing as well. The analysis shows the protocol is perfect zero-knowledge, relying on physical assumptions about indistinguishability of samples and seals.
+
+\subsection{Use of Short Tandem Repeats in forensic analysis}
+Short Tandem Repeats (STRs) are vital genetic markers used in forensics to analyze DNA samples. These repetitive sequences of DNA vary in length among individuals, making them highly informative for identifying individuals and establishing biological relationships. Forensic scientists extract DNA from crime scenes or samples, amplify specific STR regions through PCR, and then compare the resulting DNA profiles to those of suspects or a DNA database. This technique has revolutionized criminal investigations, helping to confirm or exclude suspects, identify victims, and link evidence to crime scenes, making STR analysis an indispensable tool in modern forensic science.
+
+DNA fingerprinting and profiling are invaluable forensic tools that use genetic markers like short tandem repeats (STRs) to identify individuals. The Common Rule requires informed consent so research participants understand privacy risks. Laws like GINA prohibit genetic discrimination. Certificates of Confidentiality protect identities. STR typing has become the standard for forensic DNA analysis given its compatibility with PCR for even small, degraded samples. DNA evidence has exonerated the wrongly convicted, brought justice through solving cold cases, and deterred some criminals. National DNA databases aid investigations by linking crime scene evidence to offender profiles. Overall, DNA analysis provides objective, accurate evidence to uphold justice in the courts.
+
+\subsection{Privacy preserving in STRs: Importance and current approach}
+
+Privacy in STR reporting is crucial due to the sensitive nature of genetic information. When individuals' DNA profiles, which contain highly personal and identifying information, are shared or disclosed without proper safeguards, it can lead to a range of privacy risks, including discrimination, stigmatization, and breaches of personal autonomy. To preserve privacy in genetics, several methods are employed:
+
+1. \textbf{Data Anonymization}: Genetic data can be anonymized by removing personally identifiable information, such as names and addresses, from the data before reporting. However, complete anonymity is challenging to achieve, especially with large-scale genetic databases.
+
+2. \textbf{Data Encryption}: Genetic data can be encrypted during storage and transmission, ensuring that only authorized individuals with the decryption key can access the information.
+
+3. \textbf{Access Controls}: Implementing strict access controls and authentication mechanisms helps restrict who can access and use genetic data. This limits the risk of unauthorized access and misuse.
+
+4. \textbf{Differential Privacy}: This method adds noise or perturbation to genetic data, making it statistically more difficult to identify specific individuals while still allowing for meaningful analysis at a population level.
+
+5. \textbf{Secure Multi-party Computation (SMC)}: SMC techniques enable computations on encrypted genetic data without revealing the actual data to any party involved, preserving privacy during data analysis and sharing.
+
+6. \textbf{Consent and Transparency}: Obtaining informed consent from individuals before collecting and sharing their genetic information is essential. Transparent policies and practices regarding data usage and sharing should be established.
+
+7. \textbf{Genetic Data Ownership}: Clarifying the ownership of genetic data and giving individuals more control over their genetic information can enhance privacy protection.
+
+8. \textbf{Legislation and Regulations}: Enacting and enforcing robust privacy laws and regulations, such as the General Data Protection Regulation (GDPR) in Europe, can provide legal safeguards for genetic data.
+
+9. \textbf{Ethical Guidelines}: Adhering to ethical principles, including respect for autonomy and the principle of beneficence, can guide responsible handling of genetic information.
+
+These privacy-preserving methods aim to strike a balance between utilizing genetic data for scientific advancements and protecting the privacy rights and security of individuals.
+
+\subsection{Why use zero-knowledge}
+
+Developing a Zero-Knowledge (ZK) method for sharing Short Tandem Repeat (STR) proofs in forensic genetics could bring several significant benefits to the field. First, ZK methods enhance privacy protection by allowing one party to prove knowledge of certain information without revealing the actual data. In the context of STRs, this means that genetic profiles could be shared for comparison or verification without disclosing the full genetic information, reducing the risk of privacy breaches.
+
+Second, ZK methods could streamline and secure data sharing among forensic laboratories, law enforcement agencies, and other relevant parties. By using ZK proofs, organizations can collaborate on criminal investigations or DNA database searches without sharing sensitive genetic data directly. This not only safeguards individual privacy but also ensures the integrity of the data and minimizes the potential for data leaks or misuse.
+
+Lastly, ZK-based sharing of STR proofs could enhance public trust in forensic practices. Concerns about genetic privacy are paramount, and ZK methods would demonstrate a commitment to responsible and ethical data handling. This could lead to greater cooperation among stakeholders and a more robust forensic genetics framework overall, ultimately benefiting criminal justice and society as a whole.
+
+\section{Methodology}
+\subsection{DNA matching in forensic analysis}
+
+In DNA matching, the computer data primarily consists of DNA sequences and associated genetic information. This data includes:
+
+\begin{enumerate}
+  \item DNA Sequences: The actual genetic code extracted from the DNA samples. These sequences represent the nucleotide base pairs (adenine, thymine, cytosine, and guanine) in a person's DNA.
+  
+  \item Genetic Markers: Specific regions of the DNA that are analyzed for variations or mutations. These markers are used to identify unique genetic patterns and relationships.
+  
+  \item Allele Frequencies: Data on the frequency of different alleles (gene variants) within a population, which is important for statistical analysis in DNA matching.
+  
+  \item Reference Databases: Collections of DNA profiles and genetic data used for comparison and matching.
+  
+  \item Encryption Keys and Cryptographic Protocols: In the case of zero-knowledge DNA matching, encryption keys and protocols are used to secure and perform computations on genetic data while preserving privacy.
+  
+  \item Metadata: Information about the DNA samples, such as the source, date of collection, and any relevant medical or genealogical data.
+  
+  \item Analysis Algorithms: Computer algorithms and software used to process and interpret the genetic data, identify matches, and perform statistical analysis.
+\end{enumerate}
+
+All of this data is processed and analyzed using powerful computer systems to determine genetic relationships, match individuals, and protect privacy when necessary.
+
+
+\subsection{Interactive vs. Non-interactive proofs}
+The choice between an interactive or non-interactive Zero-Knowledge (ZK) method for sharing STR proofs in forensic genetics hinges on the particular context and needs of the investigation. Interactive ZK proofs involve a real-time exchange between the prover and verifier, offering robust security assurances but necessitating direct communication. In contrast, non-interactive ZK proofs enable the creation of proofs that can be shared asynchronously, enhancing convenience and efficiency. The decision would depend on factors such as the geographical separation of parties, the need for real-time verification, and the balance between privacy and practicality. 
+
+
+\subsubsection{Formally defining Interactive proofs for the sake of brevity}
+
+
+An interactive proof system for a language \(L\) is a two-party protocol between a prover \(P\) and a verifier \(V\).
+
+An interactive proof system is a tuple \((P, V)\) where \(P\) and \(V\) are probabilistic polynomial-time algorithms that interact through the following steps:
+
+\begin{enumerate}
+    \item \(V\) receives an input \(x\), and both \(P\) and \(V\) receive a common random string \(r\).
+    \item \(V\) and \(P\) interact for a polynomial number of rounds.
+    \item \(V\) outputs either \texttt{accept} or \texttt{reject}.
+\end{enumerate}
+
+The interactive proof system \((P, V)\) is said to be zero-knowledge if it satisfies the following properties:
+
+\begin{itemize}
+    \item \textbf{Completeness:} If \(x \in L\), then \(V\) outputs \texttt{accept} with high probability when interacting with \(P\).
+    \item \textbf{Soundness:} If \(x \notin L\), no cheating prover can make \(V\) output \texttt{accept} with non-negligible probability.
+    \item \textbf{Zero-Knowledge:} If \(x \in L\), the view of \(V\) during the interaction can be simulated by a polynomial-time algorithm without the help of \(P\).
+\end{itemize}
+
+\subsection{The Zero-knowledge scheme}
+\begin{align}
+  \text{Setup:} \quad & \text{Agree on hash function \( H() \) and commitment scheme \( C() \).} \label{eq:setup} \\
+  \text{Commitment:} \quad & c = C(g, r) \quad \text{where \( r \) is random} \label{eq:commitment} \\
+  \text{Challenge:} \quad & \text{Verifier sends random challenge \( x \)} \label{eq:challenge} \\
+  \text{Response:} \quad & z = H(g, x, r) \label{eq:response} \\
+  \text{Verification:} \quad & \text{Verifier checks } H(C^{-1}(c, r), x, r) = z \label{eq:verification}
+\end{align}
+
+\section{Results}
+Present your results in this section.
+
+\section{Conclusion}
+Summarize your findings and conclusions.
+
+\section*{Acknowledgment}
+You can include an acknowledgment section if needed.
+
+% References section
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+
+```

@@ -13,4 +13,4 @@ I am a graduate of the M.S Computer Science program at [Boston University](https
 
 [Here](/about) is why you should hire me.
 
-Note: My blog is undergoing reconstruction because I didn't like the old content.
+`Note: My blog is undergoing reconstruction because I didn't like the old content.`

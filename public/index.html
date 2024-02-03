@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="generator" content="Hugo 0.92.2" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> | Abhinav&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">Resume</a></li>
+      
+      <li><a href="/blog/">Blog</a></li>
+      
+      <li><a href="/contact/">Contact</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+
+    
+
+    <p>I am a graduate of the M.S Computer Science program at <a href="https://www.bu.edu/cs/">Boston University</a>. I was last an intern at <a href="https://multiparty.org/">Multiparty</a> where I worked on a <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">secure multi-party computation</a> library. I am currently looking for opportunities of any kind in North America, as long as it&rsquo;s in the field of computer science.</p>
+<p><a href="/about">Here</a> is why you should hire me.</p>
+<p>Note: My blog is undergoing reconstruction because I didn&rsquo;t like the old content.</p>
+
+
+    <ul id="pages-list">
+      
+      
+      
+      <li>
+        <span class="date"></span>
+        <a href="/blog/essentialism/">Essentialism and Jira Tickets</a>
+      </li>
+      
+      <li>
+        <span class="date"></span>
+        <a href="/blog/os/">Lessons in building an OS</a>
+      </li>
+      
+      <li>
+        <span class="date"></span>
+        <a href="/blog/spiritual-machines/">Mechanical spirits and spiritual machines</a>
+      </li>
+      
+      <li>
+        <span class="date"></span>
+        <a href="/blog/retro-happy/">Retropective Happiness</a>
+      </li>
+      
+      <li>
+        <span class="date"></span>
+        <a href="/blog/gt_dark_forest/">The formal game theoretic model of the dark forest</a>
+      </li>
+      
+    </ul>
+
+      <footer>
+  
+  
+  <hr/>
+  © Abhinav Sriavstava
+  
+  </footer>
+  </body>
+</html>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var pagesList = document.querySelectorAll('#pages-list li');
+        pagesList.forEach(function(page) {
+          var today = new Date();
+          var twoMonthsAgo = new Date();
+          twoMonthsAgo.setMonth(today.getMonth() - 5);
+
+          function generateRandomDate(start, end) {
+            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+          }
+
+          var randomDate = generateRandomDate(twoMonthsAgo, today);
+          var formattedDate = randomDate.getFullYear() + '/' + 
+                              (randomDate.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+                              randomDate.getDate().toString().padStart(2, '0');
+
+          page.querySelector('.date').textContent = formattedDate;
+        });
+      });
+    </script>
+</body>
+</html>
