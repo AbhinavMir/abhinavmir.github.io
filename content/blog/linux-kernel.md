@@ -86,8 +86,4 @@ qemu-system-x86_64 -kernel arch/x86/boot/bzImage -hda rootfs.img -append "root=/
 This command starts a virtual machine running your custom kernel. The `-nographic` option is used for a headless setup, ideal for server environments or automation tasks.
 
 
-### Remember
-
-Always back up your work and use version control to manage your changes. Happy coding!
-
 <a href="https://ibb.co/fdFmBpz"><img src="https://i.ibb.co/whgD3WF/image-20240216220556122.png" alt="image-20240216220556122" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>upload pic</a><br />
