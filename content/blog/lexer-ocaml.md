@@ -68,4 +68,37 @@ Now we want to find a way to containerize the current string into a token. `int`
 match str.[pos] with | ' ' | '\n' | '\t' | '\r' -> aux (pos + 1)
 ```
 
-This checks if the 
+This checks (using the Ocaml's switch-like `|` we discussed earlier) if the current string is a whitespace, if yes, then it calls `aux` recursively with the next position `pos+1` as the parameter.
+
+But what happens when the current string is a non-whitespace character? We do the same thing, but we find a way to equate the character to a type we defined earlier.
+
+```ocaml
+| '{' -> LBrace :: aux (pos + 1)
+| '}' -> RBrace :: aux (pos + 1)
+| '(' -> LParen :: aux (pos + 1)
+| ')' -> RParen :: aux (pos + 1)
+```
+
+Let's worry about numbers now.
+
+```ocaml
+    | '0'..'9' as c ->
+          let rec number n p =
+            if p < String.length str && Char.code str.[p] >= Char.code '0' && Char.code str.[p] <= Char.code '9'
+            then number (n * 10 + (Char.code str.[p] - Char.code '0')) (p + 1)
+            else (Number n, p)
+          in
+          let (num, newPos) = number (Char.code c - Char.code '0') (pos + 1) in
+          num :: aux newPos
+      | _ ->
+```
+
+You already know what the first line does. From then on, we define a function `number` that is recursive, and takes in two parameters: `n`, to keep track of the current accumulated number and `p` as in position from before. Quickly asserting a few things in the next line: position is not out of bounds, and the number being read is greater than 0, less than 9 (pays to be careful!).
+
+If the conditions are met, it recursively calls itself, updating `n` to include the digit at position `p` (by converting the character to its numeric value and adding it to `n` multiplied by `10`, effectively shifting `n` one decimal place left).
+
+This process continues until a non-digit character is encountered, at which point the function returns a tuple `(Number n, p)`, where Number `n` is the token representing the accumulated number and `p` is the position of the first non-digit character after the number.
+
+Finally, this number needs to be converted to an actual integer to make sense. 
+
+There are a few ways you could do this, but keeping this language agnostic, we'll use ASCII-aritmetic (not an actual thing, before you Google). That's what the `number (n * 10 + (Char.code str.[p] - Char.code '0')) (p + 1)` represents - it 
