@@ -4,7 +4,9 @@ title: Writing a lexer for C in Ocaml
 
 ref. [Nora Sandler's, Writing a C Compiler, Part 1](https://norasandler.com/2017/11/29/Write-a-Compiler.html)
 
-This is my first time using Ocaml, and Dune. First, I'd say install Ocaml and Dune and let's move forward directly with writing a new lexing function in `lexer.ml` that can parse `int main() { return 42; }`.
+This is my first time using Ocaml, and Dune. If this is the case with you, if you want a primer, you can read the official docs, and then do `99 Problems` and get back here, although 3 problems in, I said "Bah! I got this" and infact, I didn't. You can read this bit, and implement parsers in the next one on your own.
+
+First, I'd say install Ocaml and Dune and let's move forward directly with writing a new lexing function in `lexer.ml` that can parse `int main() { return 42; }`.
 
 Second, we want to define what the tokens are. For such a simple program, there are only a handful of tokens we need. Some may call this process "scanning", as does Robert Nystrom [here](https://craftinginterpreters.com/scanning.html), but what it does is take a program, and break it into chunks without worrying about the syntax. For our program, we just need `int, return, {}, (), int, indentation`, roughly.
 
@@ -101,4 +103,8 @@ This process continues until a non-digit character is encountered, at which poin
 
 Finally, this number needs to be converted to an actual integer to make sense. 
 
-There are a few ways you could do this, but keeping this language agnostic, we'll use ASCII-aritmetic (not an actual thing, before you Google). That's what the `number (n * 10 + (Char.code str.[p] - Char.code '0')) (p + 1)` represents - it 
+There are a few ways you could do this, but keeping this language agnostic, we'll use ASCII-aritmetic (not an actual thing, before you Google). That's what the `number (n * 10 + (Char.code str.[p] - Char.code '0')) (p + 1)` represents - it shows us calling the function `number` recrusively, so if we were to be lex-ing `12` as our number, it would look like this.
+- Encounter '1': Start with `n = 1` and `pos` pointing to '2'.
+- Encounter '2': Update `n` to `n * 10 + 2 = 12`, increment `pos`.
+- No more digits: Return `(Number 12, newPos)`, where `newPos` is the position after '2'.
+
