@@ -3,6 +3,8 @@ title: "Zero Knowledge proofs on Y-STR Data for forensic DNA analysis"
 draft: false
 ---
 
+WIP - DM if you'd want to collaborate on this.
+
 ```tex
 \documentclass{article}
 \usepackage{lipsum} % For generating dummy text
