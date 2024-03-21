@@ -8,12 +8,42 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 04 Jun 2020 23:15:33 +0200</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>If John Nash were on Trust</title>
+      <link>/blog/gt_trust/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/gt_trust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Essentialism and Jira Tickets</title>
       <link>/blog/essentialism/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/blog/essentialism/</guid>
       <description>[under construction]</description>
+    </item>
+    
+    <item>
+      <title>How to Build and Boot a Custom Linux Kernel Using QEMU Without Risking Your System</title>
+      <link>/blog/linux-kernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/linux-kernel/</guid>
+      <description>READ BEFORE COPY PASTING COMMANDS!
+ QEMU is a powerful open-source machine emulator and virtualizer. We don&amp;rsquo;t wan to play around too much on our system, so best to use QEMU. Before starting, ensure QEMU is installed on your system. Installation commands vary by distribution:
+ Debian/Ubuntu: sudo apt-get install qemu  Obtain the latest Linux kernel source from kernel.org. Extract the archive and prepare for compilation:
+git clone https://github.</description>
+    </item>
+    
+    <item>
+      <title>Ideas I&#39;ll eventually build on (feel free to steal!)</title>
+      <link>/blog/ideas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ideas/</guid>
+      <description>I have a pragmatic way of building things. Modern medicine wouldn&amp;rsquo;t be the same if Julius Richard Petri hadn&amp;rsquo;t developed Petri dish. Dr. Petri did not &amp;ldquo;invent&amp;rdquo; much after this, and his work is mostly overshadowed by the Petridish. Medicine, and the rest of sciences, is filled with quiet, small wonders such as this, that change the world. I do not claim to be the next Dr. Petri, I am nowhere as intelligent, but I want to use his work as a pointer to the fact that small ideas change world.</description>
     </item>
     
     <item>
@@ -37,6 +67,16 @@ Notes:
     </item>
     
     <item>
+      <title>Random Notes from reth-evm</title>
+      <link>/blog/random-evm-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/random-evm-notes/</guid>
+      <description>This is different from my &amp;ldquo;Stolen notes on EVM&amp;rdquo; post, which is now deleted, but some of you might have seen it. These are some pointers I&amp;rsquo;ve been collecting when 1) writing solidity code, 2) contributing to reth-evm, 3) talking to friends (yes, I have friends) about EVM.
+[uc]</description>
+    </item>
+    
+    <item>
       <title>Retropective Happiness</title>
       <link>/blog/retro-happy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -52,6 +92,44 @@ Notes:
       
       <guid>/blog/gt_dark_forest/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Torment Nexus - or why we don&#39;t take advice from writers</title>
+      <link>/blog/torment-nexus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/torment-nexus/</guid>
+      <description>While the title may seem disrespectful, I want to clarify that I respect writers. Chekov, King, Liu, Stephenson, Gaiman, Herbert, Crichton, Guin, have all written books that have personally influenced me deeply. I love their work, and I respect their craft. But I don&amp;rsquo;t take advice from them, because they&amp;rsquo;re not engineers who are currently building the present.
+Charlie Stoss wrote the blog titled &amp;ldquo;We&amp;rsquo;re sorry we created the Torment Nexus&amp;rdquo;, in which he writes &amp;ldquo;I—and other SF authors—are terrible guides to the future&amp;rdquo; - and I agree, but not in the way Stoss presents it.</description>
+    </item>
+    
+    <item>
+      <title>Why Reth is faster</title>
+      <link>/blog/reth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/reth/</guid>
+      <description>Reth is a full-node implementation of the Ethereum protocol. There are many layers to an Ethereum node.</description>
+    </item>
+    
+    <item>
+      <title>Writing a lexer for C in Ocaml</title>
+      <link>/blog/lexer-ocaml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/lexer-ocaml/</guid>
+      <description>ref. Nora Sandler&amp;rsquo;s, Writing a C Compiler, Part 1
+This is my first time using Ocaml, and Dune. If this is the case with you, if you want a primer, you can read the official docs, and then do 99 Problems and get back here, although 3 problems in, I said &amp;ldquo;Bah! I got this&amp;rdquo; and infact, I didn&amp;rsquo;t. You can read this bit, and implement parsers in the next one on your own.</description>
+    </item>
+    
+    <item>
+      <title>Writing a parser in Ocaml</title>
+      <link>/blog/ast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ast/</guid>
+      <description>[uc]</description>
     </item>
     
   </channel>

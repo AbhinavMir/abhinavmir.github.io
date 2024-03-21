@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abhinav&#39;s Blog</title>
+    <link>/research/</link>
+    <description>Recent content on Abhinav&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jun 2020 16:16:24 +0200</lastBuildDate><atom:link href="/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secure Multi-Party Computation for predicting healthcare costs</title>
+      <link>/research/smpc_healthcare/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/research/smpc_healthcare/</guid>
+      <description>\documentclass{article} % Language setting % Replace `english&#39; with e.g. `spanish&#39; to change the document language \usepackage[english]{babel} % Set page size and margins % Replace `letterpaper&#39; with `a4paper&#39; for UK/EU standard size \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry} % Useful packages \usepackage{amsmath} \usepackage{graphicx} \usepackage[colorlinks=true, allcolors=blue]{hyperref} \title{Using Secure Multiparty Computing to predict cost of healthcare clinic visits} \author{Abhinav Srivastava} \begin{document} \maketitle \begin{abstract} Secure Multiparty Computing (SMC) offers a privacy-preserving method for predicting healthcare clinic visit costs. Utilizing SMC, sensitive patient data is processed across multiple parties without revealing individual inputs, ensuring confidentiality.</description>
+    </item>
+    
+    <item>
+      <title>Zero Knowledge proofs on Y-STR Data for forensic DNA analysis</title>
+      <link>/research/zk-dna/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/research/zk-dna/</guid>
+      <description>\documentclass{article} \usepackage{lipsum} % For generating dummy text \usepackage{amsmath,amssymb} \usepackage{tikz} \usetikzlibrary{arrows,shapes.geometric,positioning} % Set up for two-column layout \begin{document} \title{Using interactive zero-knowledge proofs for negative STR DNA match proof} \author{\IEEEauthorblockN{Abhinav S.}\\ \IEEEauthorblockA{Boston University\\ Email: sabhinav@bu.edu} } \maketitle \begin{abstract} This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals&#39; best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification.</description>
+    </item>
+    
+  </channel>
+</rss>
