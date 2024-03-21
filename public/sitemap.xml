@@ -14,6 +14,24 @@
     <loc>/</loc>
     <lastmod>2020-06-01T16:16:24+02:00</lastmod>
   </url><url>
+    <loc>/prs/</loc>
+    <lastmod>2020-06-01T16:16:24+02:00</lastmod>
+  </url><url>
+    <loc>/research/</loc>
+    <lastmod>2020-06-01T16:16:24+02:00</lastmod>
+  </url><url>
+    <loc>/blog/gt_trust/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/love/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/math/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/tv/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/hugo-gallery/</loc>
     <priority>0</priority>
   </url><url>
@@ -29,20 +47,38 @@
   </url><url>
     <loc>/tags/history/</loc>
   </url><url>
+    <loc>/blog/linux-kernel/</loc>
+  </url><url>
+    <loc>/blog/ideas/</loc>
+  </url><url>
     <loc>/blog/os/</loc>
   </url><url>
     <loc>/blog/spiritual-machines/</loc>
   </url><url>
     <loc>/tags/philosophy/</loc>
   </url><url>
+    <loc>/blog/random-evm-notes/</loc>
+  </url><url>
     <loc>/about/</loc>
   </url><url>
     <loc>/blog/retro-happy/</loc>
+  </url><url>
+    <loc>/research/smpc_healthcare/</loc>
   </url><url>
     <loc>/categories/technical/</loc>
   </url><url>
     <loc>/tags/technology/</loc>
   </url><url>
     <loc>/blog/gt_dark_forest/</loc>
+  </url><url>
+    <loc>/blog/torment-nexus/</loc>
+  </url><url>
+    <loc>/blog/reth/</loc>
+  </url><url>
+    <loc>/blog/lexer-ocaml/</loc>
+  </url><url>
+    <loc>/blog/ast/</loc>
+  </url><url>
+    <loc>/research/zk-dna/</loc>
   </url>
 </urlset>
