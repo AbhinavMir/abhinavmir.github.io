@@ -20,10 +20,10 @@ menu:
   - BS in Computer Science & Engineering
 
 ## Work Experience
-**Mentee** @ RISC-V, Remote (*Mar 2024 - May 2024*)
-- Contributing to the development of an accessible Sail backend for the RISC-V ISA, automating the conversion of specifications into a JSON database to optimize downstream tool generation.  
-- Surveying projects dependent on the RISC-V ISA, implementing a JSON-driven approach for the automated generation of downstream sources, enhancing efficiency and reducing manual errors.  
-- Participating in the creation of a React-based interactive RISC-V ISA reference, showcasing the potential for automated integration and improving accessibility to the ISA.
+- **Mentee** @ RISC-V, Remote (*Mar 2024 - May 2024*)
+  - Contributing to the development of an accessible Sail backend for the RISC-V ISA, automating the conversion of specifications into a JSON database to optimize downstream tool generation.  
+  - Surveying projects dependent on the RISC-V ISA, implementing a JSON-driven approach for the automated generation of downstream sources, enhancing efficiency and reducing manual errors.  
+  - Participating in the creation of a React-based interactive RISC-V ISA reference, showcasing the potential for automated integration and improving accessibility to the ISA.
 
 
 - **Research Assistant** @ Software & Application Innovation Lab, Boston, MA (*Oct 2023 - Jan 2024*)
