@@ -20,7 +20,13 @@ menu:
   - BS in Computer Science & Engineering
 
 ## Work Experience
-- **Software Engineer Intern** @ Software & Application Innovation Lab, Boston, MA (*Oct 2023 - Jan 2024*)
+**Mentee** @ RISC-V, Remote (*Mar 2024 - May 2024*)
+- Contributing to the development of an accessible Sail backend for the RISC-V ISA, automating the conversion of specifications into a JSON database to optimize downstream tool generation.  
+- Surveying projects dependent on the RISC-V ISA, implementing a JSON-driven approach for the automated generation of downstream sources, enhancing efficiency and reducing manual errors.  
+- Participating in the creation of a React-based interactive RISC-V ISA reference, showcasing the potential for automated integration and improving accessibility to the ISA.
+
+
+- **Research Assistant** @ Software & Application Innovation Lab, Boston, MA (*Oct 2023 - Jan 2024*)
   - Led the development of 'Jiff-lite', an Cryptography powered TypeScript-based Multiparty Computing framework, optimized for seamless integration with React and web frameworks, delivering a remarkable 60% improvement in user experience and a 14% increase in benchmarked efficiency.
   - Authored 2 non-trivial demos, resolved ~4 issues, and improved the documentation of the framework, improving robustness.
   - Facilitated productive collaboration between cross-functional teams and vendors from diverse backgrounds to enhance product communication and collect actionable feedback.
@@ -81,9 +87,10 @@ menu:
 - Explored the significance of these optimization methods in solving non-linear optimization problems, drawing inspiration from natural organisms' instinctive optimization strategies.
 - Highlighted the wide-ranging impact of these techniques across various domains, from Civil Engineering to Financial Modeling, showcasing their versatility and relevance in modern science.
 ## Certifications
-- **Microsoft Azure Administrator**
 - **Google Cybersecurity Professional Certificate**
 - **IBM DevOps and Software Engineering Professional Certificate**
+
+#### Certifications where exams are pending due to constraints on monetary resources.
 - **HashiCorp Infrastructure Automation Certification**
 - **Certified Kubernetes Application Developer**
-- **Cisco CCNA (Exam pending)**
+- **Cisco CCNA**
