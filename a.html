@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sword Animation</title>
+<style>
+  #sword {
+    position: relative;
+    width: 20px;
+    height: 100px;
+    background-color: silver;
+  }
+  #trail {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<div id="sword"></div>
+<div id="trail"></div>
+
+<script>
+  const sword = document.getElementById('sword');
+  const trail = document.getElementById('trail');
+  document.addEventListener('mousemove', (e) => {
+    sword.style.top = e.pageY + 'px';
+    sword.style.left = e.pageX + 'px';
+    setTimeout(() => { // Create trailing effect
+      trail.style.top = e.pageY + 'px';
+      trail.style.left = e.pageX + 'px';
+    }, 100); // Delay for trail
+  });
+</script>
+
+</body>
+</html>

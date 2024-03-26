@@ -23,3 +23,4 @@ Some are WIP, will probably add in context after completing. Since I am on a tim
 8. Mutiny Node BIP39 fix
 9. Improve Mapping::find_match to return error when multiple replacements are possible. (Sway)
 10. Added missing malloc check in libpayload in Coreboot
+11. mq_open lacks support of "mode" argument (RTEMS)
