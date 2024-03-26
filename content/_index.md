@@ -11,8 +11,10 @@ menu:
 Other name(s): August Radjoe.
 
 
-I am a graduate of the M.S Computer Science program at [Boston University](https://www.bu.edu/cs/). I was last an intern at [Multiparty](https://multiparty.org/) where I worked on a [secure multi-party computation](https://en.wikipedia.org/wiki/Secure_multi-party_computation) library. I am currently looking for opportunities in North America, you can reach out to me [sabhinav@bu.edu](mailto:sabhinav@bu.edu)!
+I am a graduate of the M.S Computer Science program at [Boston University](https://www.bu.edu/cs/). Currently, I am helping improve the [sail](https://www.cl.cam.ac.uk/~pes20/sail/) spec for RISC-V. Before this, I was an RA/Intern at [Multiparty](https://multiparty.org/) where I worked on a [secure multi-party computation](https://en.wikipedia.org/wiki/Secure_multi-party_computation) library. I am currently looking for opportunities in North America, you can reach out to me [sabhinav@bu.edu](mailto:sabhinav@bu.edu)!
 
 [Here](/about) is why you should hire me.
 
 `Note: My blog is undergoing reconstruction because I didn't like the old content.` 
+
+![riscv logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/RISC-V-logo.svg/220px-RISC-V-logo.svg.png) <img src="https://sail.bu.edu/img/circle_sail.png" width="50" height="60"> <img src="https://upload.wikimedia.org/wikipedia/en/1/15/Boston_University_Terriers_logo.svg" height=60>

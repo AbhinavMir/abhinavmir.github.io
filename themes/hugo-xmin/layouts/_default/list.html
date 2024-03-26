@@ -19,7 +19,8 @@
 <body>
   {{ partial "header.html" . }}
   {{ if .IsHome }}
-  <img src="https://www.coin-operated.com/wp-content/uploads/2010/05/mail.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/atom1.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/grapher.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/cd-rom.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/spotting.gif">
+  <marquee>hire me!</marquee>
+  <img src="https://www.coin-operated.com/wp-content/uploads/2010/05/mail.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/atom1.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/grapher.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/cd-rom.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/spotting.gif"><img src="https://web.archive.org/web/20091027133945/http://geocities.com/taz20_18/celtics1-sm.gif">
   {{ end }}
   {{ if not .IsHome }}
   <h1>{{ .Title | markdownify }}</h1>
