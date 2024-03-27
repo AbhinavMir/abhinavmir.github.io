@@ -46,6 +46,11 @@ menu:
   - Developed various test applications for subsidiary products using the SDK, and React JS.
 
 ## Projects
+- **Book Writing Tool built with TypeScript, React, Node, ExpressJS** [episodic.work](https://episodic.work)
+    - Designed and developed an episodic writing platform with Express, achieving a response time under 100ms for backend requests and ReactJS for an interactive frontend, tested with 95% code coverage.
+    - Implemented scalable deployment using Docker and Kubernetes, enabling seamless handling of potential 1000+ concurrent sessions during peak loads (tested by agentic sessions).
+    - Integrated Prometheus for monitoring, resulting in 5% reduced incident response time and maintaining close to 100% uptime in performance testing scenarios.
+
 - **ThoughtForest: A note-taking app with AI-powered Insights**
   - Built web and mobile apps using React and Flutter (iOS + Android targets) for a Journaling application that provided you with weekly insights per your preference via a popular GPT Model. Voice transcription works via Assembly AI.
   - Wrote the backend in Django, deployed to AWS EC2 using Docker. Rolled out custom auth, email verification etc.
