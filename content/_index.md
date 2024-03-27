@@ -17,6 +17,8 @@ I am currently looking for opportunities in North America, you can reach out to 
 
 [Here](/about) is why you should hire me.
 
+I'll also try to keep my [book recommendations](https://bookshelf.so/augustradjoe) updated.
+
 `Note: My blog is undergoing reconstruction because I didn't like the old content. Also, I love old gifs, but other pages aren't as tacky - I think expression of self deserves a page` 
 
 ![riscv logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/RISC-V-logo.svg/220px-RISC-V-logo.svg.png) <img src="https://sail.bu.edu/img/circle_sail.png" width="50" height="60"> <img src="https://upload.wikimedia.org/wikipedia/en/1/15/Boston_University_Terriers_logo.svg" height=60>
