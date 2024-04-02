@@ -1,6 +1,6 @@
 ---
 title: Encrypting a partition and exporting it as rootfs
-```
+---
 
 ### Step 1: Creating a Virtual Disk
 To begin, we'll create a virtual disk image that will act as our encrypted partition. We can use the `dd` command to create a file of a specified size filled with zeros:
