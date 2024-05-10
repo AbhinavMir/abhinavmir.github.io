@@ -15,7 +15,6 @@ I am a graduate of the M.S Computer Science program at [Boston University](https
 
 I am currently looking for opportunities in North America, you can reach out to me [sabhinav@bu.edu](mailto:sabhinav@bu.edu)!
 
-[Here](/about) is why you should hire me.
 
 I'll also try to keep my [book recommendations](https://bookshelf.so/augustradjoe) updated.
 

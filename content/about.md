@@ -1,6 +1,6 @@
 ---
 title: "Resume"
-draft: false
+draft: true
 menu:
   main:
     name: "Resume"
