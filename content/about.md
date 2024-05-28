@@ -9,6 +9,11 @@ menu:
 
 
 ## Education
+- ** University of Colorado Boulder**  (part time)
+  - Boulder, CO
+  - Aug 2024–May 2026
+  - MS in Electrical Engineering, focus on FPGA, Embedded Engineering, Semiconductors 
+  
 - **Boston University**
   - Boston, MA
   - Sep 2022–Jan 2024
