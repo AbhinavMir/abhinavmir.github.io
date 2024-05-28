@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Encrypting a partition and exporting it as rootfs | Abhinav&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/prs/">OSS</a></li>
+      
+      <li><a href="/research/">Research</a></li>
+      
+      <li><a href="/about/">Resume</a></li>
+      
+      <li><a href="/blog/">Blog</a></li>
+      
+      <li><a href="/contact/">Contact</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Encrypting a partition and exporting it as rootfs</span></h1>
+
+
+</div>
+
+<main>
+<h3 id="step-1-creating-a-virtual-disk">Step 1: Creating a Virtual Disk</h3>
+<p>To begin, we&rsquo;ll create a virtual disk image that will act as our encrypted partition. We can use the <code>dd</code> command to create a file of a specified size filled with zeros:</p>
+<pre><code class="language-bash">dd if=/dev/zero of=virtual_disk.img bs=1M count=1024
+</code></pre>
+<p>This command creates a file named &ldquo;virtual_disk.img&rdquo; with a size of 1024 megabytes (1 GB).</p>
+<h3 id="step-2-associating-the-virtual-disk-with-a-loop-device">Step 2: Associating the Virtual Disk with a Loop Device</h3>
+<p>Next, we need to make the virtual disk image accessible as a block device. We can achieve this by associating it with a loop device using the <code>losetup</code> command:</p>
+<pre><code class="language-bash">sudo losetup -fP virtual_disk.img
+</code></pre>
+<p>You can now check what loop devices are available for you.</p>
+<pre><code class="language-bash">losetup -a
+</code></pre>
+<p>Replace <code>loopX</code> in the following commands with the correct loop device (will have the <code>virtual_disk.img</code> attached to the text).</p>
+<h3 id="step-3-encrypting-the-virtual-disk">Step 3: Encrypting the Virtual Disk</h3>
+<p>Now that we have a virtual disk set up, let&rsquo;s encrypt it using <code>cryptsetup</code> and LUKS. In this example, we&rsquo;ll use a passphrase &ldquo;cafebabe&rdquo; for encryption. It&rsquo;s important to choose a strong passphrase in real-world scenarios.</p>
+<pre><code class="language-bash">echo -n cafebabe | sudo cryptsetup luksFormat /dev/loopX -
+</code></pre>
+<p>Replace &ldquo;/dev/loopX&rdquo; with the actual loop device assigned to your virtual disk (e.g., /dev/loop2).</p>
+<h3 id="step-4-opening-the-encrypted-disk">Step 4: Opening the Encrypted Disk</h3>
+<p>To access the encrypted disk, we need to open (decrypt) it using the same passphrase:</p>
+<pre><code class="language-bash">echo -n cafebabe | sudo cryptsetup open /dev/loopX my_encrypted_vp -
+</code></pre>
+<p>This command decrypts the virtual disk and maps it to a new device at &ldquo;/dev/mapper/my_encrypted_vp&rdquo;.</p>
+<h3 id="step-5-creating-a-filesystem">Step 5: Creating a Filesystem</h3>
+<p>After decrypting the virtual disk, we need to create a filesystem on it to store our files:</p>
+<pre><code class="language-bash">sudo mkfs.ext4 /dev/mapper/my_encrypted_vp
+</code></pre>
+<h3 id="step-6-mounting-the-encrypted-volume">Step 6: Mounting the Encrypted Volume</h3>
+<p>Finally, we can mount the decrypted volume to a mount point to access and modify its contents:</p>
+<pre><code class="language-bash">sudo mount /dev/mapper/my_encrypted_vp /mnt/encrypted_vp
+</code></pre>
+<h3 id="step-7-accessing-the-encrypted-contents">Step 7: Accessing the Encrypted Contents</h3>
+<p>With the encrypted volume mounted, we can now peek inside and browse its contents using standard Linux commands like <code>ls</code>:</p>
+<pre><code class="language-bash">ls -l /mnt/encrypted_vp
+</code></pre>
+<p>This command will display the files and directories stored within the encrypted virtual disk.</p>
+<h3 id="step-8-locking-the-partition-again">Step 8: Locking the partition again</h3>
+<p>To unlock and access the contents of an encrypted volume using LUKS, first, ensure the encrypted device is associated with a loop device. Use <code>echo -n [passphrase] | sudo cryptsetup open /dev/loopX my_encrypted_vp -</code> to unlock, replacing <code>[passphrase]</code> with your actual passphrase and <code>/dev/loopX</code> with your loop device. After unlocking, mount it using <code>sudo mount /dev/mapper/my_encrypted_vp /mnt/encrypted_vp</code> to access its contents. To relock, start by unmounting with <code>sudo umount /mnt/encrypted_vp</code>. Finally, close the encrypted device using <code>sudo cryptsetup close my_encrypted_vp</code>, securing its contents until the next unlock. This process ensures data security, allowing access only to those with the passphrase.</p>
+<blockquote>
+<p>passphrase for us is cafebabe</p>
+</blockquote>
+<pre><code class="language-bash">sudo umount /mnt/encrypted_vp
+sudo cryptsetup close my_encrypted_vp
+</code></pre>
+<h2 id="performing-an-update-via-a-rootfs">Performing an update via a <code>rootfs</code></h2>
+<p>You might decide you need to do OTAs or some other form of updates, the easiest way to go about this on another&rsquo;s system with an encrypted disk is to create a <code>rootfs.tar</code>.</p>
+<p><code>rootfs.tar</code> typically refers to a compressed archive file containing the root filesystem of a Linux-based operating system. The &ldquo;root filesystem&rdquo; (rootfs) is the top-level directory hierarchy in a Linux system, containing essential directories like <code>/bin</code>, <code>/etc</code>, <code>/lib</code>, <code>/sbin</code>, <code>/usr</code>, and <code>/var</code>.</p>
+<p>This archive often contains all the files and directories necessary for the operating system to function properly. It includes system binaries, libraries, configuration files, device files, and other essential components.</p>
+<p>Archiving the root filesystem into a <code>rootfs.tar</code> file is a common practice for system backups, cloning, or distribution. It allows for easy transfer, duplication, and restoration of the entire operating system environment.</p>
+<h4 id="how-to-export-a-rootfstar">How to export a <code>rootfs.tar</code></h4>
+<p><code>sudo tar -czpvf rootfs.tar -C /mnt/encrypted_vp .</code></p>
+<p>[under construction]</p>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  © Abhinav Srivastava
+  
+  </footer>
+  </body>
+</html>
+

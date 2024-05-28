@@ -22,7 +22,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/research/zk-dna/</guid>
-      <description>\documentclass{article} \usepackage{lipsum} % For generating dummy text \usepackage{amsmath,amssymb} \usepackage{tikz} \usetikzlibrary{arrows,shapes.geometric,positioning} % Set up for two-column layout \begin{document} \title{Using interactive zero-knowledge proofs for negative STR DNA match proof} \author{\IEEEauthorblockN{Abhinav S.}\\ \IEEEauthorblockA{Boston University\\ Email: sabhinav@bu.edu} } \maketitle \begin{abstract} This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals&#39; best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification.</description>
+      <description>WIP - DM if you&amp;rsquo;d want to collaborate on this.
+\documentclass{article} \usepackage{lipsum} % For generating dummy text \usepackage{amsmath,amssymb} \usepackage{tikz} \usetikzlibrary{arrows,shapes.geometric,positioning} % Set up for two-column layout \begin{document} \title{Using interactive zero-knowledge proofs for negative STR DNA match proof} \author{\IEEEauthorblockN{Abhinav S.}\\ \IEEEauthorblockA{Boston University\\ Email: sabhinav@bu.edu} } \maketitle \begin{abstract} This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals&#39; best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification.</description>
     </item>
     
   </channel>
