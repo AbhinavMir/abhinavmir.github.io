@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<style type="text/css">
+  * {
+    cursor: url(https://cur.cursors-4u.net/sports/spo-1/spo15.cur), auto !important;
+  }
+</style>
+
+<a href="https://www.cursors-4u.com/cursor/2005/05/08/spo15-11.html" target="_blank" title="Sword"><img
+    src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Sword"
+    style="position:absolute; top: 0px; right: 0px;" /></a>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
@@ -37,85 +48,60 @@
     <hr/>
     </nav>
 
+  
+  
+  <h1>Blog</h1>
+  
 
+  
+
+  <ul id="pages-list">
     
-    <h1>Blog</h1>
     
-
     
-
-    <ul id="pages-list">
-      
-      
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/gt_trust/">If John Nash were on Trust</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/essentialism/">Essentialism and Jira Tickets</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/linux-kernel/">How to Build and Boot a Custom Linux Kernel Using QEMU Without Risking Your System</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/ideas/">Ideas I&rsquo;ll eventually build on (feel free to steal!)</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/os/">Lessons in building an OS</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/spiritual-machines/">Mechanical spirits and spiritual machines</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/random-evm-notes/">Random Notes from reth-evm</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/retro-happy/">Retropective Happiness</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/gt_dark_forest/">The formal game theoretic model of the dark forest</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/torment-nexus/">Torment Nexus - or why we don&rsquo;t take advice from writers</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/reth/">Why Reth is faster</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/lexer-ocaml/">Writing a lexer for C in Ocaml</a>
-      </li>
-      
-      <li>
-        <span class="date"></span>
-        <a href="/blog/ast/">Writing a parser in Ocaml</a>
-      </li>
-      
-    </ul>
-
-      <footer>
+    <li>
+      <span class="date"></span>
+      <a href="/blog/encrypt-rootfs/">Encrypting a partition and exporting it as rootfs</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/tx/">How does an Ethereum Transaction work?</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/linux-kernel/">How to Build and Boot a Custom Linux Kernel Using QEMU Without Risking Your System</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/india-ai/">India shouldn&rsquo;t fight the AI war</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/spiritual-machines/">Mechanical spirits and spiritual machines</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/antisocialmedia/">The weird people of social media</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/torment-nexus/">Torment Nexus - or why we don&rsquo;t take advice from writers</a>
+    </li>
+    
+    <li>
+      <span class="date"></span>
+      <a href="/blog/lexer-ocaml/">Writing a lexer for C in Ocaml</a>
+    </li>
+    
+  </ul>
+ 
+    <footer>
   
   
   <hr/>
@@ -125,26 +111,27 @@
   </body>
 </html>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var pagesList = document.querySelectorAll('#pages-list li');
-        pagesList.forEach(function(page) {
-          var today = new Date();
-          var twoMonthsAgo = new Date();
-          twoMonthsAgo.setMonth(today.getMonth() - 5);
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var pagesList = document.querySelectorAll('#pages-list li');
+      pagesList.forEach(function (page) {
+        var today = new Date();
+        var twoMonthsAgo = new Date();
+        twoMonthsAgo.setMonth(today.getMonth() - 5);
 
-          function generateRandomDate(start, end) {
-            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-          }
+        function generateRandomDate(start, end) {
+          return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        }
 
-          var randomDate = generateRandomDate(twoMonthsAgo, today);
-          var formattedDate = randomDate.getFullYear() + '/' + 
-                              (randomDate.getMonth() + 1).toString().padStart(2, '0') + '/' + 
-                              randomDate.getDate().toString().padStart(2, '0');
+        var randomDate = generateRandomDate(twoMonthsAgo, today);
+        var formattedDate = randomDate.getFullYear() + '/' +
+          (randomDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+          randomDate.getDate().toString().padStart(2, '0');
 
-          page.querySelector('.date').textContent = formattedDate;
-        });
+        page.querySelector('.date').textContent = formattedDate;
       });
-    </script>
+    });
+  </script>
 </body>
+
 </html>

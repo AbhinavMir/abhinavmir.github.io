@@ -8,21 +8,24 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 04 Jun 2020 23:15:33 +0200</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>If John Nash were on Trust</title>
-      <link>/blog/gt_trust/</link>
-      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      <title>Encrypting a partition and exporting it as rootfs</title>
+      <link>/blog/encrypt-rootfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/gt_trust/</guid>
-      <description></description>
+      <guid>/blog/encrypt-rootfs/</guid>
+      <description>Step 1: Creating a Virtual Disk To begin, we&amp;rsquo;ll create a virtual disk image that will act as our encrypted partition. We can use the dd command to create a file of a specified size filled with zeros:
+dd if=/dev/zero of=virtual_disk.img bs=1M count=1024  This command creates a file named &amp;ldquo;virtual_disk.img&amp;rdquo; with a size of 1024 megabytes (1 GB).
+Step 2: Associating the Virtual Disk with a Loop Device Next, we need to make the virtual disk image accessible as a block device.</description>
     </item>
     
     <item>
-      <title>Essentialism and Jira Tickets</title>
-      <link>/blog/essentialism/</link>
+      <title>How does an Ethereum Transaction work?</title>
+      <link>/blog/tx/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/essentialism/</guid>
-      <description>[under construction]</description>
+      <guid>/blog/tx/</guid>
+      <description>A Blockchain is essentially a public database in which the data is shared and synchronized across multiple nodes connected in a network. A Blockchain is built up of Block Data structures arranged in a Chain like cryptographic sequence.
+Ethereum is no different, when you commit any transaction on the chain, the data must be added to the network for it to be successful. The verification process is similar to Bitcoin, which uses Proof of Work.</description>
     </item>
     
     <item>
@@ -38,21 +41,12 @@ git clone https://github.</description>
     </item>
     
     <item>
-      <title>Ideas I&#39;ll eventually build on (feel free to steal!)</title>
-      <link>/blog/ideas/</link>
+      <title>India shouldn&#39;t fight the AI war</title>
+      <link>/blog/india-ai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/ideas/</guid>
-      <description>I have a pragmatic way of building things. Modern medicine wouldn&amp;rsquo;t be the same if Julius Richard Petri hadn&amp;rsquo;t developed Petri dish. Dr. Petri did not &amp;ldquo;invent&amp;rdquo; much after this, and his work is mostly overshadowed by the Petridish. Medicine, and the rest of sciences, is filled with quiet, small wonders such as this, that change the world. I do not claim to be the next Dr. Petri, I am nowhere as intelligent, but I want to use his work as a pointer to the fact that small ideas change world.</description>
-    </item>
-    
-    <item>
-      <title>Lessons in building an OS</title>
-      <link>/blog/os/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/os/</guid>
-      <description>[under construction]</description>
+      <guid>/blog/india-ai/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -67,30 +61,11 @@ Notes:
     </item>
     
     <item>
-      <title>Random Notes from reth-evm</title>
-      <link>/blog/random-evm-notes/</link>
+      <title>The weird people of social media</title>
+      <link>/blog/antisocialmedia/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/random-evm-notes/</guid>
-      <description>This is different from my &amp;ldquo;Stolen notes on EVM&amp;rdquo; post, which is now deleted, but some of you might have seen it. These are some pointers I&amp;rsquo;ve been collecting when 1) writing solidity code, 2) contributing to reth-evm, 3) talking to friends (yes, I have friends) about EVM.
-[uc]</description>
-    </item>
-    
-    <item>
-      <title>Retropective Happiness</title>
-      <link>/blog/retro-happy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/retro-happy/</guid>
-      <description>[under construction]</description>
-    </item>
-    
-    <item>
-      <title>The formal game theoretic model of the dark forest</title>
-      <link>/blog/gt_dark_forest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/gt_dark_forest/</guid>
+      <guid>/blog/antisocialmedia/</guid>
       <description></description>
     </item>
     
@@ -105,15 +80,6 @@ Charlie Stoss wrote the blog titled &amp;ldquo;We&amp;rsquo;re sorry we created 
     </item>
     
     <item>
-      <title>Why Reth is faster</title>
-      <link>/blog/reth/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/reth/</guid>
-      <description>Reth is a full-node implementation of the Ethereum protocol. There are many layers to an Ethereum node.</description>
-    </item>
-    
-    <item>
       <title>Writing a lexer for C in Ocaml</title>
       <link>/blog/lexer-ocaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -121,15 +87,6 @@ Charlie Stoss wrote the blog titled &amp;ldquo;We&amp;rsquo;re sorry we created 
       <guid>/blog/lexer-ocaml/</guid>
       <description>ref. Nora Sandler&amp;rsquo;s, Writing a C Compiler, Part 1
 This is my first time using Ocaml, and Dune. If this is the case with you, if you want a primer, you can read the official docs, and then do 99 Problems and get back here, although 3 problems in, I said &amp;ldquo;Bah! I got this&amp;rdquo; and infact, I didn&amp;rsquo;t. You can read this bit, and implement parsers in the next one on your own.</description>
-    </item>
-    
-    <item>
-      <title>Writing a parser in Ocaml</title>
-      <link>/blog/ast/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/ast/</guid>
-      <description>[uc]</description>
     </item>
     
   </channel>

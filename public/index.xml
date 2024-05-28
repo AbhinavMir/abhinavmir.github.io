@@ -8,15 +8,6 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jun 2020 16:16:24 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>If John Nash were on Trust</title>
-      <link>/blog/gt_trust/</link>
-      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/gt_trust/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title></title>
       <link>/hugo-gallery/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -31,17 +22,28 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/contact/</guid>
-      <description>I&amp;rsquo;ll add in my keybase.io profile here soon, but you can email me @ sabhinav at bu dot edu.
-I live stream my consiousness on this awesome website.</description>
+      <description>I&amp;rsquo;ll add in my keybase.io profile here soon, but you can email me @ sabhinav at bu dot edu. I live stream my consiousness on this awesome website.</description>
     </item>
     
     <item>
-      <title>Essentialism and Jira Tickets</title>
-      <link>/blog/essentialism/</link>
+      <title>Encrypting a partition and exporting it as rootfs</title>
+      <link>/blog/encrypt-rootfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/essentialism/</guid>
-      <description>[under construction]</description>
+      <guid>/blog/encrypt-rootfs/</guid>
+      <description>Step 1: Creating a Virtual Disk To begin, we&amp;rsquo;ll create a virtual disk image that will act as our encrypted partition. We can use the dd command to create a file of a specified size filled with zeros:
+dd if=/dev/zero of=virtual_disk.img bs=1M count=1024  This command creates a file named &amp;ldquo;virtual_disk.img&amp;rdquo; with a size of 1024 megabytes (1 GB).
+Step 2: Associating the Virtual Disk with a Loop Device Next, we need to make the virtual disk image accessible as a block device.</description>
+    </item>
+    
+    <item>
+      <title>How does an Ethereum Transaction work?</title>
+      <link>/blog/tx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/tx/</guid>
+      <description>A Blockchain is essentially a public database in which the data is shared and synchronized across multiple nodes connected in a network. A Blockchain is built up of Block Data structures arranged in a Chain like cryptographic sequence.
+Ethereum is no different, when you commit any transaction on the chain, the data must be added to the network for it to be successful. The verification process is similar to Bitcoin, which uses Proof of Work.</description>
     </item>
     
     <item>
@@ -57,21 +59,12 @@ git clone https://github.</description>
     </item>
     
     <item>
-      <title>Ideas I&#39;ll eventually build on (feel free to steal!)</title>
-      <link>/blog/ideas/</link>
+      <title>India shouldn&#39;t fight the AI war</title>
+      <link>/blog/india-ai/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/ideas/</guid>
-      <description>I have a pragmatic way of building things. Modern medicine wouldn&amp;rsquo;t be the same if Julius Richard Petri hadn&amp;rsquo;t developed Petri dish. Dr. Petri did not &amp;ldquo;invent&amp;rdquo; much after this, and his work is mostly overshadowed by the Petridish. Medicine, and the rest of sciences, is filled with quiet, small wonders such as this, that change the world. I do not claim to be the next Dr. Petri, I am nowhere as intelligent, but I want to use his work as a pointer to the fact that small ideas change world.</description>
-    </item>
-    
-    <item>
-      <title>Lessons in building an OS</title>
-      <link>/blog/os/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/os/</guid>
-      <description>[under construction]</description>
+      <guid>/blog/india-ai/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -86,34 +79,15 @@ Notes:
     </item>
     
     <item>
-      <title>Random Notes from reth-evm</title>
-      <link>/blog/random-evm-notes/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/random-evm-notes/</guid>
-      <description>This is different from my &amp;ldquo;Stolen notes on EVM&amp;rdquo; post, which is now deleted, but some of you might have seen it. These are some pointers I&amp;rsquo;ve been collecting when 1) writing solidity code, 2) contributing to reth-evm, 3) talking to friends (yes, I have friends) about EVM.
-[uc]</description>
-    </item>
-    
-    <item>
       <title>Resume</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>Education   Boston University
+      <description>Education   ** University of Colorado Boulder** (part time)
+ Boulder, CO Aug 2024–May 2026 MS in Electrical Engineering, focus on FPGA, Embedded Engineering, Semiconductors    Boston University
  Boston, MA Sep 2022–Jan 2024 MS in Computer Science, spl. CyberSecurity    Vellore Institute of Technology
- Vellore, India May 2021 BS in Computer Science &amp;amp; Engineering    Work Experience Mentee @ RISC-V, Remote (Mar 2024 - May 2024)
-  Contributing to the development of an accessible Sail backend for the RISC-V ISA, automating the conversion of specifications into a JSON database to optimize downstream tool generation.</description>
-    </item>
-    
-    <item>
-      <title>Retropective Happiness</title>
-      <link>/blog/retro-happy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/retro-happy/</guid>
-      <description>[under construction]</description>
+ Vellore, India May 2021 BS in Computer Science &amp;amp; Engineering    Work Experience   Mentee @ RISC-V, Remote (Mar 2024 - May 2024)</description>
     </item>
     
     <item>
@@ -126,11 +100,11 @@ Notes:
     </item>
     
     <item>
-      <title>The formal game theoretic model of the dark forest</title>
-      <link>/blog/gt_dark_forest/</link>
+      <title>The weird people of social media</title>
+      <link>/blog/antisocialmedia/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/gt_dark_forest/</guid>
+      <guid>/blog/antisocialmedia/</guid>
       <description></description>
     </item>
     
@@ -145,15 +119,6 @@ Charlie Stoss wrote the blog titled &amp;ldquo;We&amp;rsquo;re sorry we created 
     </item>
     
     <item>
-      <title>Why Reth is faster</title>
-      <link>/blog/reth/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/reth/</guid>
-      <description>Reth is a full-node implementation of the Ethereum protocol. There are many layers to an Ethereum node.</description>
-    </item>
-    
-    <item>
       <title>Writing a lexer for C in Ocaml</title>
       <link>/blog/lexer-ocaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -164,21 +129,13 @@ This is my first time using Ocaml, and Dune. If this is the case with you, if yo
     </item>
     
     <item>
-      <title>Writing a parser in Ocaml</title>
-      <link>/blog/ast/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/ast/</guid>
-      <description>[uc]</description>
-    </item>
-    
-    <item>
       <title>Zero Knowledge proofs on Y-STR Data for forensic DNA analysis</title>
       <link>/research/zk-dna/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/research/zk-dna/</guid>
-      <description>\documentclass{article} \usepackage{lipsum} % For generating dummy text \usepackage{amsmath,amssymb} \usepackage{tikz} \usetikzlibrary{arrows,shapes.geometric,positioning} % Set up for two-column layout \begin{document} \title{Using interactive zero-knowledge proofs for negative STR DNA match proof} \author{\IEEEauthorblockN{Abhinav S.}\\ \IEEEauthorblockA{Boston University\\ Email: sabhinav@bu.edu} } \maketitle \begin{abstract} This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals&#39; best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification.</description>
+      <description>WIP - DM if you&amp;rsquo;d want to collaborate on this.
+\documentclass{article} \usepackage{lipsum} % For generating dummy text \usepackage{amsmath,amssymb} \usepackage{tikz} \usetikzlibrary{arrows,shapes.geometric,positioning} % Set up for two-column layout \begin{document} \title{Using interactive zero-knowledge proofs for negative STR DNA match proof} \author{\IEEEauthorblockN{Abhinav S.}\\ \IEEEauthorblockA{Boston University\\ Email: sabhinav@bu.edu} } \maketitle \begin{abstract} This paper explores the application of zero-knowledge proofs in genetic authentication, specifically in forensic settings. In environments where a trusted central authority is assumed to have the individuals&#39; best privacy-oriented interests at heart, zero-knowledge proofs offer a compelling method for secure identity verification.</description>
     </item>
     
   </channel>
