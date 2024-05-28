@@ -9,7 +9,7 @@ menu:
 
 
 ## Education
-- **University of Colorado Boulder**  (part time)
+- **University of Colorado Boulder**  (part time - doesn't impede my ability to relocate or work full-time)
   - Boulder, CO
   - Aug 2024–May 2026
   - MS in Electrical Engineering, focus on FPGA, Embedded Engineering, Semiconductors 
