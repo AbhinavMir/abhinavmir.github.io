@@ -100,6 +100,10 @@ menu:
 - **Google Cybersecurity Professional Certificate**
 - **IBM DevOps and Software Engineering Professional Certificate**
 
+## Works in the pipeline
+
+2 more papers, a book on history of operating systems, 1st edition of magazine Computerra and a few more projects. Mostly nights and evenings type deal.
+
 #### Certifications where exams are pending due to constraints on monetary resources.
 - **HashiCorp Infrastructure Automation Certification**
 - **Certified Kubernetes Application Developer**
