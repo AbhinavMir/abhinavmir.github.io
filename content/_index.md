@@ -17,7 +17,3 @@ I am currently looking for opportunities in North America, you can reach out to 
 
 
 I'll also try to keep my [book recommendations](https://bookshelf.so/augustradjoe) updated.
-
-`If you're looking for my old work, I'm still in the process of migrating it here.`
-
-![riscv logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/RISC-V-logo.svg/220px-RISC-V-logo.svg.png) <img src="https://sail.bu.edu/img/circle_sail.png" width="50" height="60"> <img src="https://upload.wikimedia.org/wikipedia/en/1/15/Boston_University_Terriers_logo.svg" height=60>

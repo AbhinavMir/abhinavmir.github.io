@@ -19,8 +19,7 @@
 <body>
   {{ partial "header.html" . }}
   {{ if .IsHome }}
-  <marquee>hire me!</marquee>
-  <img src="https://www.coin-operated.com/wp-content/uploads/2010/05/mail.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/atom1.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/grapher.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/cd-rom.gif"><img src="https://www.coin-operated.com/wp-content/uploads/2010/05/spotting.gif"><img src="https://web.archive.org/web/20091027133945/http://geocities.com/taz20_18/celtics1-sm.gif">
+
   {{ end }}
   {{ if not .IsHome }}
   <h1>{{ .Title | markdownify }}</h1>
@@ -32,13 +31,15 @@
     {{ $pages := .Pages }}
     {{ if .IsHome }}{{ $pages = .Site.RegularPages }}{{ end }}
     {{ range (where $pages "Section" "!=" "") }}
+    {{ if not (in .Params.tags "non-technical") }}
     <li>
-      <span class="date"></span>
       <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
     </li>
     {{ end }}
+    {{ end }}
   </ul>
- 
+  </ul>
+
   {{ partial "footer.html" . }}
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -62,5 +63,14 @@
     });
   </script>
 </body>
+<img src="https://www.coin-operated.com/wp-content/uploads/2010/05/mail.gif"><img
+  src="https://www.coin-operated.com/wp-content/uploads/2010/05/atom1.gif"><img
+  src="https://www.coin-operated.com/wp-content/uploads/2010/05/grapher.gif"><img
+  src="https://www.coin-operated.com/wp-content/uploads/2010/05/cd-rom.gif"><img
+  src="https://www.coin-operated.com/wp-content/uploads/2010/05/spotting.gif"><img
+  src="https://web.archive.org/web/20091027133945/http://geocities.com/taz20_18/celtics1-sm.gif">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/RISC-V-logo.svg/220px-RISC-V-logo.svg.png" /> <img
+  src="https://sail.bu.edu/img/circle_sail.png" width="50" height="60"> <img
+  src="https://upload.wikimedia.org/wikipedia/en/1/15/Boston_University_Terriers_logo.svg" height=60>
 
 </html>
