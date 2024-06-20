@@ -1,5 +1,6 @@
 ---
 title: Encrypting a partition and exporting it as rootfs
+draft: true
 ---
 
 ### Step 1: Creating a Virtual Disk
