@@ -1,4 +1,4 @@
 ---
 title: The weird people of social media
-draft: 
+draft: true
 ---

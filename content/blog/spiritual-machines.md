@@ -2,6 +2,7 @@
 title: 'Mechanical spirits and spiritual machines'
 Tags: [computer science, philosophy, history]
 Categories: [technical]
+draft: true
 ---
 
 [under construction]
