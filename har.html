@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR to Clean cURL Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #3e3e42;
+        }
+
+        .header h1 {
+            color: #569cd6;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        .file-input {
+            margin-bottom: 20px;
+        }
+
+        .file-input input[type="file"] {
+            background: #3c3c3c;
+            color: #d4d4d4;
+            border: 1px solid #5a5a5a;
+            padding: 10px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .filters-section {
+            background: #252526;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #3e3e42;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            background: #2d2d30;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #3e3e42;
+        }
+
+        .filter-group h3 {
+            color: #4ec9b0;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #cccccc;
+            cursor: pointer;
+        }
+
+        .filter-group input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .filter-group input[type="text"], .filter-group textarea {
+            width: 100%;
+            background: #3c3c3c;
+            color: #d4d4d4;
+            border: 1px solid #5a5a5a;
+            padding: 6px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+
+        .filter-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .process-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .process-btn:hover {
+            background: #1177bb;
+        }
+
+        .process-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .results-section {
+            display: none;
+            background: #252526;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #3e3e42;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #2d2d30;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #3e3e42;
+        }
+
+        .stat-card .label {
+            color: #cccccc;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .value {
+            color: #4ec9b0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .output-section {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .output-section h3 {
+            color: #569cd6;
+            margin-bottom: 15px;
+        }
+
+        .curl-command {
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .curl-header {
+            color: #4ec9b0;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .curl-content {
+            color: #ce9178;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #1177bb;
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .export-btn {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .export-btn:hover {
+            background: #1177bb;
+        }
+
+        .filtered-list {
+            background: #2d2d30;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            border: 1px solid #3e3e42;
+        }
+
+        .filtered-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 12px;
+        }
+
+        .filtered-item:last-child {
+            border-bottom: none;
+        }
+
+        .method-tag {
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .method-tag.GET { background: #4caf50; }
+        .method-tag.POST { background: #ff9800; }
+        .method-tag.PUT { background: #2196f3; }
+        .method-tag.DELETE { background: #f44336; }
+        .response-section {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 3px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .response-header {
+            color: #f44336;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .response-content {
+            color: #dcdcaa;
+            font-size: 11px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #252526;
+            padding: 8px;
+            border-radius: 2px;
+        }
+
+        .status-badge {
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .status-badge.success { background: #4caf50; color: white; }
+        .status-badge.error { background: #f44336; color: white; }
+        .status-badge.redirect { background: #ff9800; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧹 HAR to Clean cURL Converter</h1>
+            <p>Convert HAR files to clean, LLM-friendly cURL commands by filtering out preflight requests, static assets, and other noise</p>
+        </div>
+
+        <div class="file-input">
+            <input type="file" id="harFile" accept=".har,.json,.txt" />
+        </div>
+
+        <div class="filters-section">
+            <h2 style="color: #569cd6; margin-bottom: 15px;">🔧 Filtering Options</h2>
+            
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <h3>📋 HTTP Methods</h3>
+                    <label><input type="checkbox" id="includeGET" checked> GET requests</label>
+                    <label><input type="checkbox" id="includePOST" checked> POST requests</label>
+                    <label><input type="checkbox" id="includePUT" checked> PUT requests</label>
+                    <label><input type="checkbox" id="includeDELETE" checked> DELETE requests</label>
+                    <label><input type="checkbox" id="includePATCH" checked> PATCH requests</label>
+                    <label><input type="checkbox" id="includeOPTIONS"> OPTIONS (preflight)</label>
+                </div>
+
+                <div class="filter-group">
+                    <h3>🚫 Exclude Content Types</h3>
+                    <label><input type="checkbox" id="excludeImages" checked> Images (jpg, png, gif, svg, ico)</label>
+                    <label><input type="checkbox" id="excludeFonts" checked> Fonts (woff, ttf, eot)</label>
+                    <label><input type="checkbox" id="excludeCSS" checked> Stylesheets (.css)</label>
+                    <label><input type="checkbox" id="excludeJS"> JavaScript (.js)</label>
+                    <label><input type="checkbox" id="excludeStatic" checked> Static assets</label>
+                </div>
+
+                <div class="filter-group">
+                    <h3>🎯 Custom Filters</h3>
+                    <label>
+                        Include URLs containing:
+                        <input type="text" id="includePattern" placeholder="e.g., /api/, /v1/" />
+                    </label>
+                    <label>
+                        Exclude URLs containing:
+                        <textarea id="excludePatterns" placeholder="Enter patterns to exclude (one per line):
+analytics
+google
+facebook
+tracking
+telemetry"></textarea>
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h3>⚙️ Output Options</h3>
+                    <label><input type="checkbox" id="includeHeaders" checked> Include headers</label>
+                    <label><input type="checkbox" id="includeCookies"> Include cookies</label>
+                    <label><input type="checkbox" id="includeBody" checked> Include request body</label>
+                    <label><input type="checkbox" id="includeResponses" checked> Include responses</label>
+                    <label><input type="checkbox" id="compactMode"> Compact mode (single line)</label>
+                    <label><input type="checkbox" id="addComments" checked> Add descriptive comments</label>
+                </div>
+            </div>
+
+            <button class="process-btn" id="processBtn" onclick="processHAR()">
+                🚀 Generate Clean cURLs
+            </button>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <div class="stats" id="stats"></div>
+            
+            <div class="export-buttons">
+                <button class="export-btn" onclick="exportCurls()">📄 Export as Text File</button>
+                <button class="export-btn" onclick="exportBash()">🔧 Export as Bash Script</button>
+                <button class="export-btn" onclick="copyAllCurls()">📋 Copy All to Clipboard</button>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h3>🧽 Cleaned cURL Commands</h3>
+                <div id="curlOutput"></div>
+            </div>
+
+            <div class="filtered-list" id="filteredList">
+                <h3 style="color: #4ec9b0; margin-bottom: 10px;">📊 Filtered Requests Summary</h3>
+                <div id="filteredItems"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let harData = null;
+        let filteredRequests = [];
+
+        document.getElementById('harFile').addEventListener('change', handleFileUpload);
+
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                
+                try {
+                    harData = JSON.parse(text);
+                } catch (e) {
+                    const jsonMatch = text.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        harData = JSON.parse(jsonMatch[0]);
+                    } else {
+                        throw new Error('No valid JSON found in file');
+                    }
+                }
+
+                if (!harData.log || !harData.log.entries) {
+                    throw new Error('Invalid HAR format');
+                }
+
+                document.getElementById('processBtn').disabled = false;
+                document.getElementById('processBtn').textContent = `🚀 Process ${harData.log.entries.length} requests`;
+                
+            } catch (error) {
+                alert('Error parsing HAR file: ' + error.message);
+                console.error('Parse error:', error);
+            }
+        }
+
+        function processHAR() {
+            if (!harData) return;
+
+            const entries = harData.log.entries;
+            filteredRequests = [];
+
+            // Get filter settings
+            const filters = {
+                methods: {
+                    GET: document.getElementById('includeGET').checked,
+                    POST: document.getElementById('includePOST').checked,
+                    PUT: document.getElementById('includePUT').checked,
+                    DELETE: document.getElementById('includeDELETE').checked,
+                    PATCH: document.getElementById('includePATCH').checked,
+                    OPTIONS: document.getElementById('includeOPTIONS').checked
+                },
+                exclude: {
+                    images: document.getElementById('excludeImages').checked,
+                    fonts: document.getElementById('excludeFonts').checked,
+                    css: document.getElementById('excludeCSS').checked,
+                    js: document.getElementById('excludeJS').checked,
+                    static: document.getElementById('excludeStatic').checked
+                },
+                includePattern: document.getElementById('includePattern').value.trim(),
+                excludePatterns: document.getElementById('excludePatterns').value
+                    .split('\n')
+                    .map(p => p.trim())
+                    .filter(p => p.length > 0),
+                options: {
+                    includeHeaders: document.getElementById('includeHeaders').checked,
+                    includeCookies: document.getElementById('includeCookies').checked,
+                    includeBody: document.getElementById('includeBody').checked,
+                    includeResponses: document.getElementById('includeResponses').checked,
+                    compactMode: document.getElementById('compactMode').checked,
+                    addComments: document.getElementById('addComments').checked
+                }
+            };
+
+            // Filter requests
+            entries.forEach((entry, index) => {
+                if (shouldIncludeRequest(entry, filters)) {
+                    filteredRequests.push({
+                        entry,
+                        index,
+                        curl: generateCleanCurl(entry, filters.options),
+                        response: filters.options.includeResponses ? formatResponse(entry.response) : null
+                    });
+                }
+            });
+
+            displayResults();
+        }
+
+        function shouldIncludeRequest(entry, filters) {
+            const request = entry.request;
+            const method = request.method.toUpperCase();
+            const url = request.url.toLowerCase();
+            const pathname = new URL(request.url).pathname.toLowerCase();
+
+            // Check HTTP method
+            if (!filters.methods[method]) return false;
+
+            // Check include pattern
+            if (filters.includePattern && !request.url.toLowerCase().includes(filters.includePattern.toLowerCase())) {
+                return false;
+            }
+
+            // Check exclude patterns
+            for (const pattern of filters.excludePatterns) {
+                if (url.includes(pattern.toLowerCase())) return false;
+            }
+
+            // Check file extensions and content types
+            if (filters.exclude.images && isImageRequest(url, entry.response)) return false;
+            if (filters.exclude.fonts && isFontRequest(url, entry.response)) return false;
+            if (filters.exclude.css && isCSSRequest(url, entry.response)) return false;
+            if (filters.exclude.js && isJSRequest(url, entry.response)) return false;
+            if (filters.exclude.static && isStaticAsset(url, entry.response)) return false;
+
+            return true;
+        }
+
+        function isImageRequest(url, response) {
+            const imageExts = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.ico', '.webp', '.bmp'];
+            const mimeType = response.content?.mimeType || '';
+            return imageExts.some(ext => url.endsWith(ext)) || mimeType.startsWith('image/');
+        }
+
+        function isFontRequest(url, response) {
+            const fontExts = ['.woff', '.woff2', '.ttf', '.eot', '.otf'];
+            const mimeType = response.content?.mimeType || '';
+            return fontExts.some(ext => url.endsWith(ext)) || mimeType.includes('font');
+        }
+
+        function isCSSRequest(url, response) {
+            const mimeType = response.content?.mimeType || '';
+            return url.endsWith('.css') || mimeType.includes('text/css');
+        }
+
+        function isJSRequest(url, response) {
+            const mimeType = response.content?.mimeType || '';
+            return url.endsWith('.js') || mimeType.includes('javascript') || mimeType.includes('application/javascript');
+        }
+
+        function isStaticAsset(url, response) {
+            const staticPatterns = ['/static/', '/assets/', '/public/', '/cdn/', '/images/', '/img/', '/css/', '/js/'];
+            return staticPatterns.some(pattern => url.includes(pattern));
+        }
+
+        function formatResponse(response) {
+            const status = response.status;
+            const statusText = response.statusText || '';
+            const headers = response.headers || [];
+            const content = response.content || {};
+            
+            let formattedResponse = `Status: ${status} ${statusText}\n`;
+            
+            // Add important response headers
+            const importantHeaders = headers.filter(h => {
+                const name = h.name.toLowerCase();
+                return ['content-type', 'content-length', 'location', 'set-cookie', 'cache-control'].includes(name);
+            });
+            
+            if (importantHeaders.length > 0) {
+                formattedResponse += 'Headers:\n';
+                importantHeaders.forEach(header => {
+                    formattedResponse += `  ${header.name}: ${header.value}\n`;
+                });
+            }
+            
+            // Add response body
+            if (content.text) {
+                formattedResponse += '\nResponse Body:\n';
+                
+                try {
+                    // Try to pretty-print JSON
+                    const parsed = JSON.parse(content.text);
+                    formattedResponse += JSON.stringify(parsed, null, 2);
+                } catch (e) {
+                    // Not JSON, include as-is but truncate if too long
+                    let body = content.text;
+                    if (body.length > 1000) {
+                        body = body.substring(0, 1000) + '\n... (truncated)';
+                    }
+                    formattedResponse += body;
+                }
+            } else if (content.size > 0) {
+                formattedResponse += `\nResponse Body: ${content.size} bytes (${content.mimeType || 'unknown type'})`;
+            }
+            
+            return formattedResponse;
+        }
+
+        function generateCleanCurl(entry, options) {
+            const request = entry.request;
+            const url = request.url;
+            const method = request.method;
+            
+            let curl = options.compactMode ? 
+                `curl -X ${method} '${url}'` : 
+                `curl -X ${method} \\\n  '${url}'`;
+
+            // Add headers
+            if (options.includeHeaders && request.headers) {
+                const importantHeaders = request.headers.filter(h => {
+                    const name = h.name.toLowerCase();
+                    return !['host', 'content-length', 'connection', 'user-agent'].includes(name) ||
+                           ['authorization', 'content-type', 'accept'].includes(name);
+                });
+
+                importantHeaders.forEach(header => {
+                    const headerValue = header.value.replace(/'/g, "\\'");
+                    if (options.compactMode) {
+                        curl += ` -H '${header.name}: ${headerValue}'`;
+                    } else {
+                        curl += ` \\\n  -H '${header.name}: ${headerValue}'`;
+                    }
+                });
+            }
+
+            // Add cookies
+            if (options.includeCookies && request.cookies && request.cookies.length > 0) {
+                const cookieString = request.cookies.map(c => `${c.name}=${c.value}`).join('; ');
+                if (options.compactMode) {
+                    curl += ` -H 'Cookie: ${cookieString}'`;
+                } else {
+                    curl += ` \\\n  -H 'Cookie: ${cookieString}'`;
+                }
+            }
+
+            // Add request body
+            if (options.includeBody && request.postData && request.postData.text) {
+                let data = request.postData.text;
+                
+                // Try to format JSON nicely
+                try {
+                    const parsed = JSON.parse(data);
+                    data = JSON.stringify(parsed, null, options.compactMode ? 0 : 2);
+                } catch (e) {
+                    // Not JSON, use as-is
+                }
+
+                const escapedData = data.replace(/'/g, "\\'");
+                if (options.compactMode) {
+                    curl += ` -d '${escapedData}'`;
+                } else {
+                    curl += ` \\\n  -d '${escapedData}'`;
+                }
+            }
+
+            return curl;
+        }
+
+        function displayResults() {
+            const originalCount = harData.log.entries.length;
+            const filteredCount = filteredRequests.length;
+            const filtered = originalCount - filteredCount;
+
+            // Update stats
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card">
+                    <div class="label">Original Requests</div>
+                    <div class="value">${originalCount}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Kept</div>
+                    <div class="value">${filteredCount}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Filtered Out</div>
+                    <div class="value">${filtered}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Reduction</div>
+                    <div class="value">${((filtered / originalCount) * 100).toFixed(1)}%</div>
+                </div>
+            `;
+
+            // Display cURL commands
+            const curlOutput = document.getElementById('curlOutput');
+            const addComments = document.getElementById('addComments').checked;
+            
+            curlOutput.innerHTML = filteredRequests.map((req, index) => {
+                const entry = req.entry;
+                const endpoint = new URL(entry.request.url).pathname;
+                const comment = addComments ? `# ${entry.request.method} ${endpoint}` : '';
+                const status = entry.response.status;
+                const statusClass = status >= 200 && status < 300 ? 'success' : 
+                                  status >= 300 && status < 400 ? 'redirect' : 'error';
+                
+                let html = `
+                    <div class="curl-command">
+                        <div class="curl-header">
+                            <span>${entry.request.method} ${endpoint}</span>
+                            <div>
+                                <span class="status-badge ${statusClass}">${status}</span>
+                                <button class="copy-btn" onclick="copyCurl(${index}, this)">📋 Copy</button>
+                            </div>
+                        </div>
+                        <div class="curl-content">${comment ? comment + '\n' : ''}${req.curl}</div>
+                `;
+                
+                if (req.response) {
+                    html += `
+                        <div class="response-section">
+                            <div class="response-header">
+                                📤 Response
+                                <button class="copy-btn" onclick="copyResponse(${index}, this)">📋 Copy Response</button>
+                            </div>
+                            <div class="response-content">${escapeHtml(req.response)}</div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                return html;
+            }).join('');
+
+            // Display filtered items summary
+            const filteredItems = document.getElementById('filteredItems');
+            const methodCounts = {};
+            filteredRequests.forEach(req => {
+                const method = req.entry.request.method;
+                methodCounts[method] = (methodCounts[method] || 0) + 1;
+            });
+
+            filteredItems.innerHTML = Object.entries(methodCounts)
+                .map(([method, count]) => `
+                    <div class="filtered-item">
+                        <span class="method-tag ${method}">${method}</span>
+                        ${count} request${count > 1 ? 's' : ''}
+                    </div>
+                `).join('');
+
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function copyCurl(index, button) {
+            const curl = filteredRequests[index].curl;
+            navigator.clipboard.writeText(curl).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function copyResponse(index, button) {
+            const response = filteredRequests[index].response;
+            if (response) {
+                navigator.clipboard.writeText(response).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = '✅ Copied!';
+                    button.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+
+        function copyAllCurls() {
+            const addComments = document.getElementById('addComments').checked;
+            const includeResponses = document.getElementById('includeResponses').checked;
+            
+            const allContent = filteredRequests.map(req => {
+                const endpoint = new URL(req.entry.request.url).pathname;
+                const comment = addComments ? `# ${req.entry.request.method} ${endpoint}` : '';
+                
+                let content = comment ? comment + '\n' + req.curl : req.curl;
+                
+                if (includeResponses && req.response) {
+                    content += '\n\n# Response:\n' + req.response;
+                }
+                
+                return content;
+            }).join('\n\n# ==========================================\n\n');
+
+            navigator.clipboard.writeText(allContent).then(() => {
+                alert(`Copied ${filteredRequests.length} cURL commands${includeResponses ? ' with responses' : ''} to clipboard!`);
+            });
+        }
+
+        function exportCurls() {
+            const addComments = document.getElementById('addComments').checked;
+            const content = generateExportContent(addComments, false);
+            downloadFile('clean_curls.txt', content);
+        }
+
+        function exportBash() {
+            const addComments = document.getElementById('addComments').checked;
+            const content = generateExportContent(addComments, true);
+            downloadFile('api_requests.sh', content);
+        }
+
+        function generateExportContent(addComments, asBash) {
+            const timestamp = new Date().toISOString();
+            const includeResponses = document.getElementById('includeResponses').checked;
+            let content = '';
+
+            if (asBash) {
+                content = `#!/bin/bash
+# Generated from HAR file on ${timestamp}
+# ${filteredRequests.length} cleaned API requests${includeResponses ? ' with responses' : ''}
+
+set -e  # Exit on any error
+
+echo "Executing ${filteredRequests.length} API requests..."
+
+`;
+            } else {
+                content = `# Clean cURL Commands${includeResponses ? ' with Responses' : ''}
+# Generated from HAR file on ${timestamp}
+# Original requests: ${harData.log.entries.length}
+# Filtered requests: ${filteredRequests.length}
+
+`;
+            }
+
+            content += filteredRequests.map((req, index) => {
+                const entry = req.entry;
+                const endpoint = new URL(entry.request.url).pathname;
+                const comment = addComments ? `# ${entry.request.method} ${endpoint}` : '';
+                
+                let section = '';
+                if (comment) section += comment + '\n';
+                section += req.curl;
+                
+                // Add response if included
+                if (includeResponses && req.response) {
+                    section += '\n\n# Response:\n' + req.response;
+                }
+                
+                if (asBash) {
+                    section += `\necho "Request ${index + 1}/${filteredRequests.length} completed"`;
+                }
+                
+                return section;
+            }).join('\n\n# ==========================================\n\n');
+
+            if (asBash) {
+                content += '\n\necho "All requests completed successfully!"';
+            }
+
+            return content;
+        }
+
+        function downloadFile(filename, content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
