@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Record Spinner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .controls {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            background: #444;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+        }
+
+        .file-label:hover {
+            background: #555;
+        }
+
+        input[type="range"] {
+            width: 150px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        #canvas-container {
+            position: relative;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        canvas {
+            display: block;
+            cursor: move;
+            width: 100%;
+            height: auto;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .status {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .speed-display {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .canvas-size-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .canvas-size-controls input {
+            width: 80px;
+            padding: 5px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        .bg-preview {
+            width: 100%;
+            height: 40px;
+            background: #333;
+            border-radius: 3px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .bg-preview.active {
+            background: #444;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label>Canvas Size</label>
+            <div class="canvas-size-controls">
+                <input type="number" id="canvas-width" value="1200" min="600" max="1920">
+                <span>×</span>
+                <input type="number" id="canvas-height" value="800" min="400" max="1080">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>Background</label>
+            <label class="file-label" for="bg-upload">Choose Image/Video</label>
+            <input type="file" id="bg-upload" accept="image/*,video/*">
+            <div class="bg-preview" id="bg-preview">No background</div>
+        </div>
+
+        <div class="control-group">
+            <label>Center Label Image</label>
+            <label class="file-label" for="center-upload">Choose Image</label>
+            <input type="file" id="center-upload" accept="image/*">
+        </div>
+
+        <div class="control-group">
+            <label>Outer Record Image</label>
+            <label class="file-label" for="outer-upload">Choose Image</label>
+            <input type="file" id="outer-upload" accept="image/*">
+        </div>
+
+        <div class="control-group">
+            <label>Rotation Speed (RPM)</label>
+            <input type="range" id="speed" min="0" max="78" value="33" step="1">
+            <div class="speed-display">33 RPM</div>
+        </div>
+
+        <div class="control-group">
+            <label>Record Size (Radius)</label>
+            <input type="range" id="radius" min="50" max="400" value="250" step="10">
+            <div class="speed-display" id="radius-display">250px</div>
+        </div>
+
+        <div class="control-group">
+            <label>Export Duration (seconds)</label>
+            <input type="number" id="duration" min="1" max="60" value="5" style="width: 60px; padding: 5px;">
+        </div>
+
+        <div class="control-group">
+            <label>Actions</label>
+            <button id="export-btn">Export as Video</button>
+            <button id="clear-bg-btn" style="background: #666;">Clear Background</button>
+        </div>
+    </div>
+
+    <div id="canvas-container">
+        <video id="bg-video" style="display: none;"></video>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasContainer = document.getElementById('canvas-container');
+        const bgVideo = document.getElementById('bg-video');
+        const speedSlider = document.getElementById('speed');
+        const speedDisplay = document.querySelector('.speed-display');
+        const durationInput = document.getElementById('duration');
+        const exportBtn = document.getElementById('export-btn');
+        const clearBgBtn = document.getElementById('clear-bg-btn');
+        const status = document.getElementById('status');
+        const bgPreview = document.getElementById('bg-preview');
+        const canvasWidthInput = document.getElementById('canvas-width');
+        const canvasHeightInput = document.getElementById('canvas-height');
+
+        let centerImage = null;
+        let outerImage = null;
+        let backgroundImage = null;
+        let backgroundVideo = null;
+        let rotation = 0;
+        let rpm = 33;
+        let recordRadius = 250;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let recordX = 600;
+        let recordY = 400;
+        let lastTime = performance.now();
+
+        // Set initial canvas size
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        // Load default vinyl image
+        let defaultVinyl = null;
+        const defaultVinylImg = new Image();
+        defaultVinylImg.crossOrigin = 'anonymous';
+        defaultVinylImg.onload = function() {
+            defaultVinyl = defaultVinylImg;
+        };
+        defaultVinylImg.src = '';
+
+        // Create default label
+        function createDefaultLabel() {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 200;
+            tempCanvas.height = 200;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            // Red label background
+            tempCtx.fillStyle = '#c41e3a';
+            tempCtx.fillRect(0, 0, 200, 200);
+
+            // Add text
+            tempCtx.fillStyle = '#fff';
+            tempCtx.font = 'bold 24px Arial';
+            tempCtx.textAlign = 'center';
+            tempCtx.textBaseline = 'middle';
+            tempCtx.fillText('VINYL', 100, 80);
+            tempCtx.fillText('RECORD', 100, 120);
+
+            // Add center hole
+            tempCtx.globalCompositeOperation = 'destination-out';
+            tempCtx.beginPath();
+            tempCtx.arc(100, 100, 15, 0, Math.PI * 2);
+            tempCtx.fill();
+
+            return tempCanvas;
+        }
+
+        const defaultLabel = createDefaultLabel();
+
+        // Canvas size controls
+        canvasWidthInput.addEventListener('change', updateCanvasSize);
+        canvasHeightInput.addEventListener('change', updateCanvasSize);
+
+        function updateCanvasSize() {
+            canvas.width = parseInt(canvasWidthInput.value);
+            canvas.height = parseInt(canvasHeightInput.value);
+            
+            // Allow record to be positioned anywhere on canvas
+            recordX = Math.max(0, Math.min(canvas.width, recordX));
+            recordY = Math.max(0, Math.min(canvas.height, recordY));
+        }
+
+        // Background upload handler
+        document.getElementById('bg-upload').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const fileType = file.type.split('/')[0];
+                const reader = new FileReader();
+                
+                if (fileType === 'image') {
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            backgroundImage = img;
+                            backgroundVideo = null;
+                            bgVideo.style.display = 'none';
+                            bgVideo.pause();
+                            bgPreview.textContent = 'Image: ' + file.name;
+                            bgPreview.classList.add('active');
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                } else if (fileType === 'video') {
+                    reader.onload = (event) => {
+                        bgVideo.src = event.target.result;
+                        bgVideo.style.display = 'block';
+                        bgVideo.loop = true;
+                        bgVideo.muted = true;
+                        bgVideo.play();
+                        backgroundVideo = bgVideo;
+                        backgroundImage = null;
+                        bgPreview.textContent = 'Video: ' + file.name;
+                        bgPreview.classList.add('active');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Clear background button
+        clearBgBtn.addEventListener('click', () => {
+            backgroundImage = null;
+            backgroundVideo = null;
+            bgVideo.style.display = 'none';
+            bgVideo.pause();
+            bgVideo.src = '';
+            bgPreview.textContent = 'No background';
+            bgPreview.classList.remove('active');
+        });
+
+        // File upload handlers
+        document.getElementById('center-upload').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        centerImage = img;
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('outer-upload').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        outerImage = img;
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Speed control
+        speedSlider.addEventListener('input', (e) => {
+            rpm = parseInt(e.target.value);
+            speedDisplay.textContent = `${rpm} RPM`;
+        });
+
+        // Radius control
+        const radiusSlider = document.getElementById('radius');
+        const radiusDisplay = document.getElementById('radius-display');
+        
+        radiusSlider.addEventListener('input', (e) => {
+            recordRadius = parseInt(e.target.value);
+            radiusDisplay.textContent = `${recordRadius}px`;
+        });
+
+        // Mouse controls for dragging
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            
+            const dist = Math.sqrt(Math.pow(x - recordX, 2) + Math.pow(y - recordY, 2));
+            if (dist < recordRadius) {
+                isDragging = true;
+                dragStartX = x - recordX;
+                dragStartY = y - recordY;
+                canvas.style.cursor = 'grabbing';
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const x = (e.clientX - rect.left) * scaleX;
+                const y = (e.clientY - rect.top) * scaleY;
+                
+                recordX = Math.max(0, Math.min(canvas.width, x - dragStartX));
+                recordY = Math.max(0, Math.min(canvas.height, y - dragStartY));
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+            canvas.style.cursor = 'move';
+        });
+
+        // Animation loop
+        function animate(currentTime) {
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+
+            // Update rotation based on RPM
+            rotation += (rpm * 6 * deltaTime) / 1000; // 6 degrees per RPM per second
+
+            // Clear canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background
+            if (backgroundVideo && !backgroundVideo.paused) {
+                ctx.drawImage(backgroundVideo, 0, 0, canvas.width, canvas.height);
+            } else if (backgroundImage) {
+                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+            }
+
+            // Draw record with shadow
+            ctx.save();
+            ctx.translate(recordX, recordY);
+            
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetX = 10;
+            ctx.shadowOffsetY = 10;
+            
+            ctx.rotate(rotation * Math.PI / 180);
+
+            // Draw outer record (vinyl texture or custom image)
+            ctx.beginPath();
+            ctx.arc(0, 0, recordRadius, 0, Math.PI * 2);
+            ctx.fillStyle = '#000';
+            ctx.fill();
+            
+            ctx.shadowColor = 'transparent';
+            
+            if (outerImage) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(0, 0, recordRadius, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(outerImage, -recordRadius, -recordRadius, recordRadius * 2, recordRadius * 2);
+                ctx.restore();
+            } else if (defaultVinyl) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(0, 0, recordRadius, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(defaultVinyl, -recordRadius, -recordRadius, recordRadius * 2, recordRadius * 2);
+                ctx.restore();
+            } else {
+                // Fallback to solid color if image hasn't loaded
+                ctx.beginPath();
+                ctx.arc(0, 0, recordRadius, 0, Math.PI * 2);
+                ctx.fillStyle = '#111';
+                ctx.fill();
+            }
+
+            // Draw center label (proportional to record size)
+            const labelRadius = Math.min(recordRadius * 0.4, 100);
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(0, 0, labelRadius, 0, Math.PI * 2);
+            ctx.clip();
+            
+            if (centerImage) {
+                ctx.drawImage(centerImage, -labelRadius, -labelRadius, labelRadius * 2, labelRadius * 2);
+            } else {
+                ctx.drawImage(defaultLabel, -labelRadius, -labelRadius, labelRadius * 2, labelRadius * 2);
+            }
+            ctx.restore();
+
+            // Draw center hole (proportional to record size)
+            const holeRadius = Math.min(recordRadius * 0.06, 15);
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(0, 0, holeRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Export functionality
+        exportBtn.addEventListener('click', async () => {
+            const duration = parseInt(durationInput.value) * 1000; // Convert to milliseconds
+            const fps = 30;
+            
+            exportBtn.disabled = true;
+            showStatus('Preparing export...');
+
+            try {
+                const stream = canvas.captureStream(fps);
+                const mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: 'video/webm',
+                    videoBitsPerSecond: 8000000
+                });
+
+                const chunks = [];
+                mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+                
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `vinyl-spin-${Date.now()}.webm`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    
+                    exportBtn.disabled = false;
+                    showStatus('Export complete!');
+                };
+
+                mediaRecorder.start();
+                
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                }, duration);
+
+                showStatus(`Recording ${duration / 1000} seconds...`);
+            } catch (error) {
+                console.error('Export error:', error);
+                exportBtn.disabled = false;
+                showStatus('Export failed. Please try again.');
+            }
+        });
+
+        function showStatus(message) {
+            status.textContent = message;
+            status.classList.add('show');
+            setTimeout(() => {
+                status.classList.remove('show');
+            }, 3000);
+        }
+
+        // Start animation
+        animate(performance.now());
+    </script>
+</body>
+</html>
