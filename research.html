@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #fafaf8;
+      color: #2c2c2c;
+      line-height: 1.7;
+      padding: 3rem 1.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1.5rem;
+    }
+    .blurb {
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      color: #444;
+    }
+    .project {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+    }
+    .project h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #1a1a1a;
+    }
+    .project .tagline {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+    .project p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    ul li {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Active Research</h1>
+  <p class="subtitle">Security, Privacy, and Formal Methods in Healthcare Systems</p>
+
+  <p class="blurb">
+    My research sits at the intersection of healthcare systems, security, and formal methods.
+    I work on making health data infrastructure more robust &mdash; whether that means building
+    storage engines purpose-built for clinical monitoring, stress-testing voice agents that handle
+    protected health information, enabling privacy-preserving computation across institutional
+    boundaries, applying cryptographic proofs to genomic data, or formally verifying the data
+    models that underpin modern health information exchange.
+  </p>
+
+  <div class="project">
+    <h2>EmberDB</h2>
+    <p class="tagline">FHIR-Native Time-Series Storage for Critical Care</p>
+    <ul>
+      <li>Specialized time-series database treating FHIR Observations as first-class citizens for ICU monitoring</li>
+      <li>Chunked storage with FHIR-aware metric encoding, eliminating impedance mismatch between clinical data models and storage</li>
+      <li>Integrated multivariate pattern detection &mdash; seasonal decomposition, change-point detection, anomaly scoring</li>
+      <li>Benchmarked against InfluxDB, TimescaleDB, and QuestDB using MIMIC-III (330M observations, 38K patients)</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h2>Healthcare Voice Agent Security</h2>
+    <p class="tagline">Securing AI Voice Agents that Handle PHI</p>
+    <ul>
+      <li>Security evaluation of commercial and open-source voice AI platforms deployed in healthcare settings</li>
+      <li>Novel testing framework with a FHIR-compliant EHR system for realistic attack simulation</li>
+      <li>Covers authentication bypass, prompt injection, PHI extraction, and synthetic voice attacks</li>
+      <li>Proposes a tiered security framework for reducing attack success rates while preserving clinical workflows</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h2>Privacy-Preserving Healthcare Cost Prediction</h2>
+    <p class="tagline">Secure Multiparty Computation for Cross-Institutional ML</p>
+    <ul>
+      <li>Custom SMPC protocol enabling joint model training across hospitals, insurers, and public health agencies</li>
+      <li>Additive secret sharing with Beaver-triple-based multiplication and honest-majority assumption</li>
+      <li>Commitment-based verification layer for detecting malicious participants</li>
+      <li>Optimized for gradient-based ML workloads &mdash; fewer communication rounds than general-purpose frameworks</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h2>zkDNA</h2>
+    <p class="tagline">Zero-Knowledge Proofs for Negative STR DNA Match Verification</p>
+    <ul>
+      <li>Interactive ZK protocol allowing proof of DNA non-match without revealing actual genetic data</li>
+      <li>Operates over committed STR allele values with locus-level inequality proofs</li>
+      <li>Formal security analysis &mdash; completeness, soundness, and zero-knowledge properties</li>
+      <li>Targeted at forensic investigations where suspects need privacy-preserving exclusion</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <h2>Formal Verification of FHIR Resources</h2>
+    <p class="tagline">Lightweight Formal Methods for EHR Data Models</p>
+    <ul>
+      <li>Conceptual framework for applying formal verification to the HL7 FHIR Patient resource</li>
+      <li>Formalizes structure, cardinality constraints, choice type invariants, and cross-field dependencies in Alloy</li>
+      <li>Resource-centric verification boundary modeling external references as opaque types for tractable analysis</li>
+      <li>Bounded model checking to exhaustively verify structural integrity, semantic consistency, and safety invariants</li>
+      <li>Extensible compositionally to other FHIR resources and cross-resource workflows</li>
+    </ul>
+  </div>
+
+</body>
+</html>
