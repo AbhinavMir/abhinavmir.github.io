@@ -15,10 +15,32 @@
             background: #fff;
         }
 
+        .name-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 4px;
+        }
+
+        .name-row .text h1 {
+            margin: 0;
+        }
+
+        .name-row .text .subtitle {
+            margin: 0;
+        }
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         h1 {
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin: 0;
         }
 
         .subtitle {
@@ -101,23 +123,54 @@
             font-size: 13px;
             color: #999;
         }
+
+        .socials {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin: 8px 0 20px;
+        }
+
+        .socials a {
+            color: #666;
+            display: inline-flex;
+        }
+
+        .socials a:hover {
+            color: #222;
+            text-decoration: none;
+        }
+
+        .socials svg {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>August</h1>
-    <p class="subtitle">CTO + Cofounder at <a href="https://ambra911.com" target="_blank">Ambra</a></p>
+    <div class="name-row">
+        <img class="avatar" src="https://media.licdn.com/dms/image/v2/D5603AQH0Zx2phBrojQ/profile-displayphoto-crop_800_800/B56ZxeiXo0H8AI-/0/1771112595623?e=1774483200&v=beta&t=KvOXSstg_BLqI5MVTOTvoDLMts3Q7qVI1lrhXyeBVdc" alt="August">
+        <div class="text">
+            <h1>August</h1>
+            <p class="subtitle">CTO + Cofounder at <a href="https://ambra911.com" target="_blank">Ambra</a></p>
+        </div>
+    </div>
+
+    <div class="socials">
+        <a href="https://www.linkedin.com/in/abhinavmir/" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="mailto:august@ambra911.com" title="Email"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg></a>
+        <a href="https://github.com/abhinavmir" target="_blank" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="https://cal.com/ambra-august" target="_blank" title="Book a call"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-2 .9-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg></a>
+    </div>
         
-    Ambra is an AI-powered RCM platform built exclusively for EMS, specializing in denials management and clean claims submission. By automating the revenue cycle from scrubbing to submission, Ambra helps agencies recover more of what they've earned, and quicker (cut AR days down to 3 days), and as a bonus, comes paired with a voice-first scribe that cuts PCR time down to under 3 minutes. 
+    Ambra is an intelligent and autonomous RCM platform built exclusively for EMS, specializing in denials management and clean claims submission. By automating the revenue cycle from scrubbing to submission, Ambra helps agencies recover more of what they've earned, and quicker (cut AR days down to 3 days), and as a bonus, comes paired with a voice-first scribe that cuts PCR time down to under 3 minutes. 
 
     If you'd want to try this out for your agency, please email us at <a href="mailto:founders@ambra911.com">founders@ambra911.com</a>
 
     <p class="location">I'm based in San Francisco / San Jose (and a fan of the Warriors 🌉 + Sharks 🦈)</p>
 
-    <p>Before this, was a founding engineer at multiple high-impact startups.
-    Other earlier work: <a href="https://www.cl.cam.ac.uk/~pes20/sail/" target="_blank">Sail</a> spec for RISC-V, secure multi-party computation at <a href="https://multiparty.org/" target="_blank">Multiparty</a>, contributions to CoreUtilLibs and Zephyr RTOS.</p>
 
-
-    <a href="https://cal.com/abhinavmir/meet?user=abhinavmir&duration=15" class="cta" target="_blank">Book a conversation</a>
+    <a href="https://cal.com/ambra-august" class="cta" target="_blank">Book a conversation</a>
 
     <hr>
 
