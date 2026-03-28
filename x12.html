@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X12 EDI Visualizer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0e14;
+    --surface: #13161f;
+    --surface-2: #1a1e2a;
+    --surface-3: #222738;
+    --border: #2a3045;
+    --border-active: #4a5580;
+    --text: #e2e6f0;
+    --text-dim: #7a84a0;
+    --text-muted: #4a5270;
+    --accent: #6ee7b7;
+    --accent-dim: rgba(110,231,183,0.1);
+    --accent-2: #7dd3fc;
+    --accent-3: #fbbf24;
+    --accent-4: #f87171;
+    --accent-5: #c084fc;
+    --accent-6: #fb923c;
+    --segment-isa: #6ee7b7;
+    --segment-gs: #7dd3fc;
+    --segment-st: #fbbf24;
+    --segment-se: #fbbf24;
+    --segment-ge: #7dd3fc;
+    --segment-iea: #6ee7b7;
+    --segment-default: #c084fc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .noise {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .app { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+  header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header .icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center;
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 14px; color: var(--bg);
+  }
+  header h1 {
+    font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em;
+  }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--text-dim); font-size: 0.85rem; margin-top: 2px; }
+
+  .input-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .input-area:focus-within { border-color: var(--border-active); }
+  .input-area label {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .input-area label span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+  .input-actions { display: flex; gap: 0.5rem; }
+  .input-actions button {
+    background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.3rem 0.75rem;
+    border-radius: 8px; font-size: 0.72rem; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    transition: all 0.15s;
+  }
+  .input-actions button:hover {
+    background: var(--surface-3); color: var(--text); border-color: var(--border-active);
+  }
+  .input-actions button.primary {
+    background: var(--accent); color: var(--bg); border-color: var(--accent);
+    font-weight: 600;
+  }
+  .input-actions button.primary:hover { opacity: 0.85; }
+
+  textarea {
+    width: 100%; min-height: 140px; resize: vertical;
+    background: var(--surface-2); color: var(--accent);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; line-height: 1.7;
+    outline: none; transition: border-color 0.2s;
+  }
+  textarea::placeholder { color: var(--text-muted); }
+  textarea:focus { border-color: var(--border-active); }
+
+  .config-bar {
+    display: flex; gap: 1rem; align-items: center;
+    margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .config-bar .field {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .config-bar .field label {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .config-bar .field input {
+    width: 60px; background: var(--surface);
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.35rem 0.5rem; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; text-align: center; outline: none;
+  }
+  .config-bar .field input:focus { border-color: var(--border-active); }
+
+  .stats {
+    display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.7rem 1rem;
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .stat .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem; font-weight: 700; color: var(--accent);
+  }
+  .stat .lbl {
+    font-size: 0.72rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+  }
+
+  .output { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .segment {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+    animation: segIn 0.25s ease-out both;
+  }
+  @keyframes segIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: none; } }
+  .segment:hover { border-color: var(--border-active); }
+  .segment.envelope { border-left: 3px solid var(--segment-isa); }
+  .segment.func-group { border-left: 3px solid var(--segment-gs); }
+  .segment.trans-set { border-left: 3px solid var(--segment-st); }
+  .segment.default { border-left: 3px solid var(--segment-default); }
+
+  .seg-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.6rem 1rem; cursor: pointer;
+    user-select: none;
+  }
+  .seg-header:hover { background: var(--surface-2); }
+  .seg-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 0.15rem 0.5rem; border-radius: 6px;
+    min-width: 40px; text-align: center;
+  }
+  .envelope .seg-tag { background: rgba(110,231,183,0.15); color: var(--segment-isa); }
+  .func-group .seg-tag { background: rgba(125,211,252,0.15); color: var(--segment-gs); }
+  .trans-set .seg-tag { background: rgba(251,191,36,0.15); color: var(--segment-st); }
+  .default .seg-tag { background: rgba(192,132,252,0.15); color: var(--segment-default); }
+
+  .seg-desc {
+    font-size: 0.8rem; color: var(--text-dim); flex: 1;
+  }
+  .seg-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--text-muted);
+  }
+  .seg-chevron {
+    color: var(--text-muted); font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+  .segment.open .seg-chevron { transform: rotate(90deg); }
+
+  .seg-body {
+    display: none; padding: 0 1rem 0.75rem;
+  }
+  .segment.open .seg-body { display: block; }
+
+  .elements-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .elements-table tr { border-bottom: 1px solid var(--border); }
+  .elements-table tr:last-child { border-bottom: none; }
+  .elements-table td {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+    vertical-align: top;
+  }
+  .elements-table .el-pos {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted); font-weight: 500;
+    width: 50px; font-size: 0.7rem;
+  }
+  .elements-table .el-name {
+    color: var(--text-dim); width: 180px; font-weight: 500;
+  }
+  .elements-table .el-val {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-2);
+    word-break: break-all;
+  }
+  .elements-table .el-val.empty { color: var(--text-muted); font-style: italic; }
+
+  .raw-line {
+    margin-top: 0.5rem; padding: 0.5rem 0.6rem;
+    background: var(--surface-2); border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: var(--text-muted);
+    line-height: 1.6; word-break: break-all;
+  }
+
+  .empty-state {
+    text-align: center; padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .empty-state .icon-big {
+    font-size: 3rem; margin-bottom: 1rem; opacity: 0.4;
+  }
+  .empty-state p { font-size: 0.9rem; }
+
+  .indent-1 { margin-left: 1.5rem; }
+  .indent-2 { margin-left: 3rem; }
+
+  @media (max-width: 700px) {
+    .app { padding: 1rem; }
+    .indent-1 { margin-left: 0.75rem; }
+    .indent-2 { margin-left: 1.5rem; }
+    .stats { gap: 0.5rem; }
+    .stat { padding: 0.5rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="app">
+  <header>
+    <div class="icon">X12</div>
+    <div>
+      <h1><span>X12</span> EDI Visualizer</h1>
+      <p>Paste an EDI document to parse and explore its structure</p>
+    </div>
+  </header>
+
+  <div class="input-area">
+    <label>
+      <span>EDI Input</span>
+      <div class="input-actions">
+        <button onclick="loadSample()">Sample 837</button>
+        <button onclick="loadSample270()">Sample 270</button>
+        <button onclick="clearAll()">Clear</button>
+        <button class="primary" onclick="parseEDI()">Parse ▸</button>
+      </div>
+    </label>
+    <textarea id="ediInput" placeholder="Paste your X12 EDI document here...&#10;ISA*00*          *00*          *ZZ*SENDER..."></textarea>
+  </div>
+
+  <div class="config-bar">
+    <div class="field">
+      <label>Element</label>
+      <input id="elemSep" type="text" value="*" maxlength="1">
+    </div>
+    <div class="field">
+      <label>Segment</label>
+      <input id="segSep" type="text" value="~" maxlength="1">
+    </div>
+    <div class="field">
+      <label>Sub-Element</label>
+      <input id="subSep" type="text" value=":" maxlength="1">
+    </div>
+  </div>
+
+  <div id="stats" class="stats" style="display:none;"></div>
+  <div id="output" class="output">
+    <div class="empty-state">
+      <div class="icon-big">⬡</div>
+      <p>Paste an X12 document and click <strong>Parse</strong> to visualize</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const SEGMENT_INFO = {
+  ISA: { desc: 'Interchange Control Header', cat: 'envelope', elements: ['Authorization Qualifier','Authorization Info','Security Qualifier','Security Info','Interchange ID Qualifier (Sender)','Interchange Sender ID','Interchange ID Qualifier (Receiver)','Interchange Receiver ID','Interchange Date','Interchange Time','Repetition Separator','Interchange Control Version','Interchange Control Number','Acknowledgment Requested','Usage Indicator','Component Element Separator'] },
+  IEA: { desc: 'Interchange Control Trailer', cat: 'envelope', elements: ['Number of Included Functional Groups','Interchange Control Number'] },
+  GS:  { desc: 'Functional Group Header', cat: 'func-group', elements: ['Functional Identifier Code','Application Sender Code','Application Receiver Code','Date','Time','Group Control Number','Responsible Agency Code','Version/Release/Industry ID'] },
+  GE:  { desc: 'Functional Group Trailer', cat: 'func-group', elements: ['Number of Transaction Sets','Group Control Number'] },
+  ST:  { desc: 'Transaction Set Header', cat: 'trans-set', elements: ['Transaction Set Identifier Code','Transaction Set Control Number','Implementation Convention Reference'] },
+  SE:  { desc: 'Transaction Set Trailer', cat: 'trans-set', elements: ['Number of Included Segments','Transaction Set Control Number'] },
+  BHT: { desc: 'Beginning of Hierarchical Transaction', elements: ['Hierarchical Structure Code','Transaction Set Purpose Code','Reference Identification','Date','Time','Transaction Type Code'] },
+  HL:  { desc: 'Hierarchical Level', elements: ['Hierarchical ID Number','Hierarchical Parent ID','Hierarchical Level Code','Hierarchical Child Code'] },
+  NM1: { desc: 'Individual or Organizational Name', elements: ['Entity Identifier Code','Entity Type Qualifier','Name Last/Org','Name First','Name Middle','Name Prefix','Name Suffix','Identification Code Qualifier','Identification Code','Entity Relationship Code','Entity Identifier Code'] },
+  N3:  { desc: 'Party Location (Address)', elements: ['Address Line 1','Address Line 2'] },
+  N4:  { desc: 'Geographic Location', elements: ['City Name','State/Province Code','Postal Code','Country Code','Location Qualifier','Location Identifier','Country Subdivision Code'] },
+  REF: { desc: 'Reference Information', elements: ['Reference ID Qualifier','Reference Identification','Description','Reference Identifier'] },
+  PER: { desc: 'Administrative Communications Contact', elements: ['Contact Function Code','Name','Communication Number Qualifier','Communication Number','Comm Number Qualifier 2','Comm Number 2'] },
+  DMG: { desc: 'Demographic Information', elements: ['Date Time Period Format Qualifier','Date of Birth','Gender Code','Marital Status','Composite Race','Citizenship Status','Country Code','Basis of Verification','Quantity'] },
+  DTP: { desc: 'Date or Time Period', elements: ['Date/Time Qualifier','Date Time Period Format Qualifier','Date Time Period'] },
+  CLM: { desc: 'Claim Information', elements: ['Claim Submitter ID','Monetary Amount','Claim Filing Indicator','','','','','','',''] },
+  SV1: { desc: 'Professional Service', elements: ['Composite Medical Procedure','Monetary Amount','Unit/Basis Measurement Code','Service Unit Count','Place of Service','','Composite Diagnosis Code Pointer'] },
+  SV2: { desc: 'Institutional Service Line', elements: ['Service Line Revenue Code','Composite Medical Procedure','Monetary Amount','Unit/Basis Measurement Code','Service Unit Count'] },
+  HI:  { desc: 'Health Care Information Codes', elements: ['Health Care Code Info 1','Health Care Code Info 2','Health Care Code Info 3','Health Care Code Info 4','Health Care Code Info 5','Health Care Code Info 6','Health Care Code Info 7','Health Care Code Info 8'] },
+  SBR: { desc: 'Subscriber Information', elements: ['Payer Responsibility Code','Individual Relationship Code','Reference Identification','Name','Insurance Type Code','','','','Claim Filing Indicator'] },
+  PAT: { desc: 'Patient Information', elements: ['Individual Relationship Code','Patient Location Code','Employment Status Code','Student Status Code','Date Time Period Format Qualifier','Date of Death','Unit/Basis for Measurement','Patient Weight','Pregnancy Indicator'] },
+  PRV: { desc: 'Provider Information', elements: ['Provider Code','Reference ID Qualifier','Reference Identification'] },
+  EQ:  { desc: 'Eligibility/Benefit Inquiry', elements: ['Service Type Code','Composite Medical Procedure','Coverage Level Code','Insurance Type Code','Composite Diagnosis Code'] },
+  EB:  { desc: 'Eligibility/Benefit Information', elements: ['Eligibility/Benefit Info Code','Coverage Level Code','Service Type Code','Insurance Type Code','Plan Coverage Description','Time Period Qualifier','Monetary Amount','Percentage','Quantity Qualifier','Quantity','Authorization/Certification'] },
+  TRN: { desc: 'Trace', elements: ['Trace Type Code','Reference Identification','Originating Company Identifier','Reference Identification 2'] },
+  AMT: { desc: 'Monetary Amount Information', elements: ['Amount Qualifier Code','Monetary Amount','Credit/Debit Flag Code'] },
+  LX:  { desc: 'Transaction Set Line Number', elements: ['Assigned Number'] },
+  CAS: { desc: 'Claims Adjustment', elements: ['Claim Adjustment Group Code','Adjustment Reason Code','Monetary Amount','Quantity','Adjustment Reason Code 2','Monetary Amount 2','Quantity 2'] },
+  CLP: { desc: 'Claim Level Payment', elements: ['Claim Submitter ID','Claim Status Code','Total Claim Charge Amount','Claim Payment Amount','Patient Responsibility','Claim Filing Indicator','Payer Claim Control Number','Facility Code','Claim Frequency Type'] },
+  SVC: { desc: 'Service Payment Information', elements: ['Composite Medical Procedure','Line Item Charge Amount','Line Item Payment Amount','Revenue Code','Units of Service Paid Count','Composite Medical Procedure (Original)','Adjusted Units Count'] },
+  PLB: { desc: 'Provider Level Balance', elements: ['Reference Identification','Fiscal Period Date','Adjustment Identifier','Provider Adjustment Amount'] },
+};
+
+const TRANSACTION_TYPES = {
+  '270': 'Eligibility, Coverage, or Benefit Inquiry',
+  '271': 'Eligibility, Coverage, or Benefit Information',
+  '276': 'Health Care Claim Status Request',
+  '277': 'Health Care Claim Status Response',
+  '278': 'Health Care Services Review',
+  '834': 'Benefit Enrollment & Maintenance',
+  '835': 'Health Care Claim Payment/Advice',
+  '837': 'Health Care Claim',
+  '820': 'Premium Payment',
+  '810': 'Invoice',
+  '850': 'Purchase Order',
+  '855': 'Purchase Order Acknowledgment',
+  '856': 'Ship Notice/Manifest',
+  '997': 'Functional Acknowledgment',
+  '999': 'Implementation Acknowledgment',
+};
+
+function parseEDI() {
+  const raw = document.getElementById('ediInput').value.trim();
+  if (!raw) return;
+
+  const elemSep = document.getElementById('elemSep').value || '*';
+  const segSep = document.getElementById('segSep').value || '~';
+
+  // Auto-detect from ISA if possible
+  let effectiveElemSep = elemSep;
+  if (raw.startsWith('ISA') && raw.length > 3) {
+    effectiveElemSep = raw[3];
+    document.getElementById('elemSep').value = effectiveElemSep;
+  }
+
+  const lines = raw.split(segSep).map(s => s.trim()).filter(Boolean);
+  const output = document.getElementById('output');
+  const statsEl = document.getElementById('stats');
+
+  // Count segments
+  const segCounts = {};
+  let transType = '';
+  lines.forEach(l => {
+    const tag = l.split(effectiveElemSep)[0];
+    segCounts[tag] = (segCounts[tag] || 0) + 1;
+    if (tag === 'ST') {
+      transType = l.split(effectiveElemSep)[1] || '';
+    }
+  });
+
+  // Show stats
+  const transDesc = TRANSACTION_TYPES[transType] || '';
+  statsEl.style.display = 'flex';
+  statsEl.innerHTML = `
+    <div class="stat"><span class="val">${lines.length}</span><span class="lbl">Segments</span></div>
+    <div class="stat"><span class="val">${Object.keys(segCounts).length}</span><span class="lbl">Unique Types</span></div>
+    ${transType ? `<div class="stat"><span class="val">${transType}</span><span class="lbl">${transDesc || 'Transaction'}</span></div>` : ''}
+  `;
+
+  // Build segments
+  let html = '';
+  let indentLevel = 0;
+
+  lines.forEach((line, i) => {
+    const parts = line.split(effectiveElemSep);
+    const tag = parts[0];
+    const info = SEGMENT_INFO[tag] || { desc: '', elements: [] };
+    const cat = info.cat || 'default';
+
+    // Manage indentation
+    if (['IEA','GE','SE'].includes(tag) && indentLevel > 0) indentLevel--;
+    const indent = indentLevel;
+    if (['ISA','GS','ST'].includes(tag)) indentLevel++;
+
+    const elCount = parts.length - 1;
+    const indentClass = indent > 0 ? ` indent-${Math.min(indent, 2)}` : '';
+
+    let elemRows = '';
+    for (let j = 1; j < parts.length; j++) {
+      const name = info.elements[j-1] || `Element ${String(j).padStart(2,'0')}`;
+      const val = parts[j];
+      const isEmpty = !val || !val.trim();
+      elemRows += `<tr>
+        <td class="el-pos">${tag}${String(j).padStart(2,'0')}</td>
+        <td class="el-name">${name}</td>
+        <td class="el-val${isEmpty ? ' empty' : ''}">${isEmpty ? '(empty)' : escHtml(val)}</td>
+      </tr>`;
+    }
+
+    html += `<div class="segment ${cat}${indentClass}" style="animation-delay:${i * 20}ms">
+      <div class="seg-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="seg-tag">${tag}</span>
+        <span class="seg-desc">${info.desc || 'Segment'}</span>
+        <span class="seg-count">${elCount} elements</span>
+        <span class="seg-chevron">▸</span>
+      </div>
+      <div class="seg-body">
+        <table class="elements-table">${elemRows}</table>
+        <div class="raw-line">${escHtml(line)}</div>
+      </div>
+    </div>`;
+  });
+
+  output.innerHTML = html;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function clearAll() {
+  document.getElementById('ediInput').value = '';
+  document.getElementById('output').innerHTML = `<div class="empty-state"><div class="icon-big">⬡</div><p>Paste an X12 document and click <strong>Parse</strong> to visualize</p></div>`;
+  document.getElementById('stats').style.display = 'none';
+}
+
+function loadSample() {
+  document.getElementById('ediInput').value =
+`ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *230915*1205*^*00501*000000001*0*P*:~
+GS*HC*SENDER*RECEIVER*20230915*1205*1*X*005010X222A1~
+ST*837*0001*005010X222A1~
+BHT*0019*00*REF123456*20230915*1205*CH~
+NM1*41*2*PREMIER BILLING*****46*TX1234567~
+PER*IC*JANE SMITH*TE*5551234567~
+NM1*40*2*RECEIVER HEALTHCARE*****46*RX9876543~
+HL*1**20*1~
+NM1*85*2*ACME MEDICAL GROUP*****XX*1234567890~
+N3*123 MAIN ST*SUITE 100~
+N4*ANYTOWN*CA*90210~
+REF*EI*123456789~
+HL*2*1*22*1~
+SBR*P*18*GRP12345******CI~
+NM1*IL*1*DOE*JOHN****MI*ABC123456~
+N3*456 OAK AVE~
+N4*SOMEWHERE*CA*90211~
+DMG*D8*19800115*M~
+NM1*PR*2*BLUE CROSS BLUE SHIELD*****PI*BCBS001~
+HL*3*2*23*0~
+PAT*19~
+NM1*QC*1*DOE*JANE~
+CLM*PAT123*250***11:B:1*Y*A*Y*Y~
+DTP*431*D8*20230910~
+HI*ABK:J06.9~
+NM1*DN*1*SMITH*ROBERT****XX*9876543210~
+SV1*HC:99213*125*UN*1***1~
+DTP*472*D8*20230910~
+SV1*HC:85025*75*UN*1***2~
+DTP*472*D8*20230910~
+SV1*HC:36415*50*UN*1***2~
+DTP*472*D8*20230910~
+SE*28*0001~
+GE*1*1~
+IEA*1*000000001~`;
+  parseEDI();
+}
+
+function loadSample270() {
+  document.getElementById('ediInput').value =
+`ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *230915*1205*^*00501*000000002*0*P*:~
+GS*HS*SENDER*RECEIVER*20230915*1205*2*X*005010X279A1~
+ST*270*0001*005010X279A1~
+BHT*0022*13*REF789*20230915*1205~
+HL*1**20*1~
+NM1*PR*2*AETNA*****PI*60054~
+HL*2*1*21*1~
+NM1*1P*2*ACME MEDICAL*****XX*1234567890~
+REF*EI*123456789~
+HL*3*2*22*0~
+TRN*1*TRACE001*9SENDER~
+NM1*IL*1*DOE*JOHN****MI*W123456789~
+DMG*D8*19800115~
+DTP*291*D8*20230915~
+EQ*30~
+SE*14*0001~
+GE*1*2~
+IEA*1*000000002~`;
+  parseEDI();
+}
+</script>
+</body>
+</html>
