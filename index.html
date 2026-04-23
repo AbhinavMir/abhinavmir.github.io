@@ -257,46 +257,46 @@
         <li><strong>Vellore Institute of Technology</strong> - BS Computer Science (2021)</li>
     </ul>
 
-    <h2>Projects</h2>
+    <h2>Other projects</h2>
 
     <div class="project">
-        <a href="./WalkReminder-1.0.dmg" download>WalkReminder</a> - A tiny menu-bar app for macOS that reminds you to get up and walk. Click to download the .dmg, then drag to Applications.
+        <a href="./WalkReminder-1.0.dmg" download>WalkReminder</a> - A lightweight macOS menu-bar app that nudges you to step away from your desk and walk on a schedule you set. Click to download the .dmg and drag it to Applications.
     </div>
 
     <div class="project">
-        <a href="https://libreprose.com" target="_blank">libreprose.com</a> - Book writing tool
+        <a href="https://libreprose.com" target="_blank">libreprose.com</a> - A distraction-free writing environment built for long-form work — drafting, outlining, and revising book-length manuscripts.
     </div>
-    
+
     <div class="project">
-        <a href="./vinyl.html" target="_blank">vinyl.html</a> - Vinyl video generator
+        <a href="./vinyl.html" target="_blank">vinyl.html</a> - Generate looping spinning-vinyl videos from any audio file, in your browser — drop a track in, get a shareable MP4 out.
     </div>
-    
+
     <div class="project">
-        <a href="./har.html" target="_blank">har.html</a> - HAR to curl converter
+        <a href="./har.html" target="_blank">har.html</a> - Paste a browser HAR archive, get clean, reproducible cURL commands for every request — useful for debugging, reverse-engineering, and sharing repros.
     </div>
-    
+
     <div class="project">
-        <a href="https://asm.garden" target="_blank">asm.garden</a> - Leetcode for Assembly
+        <a href="https://asm.garden" target="_blank">asm.garden</a> - A LeetCode-style playground for x86-64 assembly: small problems, in-browser assembler, instant feedback. A gentler on-ramp to low-level programming.
         <span class="project-meta">· archived</span>
     </div>
-    
+
     <div class="project">
-        <a href="https://thoughtforest.xyz" target="_blank">thoughtforest.xyz</a> - AI note-taking
+        <a href="https://thoughtforest.xyz" target="_blank">thoughtforest.xyz</a> - AI-assisted note-taking that treats notes as a linked graph, surfacing connections between ideas as you write.
         <span class="project-meta">· archived</span>
     </div>
-    
+
     <div class="project">
-        <a href="https://strudel.xyz" target="_blank">strudel.xyz</a> - Team Ethereum testnets
+        <a href="https://strudel.xyz" target="_blank">strudel.xyz</a> - Spin up and tear down ephemeral Ethereum testnets for teams, so a whole engineering org can share forks and state without stepping on each other.
         <span class="project-meta">· archived</span>
     </div>
-    
+
     <div class="project">
-        <a href="https://elcair.sh" target="_blank">elcair.sh</a> - Ethereum SDK generator
+        <a href="https://elcair.sh" target="_blank">elcair.sh</a> - Point at an Ethereum contract ABI, get a typed TypeScript SDK — no hand-rolled wrappers, no drift between contract and client.
         <span class="project-meta">· archived</span>
     </div>
-    
+
     <div class="project">
-        <a href="https://profs.fyi" target="_blank">profs.fyi</a> - Find professors by interest
+        <a href="https://profs.fyi" target="_blank">profs.fyi</a> - Search university faculty by research interest and recent publications — find the right advisor, reviewer, or collaborator without trawling department pages.
         <span class="project-meta">· archived</span>
     </div>
 
@@ -313,11 +313,10 @@
                     return isNaN(d) ? '' : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
                 };
                 el.className = '';
-                el.innerHTML = posts.slice(0, 5).map(function (p) {
+                el.innerHTML = posts.map(function (p) {
                     return '<div class="post">'
                         + '<a class="post-title" href="' + p.url + '" target="_blank">' + p.title + '</a>'
                         + '<span class="post-meta">· ' + fmt(p.published) + '</span>'
-                        + (p.excerpt ? '<div class="post-excerpt">' + p.excerpt + '</div>' : '')
                         + '</div>';
                 }).join('');
             })
