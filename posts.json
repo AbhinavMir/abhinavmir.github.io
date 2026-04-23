@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Preface to Operating Systems",
+    "url": "https://august.mataroa.blog/blog/preface-to-operating-systems/",
+    "published": "Wed, 22 Apr 2026 00:00:00 +0000",
+    "excerpt": "There is a rising trend amongst entrepreneurs to call their products the \u201cOperating System of X\u201d where X could be creator economy, large language models, so on and so forth. This nomenclature is correct in that the\u2026"
+  },
+  {
+    "title": "Part II: The FHIR Storm consumes us all",
+    "url": "https://august.mataroa.blog/blog/fhir-storm/",
+    "published": "Wed, 22 Apr 2026 00:00:00 +0000",
+    "excerpt": "Previous post on why EHRs suck - good primer before learning about FHIR. I. A short history of FHIR FHIR stands for Fast Healthcare Interoperability Resources. It is a specification maintained by HL7 consortium that\u2026"
+  },
+  {
+    "title": "Writing acceptable backend code",
+    "url": "https://august.mataroa.blog/blog/writing-acceptable-backend-code/",
+    "published": "Wed, 22 Apr 2026 00:00:00 +0000",
+    "excerpt": "Do not do retries. Retries are the sign of the weak. If it didn\u2019t work in the first try, unless you\u2019re pinging an unreliable third party service (and under very strict definitions of reliability, you can find times of\u2026"
+  },
+  {
+    "title": "American Literature Reading List (personal)",
+    "url": "https://august.mataroa.blog/blog/american-literature-reading-list-personal/",
+    "published": "Tue, 21 Apr 2026 00:00:00 +0000",
+    "excerpt": "TBR Gilead by Marilynne Robinson Lonesome Dove by Larry McMurtry A Confederacy of Dunces by John Kennedy Toole North Woods by Daniel Mason My \u00c1ntonia by Willa Cather Death Comes for the Archbishop by Willa Cather\u2026"
+  },
+  {
+    "title": "How to do (mostly) good full-stack engineering",
+    "url": "https://august.mataroa.blog/blog/tips-for-full-stack-engineering/",
+    "published": "Thu, 08 Jan 2026 00:00:00 +0000",
+    "excerpt": "Stacks, languages, databases There is often an idea that the best stack wins. In that the answers to revenue, users, and such are inside tech stacks. This is false. I've built out backends in Rust, C++ and Go, I've\u2026"
+  },
+  {
+    "title": "First Responders deserve better",
+    "url": "https://august.mataroa.blog/blog/first-responders-deserve-better/",
+    "published": "Sun, 21 Dec 2025 00:00:00 +0000",
+    "excerpt": "ePCRs suck in a very specific, grinding way that only makes sense if you\u2019ve actually done EMS work. On paper they\u2019re supposed to make things cleaner and safer and more accountable, but in real life they mostly feel like\u2026"
+  },
+  {
+    "title": "Part I: The Software Infrastructure of the American Healthcare System is endangering the lives of The Everyday Citizen",
+    "url": "https://august.mataroa.blog/blog/healthcare-sw/",
+    "published": "Sun, 14 Dec 2025 00:00:00 +0000",
+    "excerpt": "I. The state of the field I have worked on more than twenty electronic health record systems. The story is always the same. eClinicalWorks is a technical nightmare that would scar a veteran programmer. The APIs are\u2026"
+  },
+  {
+    "title": "Building Torment Nexus - or why we don\u2019t take advice from writers",
+    "url": "https://august.mataroa.blog/blog/torment-nexus-or-why-we-dont-take-advice-from-writers/",
+    "published": "Tue, 08 Jul 2025 00:00:00 +0000",
+    "excerpt": "While the title may seem disrespectful, I want to clarify that I respect writers. Chekov, King, Liu, Stephenson, Gaiman, Herbert, Crichton, Guin, have all written books that have personally influenced me deeply. I love\u2026"
+  },
+  {
+    "title": "Writing a lexer for C in Ocaml",
+    "url": "https://august.mataroa.blog/blog/writing-a-lexer-for-c-in-ocaml/",
+    "published": "Thu, 20 Mar 2025 00:00:00 +0000",
+    "excerpt": "ref. Nora Sandler's, Writing a C Compiler, Part 1 This is my first time using Ocaml, and Dune. If this is the case with you, if you want a primer, you can read the official docs, and then do 99 Problems and get back\u2026"
+  },
+  {
+    "title": "There is no beautiful code, only beautiful products.",
+    "url": "https://august.mataroa.blog/blog/there-is-no-beautiful-code-only-beautiful-products/",
+    "published": "Mon, 26 Aug 2024 00:00:00 +0000",
+    "excerpt": "Merleau-Ponty argued in \"The Visible and the Invisible\" that true meaning emerges not from the object itself but from its interaction with the world. Similarly, code finds its true significance not in its internal\u2026"
+  }
+]
