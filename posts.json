@@ -1,18 +1,43 @@
 [
   {
-    "title": "Chapter Three: Hollywood Presbyterian and Hospital Ransomware, 2016-2018",
+    "title": "Anthem, 2015",
+    "url": "https://august.mataroa.blog/blog/anthem-2015/",
+    "published": "Mon, 06 Jul 2026 00:00:00 +0000"
+  },
+  {
+    "title": "Vastaamo, 2018-2025",
+    "url": "https://august.mataroa.blog/blog/vastaamo-2018-2025/",
+    "published": "Fri, 03 Jul 2026 00:00:00 +0000"
+  },
+  {
+    "title": "Medical Device Security, 2007\u20132023",
+    "url": "https://august.mataroa.blog/blog/medical-device-security-20072023/",
+    "published": "Sun, 21 Jun 2026 00:00:00 +0000"
+  },
+  {
+    "title": "Hollywood Presbyterian and Hospital Ransomware, 2016-2018",
     "url": "https://august.mataroa.blog/blog/chapter-three-hollywood-presbyterian-and-hospital-ransomware-2016-2018/",
     "published": "Sat, 20 Jun 2026 00:00:00 +0000"
   },
   {
-    "title": "Chapter One: Change Healthcare, 2024",
+    "title": "AMCA, 2019",
+    "url": "https://august.mataroa.blog/blog/amca-2019/",
+    "published": "Wed, 13 May 2026 00:00:00 +0000"
+  },
+  {
+    "title": "Change Healthcare, 2024",
     "url": "https://august.mataroa.blog/blog/chapter-one-change-healthcare-2024/",
     "published": "Sun, 10 May 2026 00:00:00 +0000"
   },
   {
-    "title": "Chapter Two: WannaCry and the NHS, 2017",
+    "title": "WannaCry and the NHS, 2017",
     "url": "https://august.mataroa.blog/blog/chapter-two-wannacry-and-the-nhs-2017/",
     "published": "Wed, 06 May 2026 00:00:00 +0000"
+  },
+  {
+    "title": "Part II: The FHIR Storm consumes us all",
+    "url": "https://august.mataroa.blog/blog/fhir-storm/",
+    "published": "Wed, 22 Apr 2026 00:00:00 +0000"
   },
   {
     "title": "Writing acceptable backend code",
@@ -25,14 +50,14 @@
     "published": "Wed, 22 Apr 2026 00:00:00 +0000"
   },
   {
-    "title": "Part II: The FHIR Storm consumes us all",
-    "url": "https://august.mataroa.blog/blog/fhir-storm/",
-    "published": "Wed, 22 Apr 2026 00:00:00 +0000"
-  },
-  {
     "title": "American Literature Reading List (personal)",
     "url": "https://august.mataroa.blog/blog/american-literature-reading-list-personal/",
     "published": "Tue, 21 Apr 2026 00:00:00 +0000"
+  },
+  {
+    "title": "The Conti Attack on Ireland's Health Service, 2021",
+    "url": "https://august.mataroa.blog/blog/the-conti-attack-on-irelands-health-service-2021/",
+    "published": "Fri, 03 Apr 2026 00:00:00 +0000"
   },
   {
     "title": "How to do (mostly) good full-stack engineering",
