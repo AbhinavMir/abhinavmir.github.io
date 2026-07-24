@@ -13,6 +13,7 @@ Things I've built or I'm building passively.
 4. elcair.sh
 5. profs.fyi
 6. episodic.work
+7. hypertext.one
 
 To do:
 1. Landing page for computerra
