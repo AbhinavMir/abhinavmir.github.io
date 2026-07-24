@@ -14,6 +14,7 @@ Things I've built or I'm building passively.
 5. profs.fyi
 6. episodic.work
 7. hypertext.one
+8. hamlet.so
 
 To do:
 1. Landing page for computerra
