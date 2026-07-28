@@ -128,10 +128,6 @@
         }
 
         .projects {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 36px;
-            align-items: start;
             margin-bottom: 8px;
         }
 
@@ -141,21 +137,9 @@
             font-size: 14px;
         }
 
-        /* No rule above the first row. */
-        .projects > .project:nth-child(-n+2) {
+        .projects > .project:first-child {
             border-top: none;
             padding-top: 0;
-        }
-
-        @media (max-width: 700px) {
-            .projects {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .projects > .project:nth-child(2) {
-                border-top: 1px solid #eee;
-                padding-top: 14px;
-            }
         }
 
         .project-head {
@@ -172,6 +156,32 @@
         .project-host {
             font-size: 13px;
             color: #999;
+        }
+
+        /* Reveals the extra detail only on hover, without shifting the line. */
+        .hint {
+            position: relative;
+        }
+
+        .hint-text {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            margin-top: 4px;
+            white-space: nowrap;
+            font-size: 13px;
+            color: #888;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 3px 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.12s ease;
+        }
+
+        .hint:hover .hint-text {
+            opacity: 1;
         }
 
         .project-desc {
@@ -250,7 +260,7 @@
         <img class="avatar" src="me.jpg" alt="August">
         <div class="text">
             <h1><span class="full-only">Abhinav Mir (</span>August<span class="full-only">)</span></h1>
-            <p class="subtitle">Founding Senior Engineer at <a href="https://ambra911.com" target="_blank">Ambra</a></p>
+            <p class="subtitle">Founding Senior Engineer at <span class="hint"><a href="https://ambra911.com" target="_blank">Ambra</a><span class="hint-text">which I also helped cofound</span></span></p>
         </div>
     </div>
 
@@ -262,6 +272,8 @@
     </div>
 
     <p class="small muted">Ambra is an autonomous RCM platform for EMS agencies — denials management, clean claims, and a voice-first scribe.</p>
+
+    <p class="small muted">Previously Founding Engineer at <a href="https://simbie.ai" target="_blank">Simbie AI</a> and SWE 2 at <a href="https://commure.com" target="_blank">Commure</a>.</p>
 
     <hr>
 
@@ -307,6 +319,14 @@
             <span class="project-host">ultraball.xyz</span>
         </div>
         <div class="project-desc">Multiplayer Pokémon battles entirely in your terminal — <code>ssh ultraball.xyz</code>, pick a team from the full national dex, and challenge anyone online. Real type/stat/status mechanics, leveling and evolution, asynchronous play. Go + Postgres + Redis behind an SSH TUI; nothing to install.</div>
+    </div>
+
+    <div class="project">
+        <div class="project-head">
+            <a href="https://trysoquel.com" target="_blank">Soquel</a>
+            <span class="project-host">trysoquel.com</span>
+        </div>
+        <div class="project-desc">A Finder replacement for macOS, open source and MIT licensed. Split panes with their own tabs and saveable workspaces, four view modes, and search by name, contents, regex or glob that reports what it skipped instead of quietly returning less. Semantic search runs on the language model macOS already ships, on your own machine — nothing leaves it.</div>
     </div>
 
     <div class="project">
@@ -437,6 +457,14 @@
         <p class="small muted" style="margin-bottom: 16px;">Latest from <a href="https://august.mataroa.blog" target="_blank">august.mataroa.blog</a>.</p>
         <div id="posts" class="small muted">Loading…</div>
     </div>
+
+    <h2>Outside work</h2>
+    <ul>
+        <li>Sports, mostly Bay Area — Sharks, Earthquakes, Warriors, Giants, Bay FC, USMNT, and the Celtics.</li>
+        <li>Music — I make house, DJ, and play bass.</li>
+        <li>Science fiction. I built <a href="https://libreprose.com" target="_blank">Libreprose</a> before the AI era to help me handle long drafts; it is due for a rewrite.</li>
+        <li>Reading, and trying to read more — <a href="https://www.goodreads.com/user/show/163219394-abhinav-srivastava" target="_blank">Goodreads</a>, which is missing plenty of it.</li>
+    </ul>
 
     <h2>Education</h2>
     <ul>
