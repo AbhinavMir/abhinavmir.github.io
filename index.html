@@ -127,13 +127,60 @@
             text-decoration: none;
         }
 
+        .projects {
+            margin-bottom: 8px;
+        }
+
         .project {
-            margin-bottom: 12px;
+            padding: 14px 0;
+        }
+
+        .project + .project {
+            border-top: 1px solid #eee;
+        }
+
+        .project-head {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .project-head a {
+            font-weight: 600;
+        }
+
+        .project-host {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .project-desc {
+            margin-top: 2px;
         }
 
         .project-meta {
             font-size: 13px;
             color: #999;
+        }
+
+        .tag {
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #888;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            padding: 1px 5px;
+        }
+
+        h3.group {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #999;
+            margin: 28px 0 0;
         }
 
         .post {
@@ -199,71 +246,141 @@
 
     <hr>
 
-    <h2>Other projects</h2>
+    <h2>Projects</h2>
+
+    <div class="projects">
 
     <div class="project">
-        <a href="https://hamlet.so" target="_blank">hamlet.so</a> - A small forum that coding agents can read and post to over one MCP server, since most project help now lives in Discord where neither search engines nor agents can reach it. Each community gets a subdomain, full-text search, a knowledge base, and a little CMS for its pages and blog. People and agents go through the same API and the same permission checks, so an agent can never do more than a member with the same role, and a maintainer can require human approval on anything an agent writes. Optional custom domains and full CSS control.
+        <div class="project-head">
+            <a href="https://hamlet.so" target="_blank">Hamlet</a>
+            <span class="project-host">hamlet.so</span>
+        </div>
+        <div class="project-desc">A small forum that coding agents can read and post to over one MCP server, since most project help now lives in Discord where neither search engines nor agents can reach it. Each community gets a subdomain, full-text search, a knowledge base, and a little CMS for its pages and blog. People and agents go through the same API and the same permission checks, so an agent can never do more than a member with the same role, and a maintainer can require human approval on anything an agent writes. Optional custom domains and full CSS control.</div>
     </div>
 
     <div class="project">
-        <a href="https://hypertext.one" target="_blank">hypertext.one</a> - Pastebin, but for HTML. Paste a small HTML page, get a link — every page serves on its own subdomain, optionally password-protected or auto-expiring. HTML is sanitized server-side and served with a no-script CSP, so pages are safe to open. No accounts, 100KB max.
+        <div class="project-head">
+            <a href="https://hypertext.one" target="_blank">Hypertext</a>
+            <span class="project-host">hypertext.one</span>
+        </div>
+        <div class="project-desc">Pastebin, but for HTML. Paste a small HTML page, get a link — every page serves on its own subdomain, optionally password-protected or auto-expiring. HTML is sanitized server-side and served with a no-script CSP, so pages are safe to open. No accounts, 100KB max.</div>
     </div>
 
     <div class="project">
-        <a href="https://apps.apple.com/app/id6783926816" target="_blank">Couch 2 Court</a> - A Couch-to-5K for basketball, on iOS. A guided interval timer that builds on-court conditioning: timed dribble runs, sprints, and shooting drills with spoken cues and beeps, plus a lock screen and Dynamic Island timer. You tap how each session felt and the difficulty adapts. No accounts, no tracking, works offline.
+        <div class="project-head">
+            <a href="https://apps.apple.com/app/id6783926816" target="_blank">Couch 2 Court</a>
+            <span class="project-host">iOS</span>
+        </div>
+        <div class="project-desc">A Couch-to-5K for basketball. A guided interval timer that builds on-court conditioning: timed dribble runs, sprints, and shooting drills with spoken cues and beeps, plus a lock screen and Dynamic Island timer. You tap how each session felt and the difficulty adapts. No accounts, no tracking, works offline.</div>
     </div>
 
     <div class="project">
-        <a href="https://cioppino.xyz" target="_blank">cioppino</a> - Weekly AI-tics tracker: runs the same essays through GPT-4o-mini/gpt-5-mini across technical, fiction, non-technical, persuasive, reflective, and business genres, judging repeated AI writing tics and overused words/phrases. Feeds live data to the deslopify and degpt skills.
+        <div class="project-head">
+            <a href="https://cioppino.xyz" target="_blank">Cioppino</a>
+            <span class="project-host">cioppino.xyz</span>
+        </div>
+        <div class="project-desc">Weekly AI-tics tracker: runs the same essays through GPT-4o-mini/gpt-5-mini across technical, fiction, non-technical, persuasive, reflective, and business genres, judging repeated AI writing tics and overused words/phrases. Feeds live data to the deslopify and degpt skills.</div>
     </div>
 
     <div class="project">
-        <a href="https://ultraball.xyz" target="_blank">ultraball</a> - Multiplayer Pokémon battles entirely in your terminal — <code>ssh ultraball.xyz</code>, pick a team from the full national dex, and challenge anyone online. Real type/stat/status mechanics, leveling and evolution, asynchronous play. Go + Postgres + Redis behind an SSH TUI; nothing to install.
+        <div class="project-head">
+            <a href="https://ultraball.xyz" target="_blank">Ultraball</a>
+            <span class="project-host">ultraball.xyz</span>
+        </div>
+        <div class="project-desc">Multiplayer Pokémon battles entirely in your terminal — <code>ssh ultraball.xyz</code>, pick a team from the full national dex, and challenge anyone online. Real type/stat/status mechanics, leveling and evolution, asynchronous play. Go + Postgres + Redis behind an SSH TUI; nothing to install.</div>
     </div>
 
     <div class="project">
-        <a href="./X12-Viewer-1.0.dmg" download>X12 Viewer</a> - A native macOS app that opens any X12/EDI file — 837, 835, 834, 270/271, 276/277, 999 and more — as a readable outline with decoded segment and element names, then exports it as a PDF. Notarized; drag to Applications and it offers to become the default handler for X12 files.
+        <div class="project-head">
+            <a href="./X12-Viewer-1.0.dmg" download>X12 Viewer</a>
+            <span class="project-host">macOS</span>
+        </div>
+        <div class="project-desc">Opens any X12/EDI file — 837, 835, 834, 270/271, 276/277, 999 and more — as a readable outline with decoded segment and element names, then exports it as a PDF. Notarized; drag to Applications and it offers to become the default handler for X12 files.</div>
     </div>
 
     <div class="project">
-        <a href="./WalkReminder-1.1.dmg" download>WalkReminder</a> - A lightweight macOS menu-bar app that nudges you to step away from your desk and walk on a schedule you set. Click to download the .dmg and drag it to Applications.
+        <div class="project-head">
+            <a href="./WalkReminder-1.1.dmg" download>Walk Reminder</a>
+            <span class="project-host">macOS</span>
+        </div>
+        <div class="project-desc">A lightweight menu-bar app that nudges you to step away from your desk and walk on a schedule you set. Download the .dmg and drag it to Applications.</div>
     </div>
 
     <div class="project">
-        <a href="https://libreprose.com" target="_blank">Libreprose</a> - A distraction-free writing environment built for long-form work — drafting, outlining, and revising book-length manuscripts.
+        <div class="project-head">
+            <a href="https://libreprose.com" target="_blank">Libreprose</a>
+            <span class="project-host">libreprose.com</span>
+        </div>
+        <div class="project-desc">A distraction-free writing environment built for long-form work — drafting, outlining, and revising book-length manuscripts.</div>
     </div>
 
     <div class="project">
-        <a href="./vinyl.html" target="_blank">Vinyl</a> - Generate looping spinning-vinyl videos from any audio file, in your browser — drop a track in, get a shareable MP4 out.
+        <div class="project-head">
+            <a href="./vinyl.html" target="_blank">Vinyl</a>
+            <span class="project-host">Web</span>
+        </div>
+        <div class="project-desc">Generate looping spinning-vinyl videos from any audio file, in your browser — drop a track in, get a shareable MP4 out.</div>
     </div>
 
     <div class="project">
-        <a href="./har.html" target="_blank">HAR → cURL</a> - Paste a browser HAR archive, get clean, reproducible cURL commands for every request — useful for debugging, reverse-engineering, and sharing repros.
+        <div class="project-head">
+            <a href="./har.html" target="_blank">HAR to cURL</a>
+            <span class="project-host">Web</span>
+        </div>
+        <div class="project-desc">Paste a browser HAR archive, get clean, reproducible cURL commands for every request — useful for debugging, reverse-engineering, and sharing repros.</div>
+    </div>
+
+    </div>
+
+    <h3 class="group">Archived</h3>
+
+    <div class="projects">
+
+    <div class="project">
+        <div class="project-head">
+            <a href="https://asm.garden" target="_blank">Asm Garden</a>
+            <span class="project-host">asm.garden</span>
+            <span class="tag">Archived</span>
+        </div>
+        <div class="project-desc">A LeetCode-style playground for x86-64 assembly: small problems, in-browser assembler, instant feedback. A gentler on-ramp to low-level programming.</div>
     </div>
 
     <div class="project">
-        <a href="https://asm.garden" target="_blank">asm.garden</a> - A LeetCode-style playground for x86-64 assembly: small problems, in-browser assembler, instant feedback. A gentler on-ramp to low-level programming.
-        <span class="project-meta">· archived</span>
+        <div class="project-head">
+            <a href="https://thoughtforest.xyz" target="_blank">Thoughtforest</a>
+            <span class="project-host">thoughtforest.xyz</span>
+            <span class="tag">Archived</span>
+        </div>
+        <div class="project-desc">AI-assisted note-taking that treats notes as a linked graph, surfacing connections between ideas as you write.</div>
     </div>
 
     <div class="project">
-        <a href="https://thoughtforest.xyz" target="_blank">Thoughtforest</a> - AI-assisted note-taking that treats notes as a linked graph, surfacing connections between ideas as you write.
-        <span class="project-meta">· archived</span>
+        <div class="project-head">
+            <a href="https://strudel.xyz" target="_blank">Strudel</a>
+            <span class="project-host">strudel.xyz</span>
+            <span class="tag">Archived</span>
+        </div>
+        <div class="project-desc">Spin up and tear down ephemeral Ethereum testnets for teams, so a whole engineering org can share forks and state without stepping on each other.</div>
     </div>
 
     <div class="project">
-        <a href="https://strudel.xyz" target="_blank">Strudel</a> - Spin up and tear down ephemeral Ethereum testnets for teams, so a whole engineering org can share forks and state without stepping on each other.
-        <span class="project-meta">· archived</span>
+        <div class="project-head">
+            <a href="https://elcair.sh" target="_blank">Elcair</a>
+            <span class="project-host">elcair.sh</span>
+            <span class="tag">Archived</span>
+        </div>
+        <div class="project-desc">Point at an Ethereum contract ABI, get a typed TypeScript SDK — no hand-rolled wrappers, no drift between contract and client.</div>
     </div>
 
     <div class="project">
-        <a href="https://elcair.sh" target="_blank">Elcair</a> - Point at an Ethereum contract ABI, get a typed TypeScript SDK — no hand-rolled wrappers, no drift between contract and client.
-        <span class="project-meta">· archived</span>
+        <div class="project-head">
+            <a href="https://profs.fyi" target="_blank">Profs</a>
+            <span class="project-host">profs.fyi</span>
+            <span class="tag">Archived</span>
+        </div>
+        <div class="project-desc">Search university faculty by research interest and recent publications — find the right advisor, reviewer, or collaborator without trawling department pages.</div>
     </div>
 
-    <div class="project">
-        <a href="https://profs.fyi" target="_blank">profs.fyi</a> - Search university faculty by research interest and recent publications — find the right advisor, reviewer, or collaborator without trawling department pages.
-        <span class="project-meta">· archived</span>
     </div>
 
     <hr>
