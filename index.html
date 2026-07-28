@@ -128,15 +128,34 @@
         }
 
         .projects {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 36px;
+            align-items: start;
             margin-bottom: 8px;
         }
 
         .project {
             padding: 14px 0;
+            border-top: 1px solid #eee;
+            font-size: 14px;
         }
 
-        .project + .project {
-            border-top: 1px solid #eee;
+        /* No rule above the first row. */
+        .projects > .project:nth-child(-n+2) {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        @media (max-width: 700px) {
+            .projects {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .projects > .project:nth-child(2) {
+                border-top: 1px solid #eee;
+                padding-top: 14px;
+            }
         }
 
         .project-head {
@@ -180,7 +199,7 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
             color: #999;
-            margin: 28px 0 0;
+            margin: 36px 0 14px;
         }
 
         .post {
@@ -340,7 +359,6 @@
         <div class="project-head">
             <a href="https://asm.garden" target="_blank">Asm Garden</a>
             <span class="project-host">asm.garden</span>
-            <span class="tag">Archived</span>
         </div>
         <div class="project-desc">A LeetCode-style playground for x86-64 assembly: small problems, in-browser assembler, instant feedback. A gentler on-ramp to low-level programming.</div>
     </div>
@@ -349,7 +367,6 @@
         <div class="project-head">
             <a href="https://thoughtforest.xyz" target="_blank">Thoughtforest</a>
             <span class="project-host">thoughtforest.xyz</span>
-            <span class="tag">Archived</span>
         </div>
         <div class="project-desc">AI-assisted note-taking that treats notes as a linked graph, surfacing connections between ideas as you write.</div>
     </div>
@@ -358,7 +375,6 @@
         <div class="project-head">
             <a href="https://strudel.xyz" target="_blank">Strudel</a>
             <span class="project-host">strudel.xyz</span>
-            <span class="tag">Archived</span>
         </div>
         <div class="project-desc">Spin up and tear down ephemeral Ethereum testnets for teams, so a whole engineering org can share forks and state without stepping on each other.</div>
     </div>
@@ -367,7 +383,6 @@
         <div class="project-head">
             <a href="https://elcair.sh" target="_blank">Elcair</a>
             <span class="project-host">elcair.sh</span>
-            <span class="tag">Archived</span>
         </div>
         <div class="project-desc">Point at an Ethereum contract ABI, get a typed TypeScript SDK — no hand-rolled wrappers, no drift between contract and client.</div>
     </div>
@@ -376,7 +391,6 @@
         <div class="project-head">
             <a href="https://profs.fyi" target="_blank">Profs</a>
             <span class="project-host">profs.fyi</span>
-            <span class="tag">Archived</span>
         </div>
         <div class="project-desc">Search university faculty by research interest and recent publications — find the right advisor, reviewer, or collaborator without trawling department pages.</div>
     </div>
