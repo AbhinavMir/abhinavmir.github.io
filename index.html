@@ -270,6 +270,84 @@
             width: 20px;
             height: 20px;
         }
+
+        #search-box {
+            margin: 4px 0 8px;
+        }
+
+        #site-search {
+            width: 100%;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #222;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 9px 12px;
+            resize: none;
+            overflow: hidden;
+        }
+
+        #site-search::placeholder {
+            color: #999;
+        }
+
+        #site-search:focus {
+            outline: none;
+            border-color: #0066cc;
+            background: #fff;
+        }
+
+        #search-status {
+            margin-top: 6px;
+            min-height: 0;
+        }
+
+        #search-results {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0 0;
+        }
+
+        #search-results li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        #search-results .hit-title {
+            font-weight: 600;
+        }
+
+        #search-results .hit-section {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #999;
+            margin-left: 6px;
+        }
+
+        #search-results .hit-snippet {
+            color: #555;
+            display: block;
+            margin-top: 1px;
+        }
+
+        #search-results .hit-score {
+            color: #bbb;
+            font-size: 12px;
+            margin-left: 6px;
+        }
+
+        @keyframes searchFlash {
+            0% { background: #fff3b0; }
+            100% { background: transparent; }
+        }
+
+        .search-flash {
+            animation: searchFlash 1.6s ease;
+        }
     </style>
 </head>
 <body>
@@ -291,6 +369,12 @@
     <p class="small muted">Ambra is an autonomous RCM platform for EMS agencies - denials management, clean claims, and a voice-first scribe.</p>
 
     <p class="small muted">Previously Founding Engineer at <a href="https://simbie.ai" target="_blank">Simbie AI</a> and SWE 2 at <a href="https://commure.com" target="_blank">Commure</a>.</p>
+
+    <div id="search-box">
+        <textarea id="site-search" rows="1" placeholder="Search my work…" spellcheck="false" autocomplete="off"></textarea>
+        <div id="search-status" class="small muted"></div>
+        <ol id="search-results"></ol>
+    </div>
 
     <hr>
 
@@ -440,6 +524,109 @@
                 var section = document.getElementById('writing-section');
                 if (section) section.style.display = 'none';
             });
+    })();
+    </script>
+
+    <script>
+    // Plain keyword search over the page's own text. No dependencies, no network.
+    (function () {
+        var input = document.getElementById('site-search');
+        var statusEl = document.getElementById('search-status');
+        var listEl = document.getElementById('search-results');
+        if (!input) return;
+
+        function sectionOf(node) {
+            var n = node;
+            while (n && n !== document.body) {
+                var p = n.previousElementSibling;
+                while (p) {
+                    if (p.tagName === 'H2' || p.tagName === 'H3') return p.textContent.trim();
+                    p = p.previousElementSibling;
+                }
+                n = n.parentElement;
+            }
+            return '';
+        }
+
+        var items = [];
+        (function collect() {
+            var seen = new Set();
+            document.querySelectorAll('.project, .post, ul li, p.small.muted').forEach(function (el) {
+                if (el.closest('#search-box')) return;
+                if (seen.has(el)) return;
+                var text = el.textContent.replace(/\s+/g, ' ').trim();
+                if (text.length < 12) return;
+                seen.add(el);
+                var lead = el.querySelector('a, strong');
+                var title = (lead ? lead.textContent : text.split(' — ')[0]).trim();
+                if (title.length > 60) title = text.slice(0, 60);
+                items.push({ el: el, title: title, section: sectionOf(el),
+                             text: text, hay: text.toLowerCase(), titleLc: title.toLowerCase() });
+            });
+        })();
+
+        function render(hits) {
+            listEl.innerHTML = '';
+            statusEl.textContent = hits.length ? '' : 'No matches.';
+            hits.forEach(function (it) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = '#';
+                a.className = 'hit-title';
+                a.textContent = it.title;
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    it.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    it.el.classList.remove('search-flash');
+                    void it.el.offsetWidth;
+                    it.el.classList.add('search-flash');
+                });
+                li.appendChild(a);
+                if (it.section) {
+                    var sec = document.createElement('span');
+                    sec.className = 'hit-section';
+                    sec.textContent = it.section;
+                    li.appendChild(sec);
+                }
+                var snip = document.createElement('span');
+                snip.className = 'hit-snippet';
+                var dash = it.text.indexOf(' — ');
+                snip.textContent = dash > -1 ? it.text.slice(dash + 3) : it.text;
+                li.appendChild(snip);
+                listEl.appendChild(li);
+            });
+        }
+
+        function search() {
+            var q = input.value.trim().toLowerCase();
+            if (q.length < 2) { listEl.innerHTML = ''; statusEl.textContent = ''; return; }
+            var words = q.split(/\s+/);
+            var hits = items.map(function (it) {
+                var score = 0;
+                words.forEach(function (w) {
+                    if (it.titleLc.indexOf(w) > -1) score += 3;
+                    else if (it.hay.indexOf(w) > -1) score += 1;
+                });
+                return { it: it, score: score };
+            }).filter(function (r) { return r.score > 0; })
+              .sort(function (a, b) { return b.score - a.score; })
+              .slice(0, 8)
+              .map(function (r) { return r.it; });
+            render(hits);
+        }
+
+        input.addEventListener('input', function () {
+            input.style.height = 'auto';
+            input.style.height = input.scrollHeight + 'px';
+            search();
+        });
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                var first = listEl.querySelector('a.hit-title');
+                if (first) first.click();
+            }
+        });
     })();
     </script>
 </body>
