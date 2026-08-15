@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Structured profile for LLMs and agents:
+# https://abhinavmir.xyz/llms.txt
+# https://iamaugust.com/llms.txt
+
+Sitemap: https://abhinavmir.xyz/sitemap.xml
