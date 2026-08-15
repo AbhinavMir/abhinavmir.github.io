@@ -270,6 +270,66 @@
             width: 20px;
             height: 20px;
         }
+
+        .exp {
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .exp:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .exp > summary {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .exp > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .exp > summary::after {
+            content: "+";
+            margin-left: auto;
+            color: #bbb;
+            font-size: 16px;
+        }
+
+        .exp[open] > summary::after {
+            content: "\2212";
+        }
+
+        .exp-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            flex: none;
+            object-fit: contain;
+            background: #fff;
+        }
+
+        .exp-role {
+            font-weight: 600;
+        }
+
+        .exp-dates {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .exp-body {
+            margin: 10px 0 4px 38px;
+        }
+
+        .exp-body li {
+            font-size: 14px;
+            color: #444;
+        }
     </style>
 </head>
 <body>
@@ -291,6 +351,85 @@
     <p class="small muted">Ambra is an autonomous RCM platform for EMS agencies - denials management, clean claims, and a voice-first scribe.</p>
 
     <p class="small muted">Previously Founding Engineer at <a href="https://simbie.ai" target="_blank">Simbie AI</a> and SWE 2 at <a href="https://commure.com" target="_blank">Commure</a>.</p>
+
+    <hr>
+
+    <h2>Experience</h2>
+
+    <details class="exp" open>
+        <summary>
+            <img class="exp-logo" src="./logos/exp-ambra.png" alt="">
+            <span>
+                <span class="exp-role"><a href="https://ambra911.com" target="_blank">Ambra</a> — Founding Senior Engineer</span><br>
+                <span class="exp-dates">December 2025–present</span>
+            </span>
+        </summary>
+        <ul class="exp-body">
+            <li>Built Ambra's production platform from its initial prototype. Now lead engineering across denials management, claim status, claims posting, analytics, and AI-assisted EMS documentation.</li>
+            <li>Built the denial workflow end to end: SFTP and file ingestion, data normalization, payer and funding classification, document retrieval, PDF redaction, appeal-packet generation, and mail, fax, and portal submission.</li>
+            <li>Built a TypeScript and React application for dense billing workflows involving thousands of payer and denial configurations, live background jobs, large claim queues, and high-resolution medical attachments.</li>
+            <li>Built the core backend in Go and PostgreSQL, with Python and Django services for agent workflows, deployed on GCP and Cloud Run.</li>
+            <li>Integrated X12 transactions, EMS record systems, clearinghouses, payer portals, SFTP sources, telephony systems, and browser automation with Playwright and direct network integrations.</li>
+            <li>Built ephemeral pull-request environments, tenant-aware visual testing, PHI-leak checks, automated migration coordination, and application/database revision gating.</li>
+            <li>Led the company through HIPAA and SOC 2 readiness while owning architecture, infrastructure, customer launches, production support, and a large share of implementation.</li>
+            <li>Managed and hired engineers, designed technical interviews, ran one-on-ones and code reviews, and worked directly with customers from discovery through production.</li>
+        </ul>
+    </details>
+
+    <details class="exp">
+        <summary>
+            <img class="exp-logo" src="./logos/exp-simbie.png" alt="">
+            <span>
+                <span class="exp-role"><a href="https://www.simbie.ai" target="_blank">Simbie AI</a> — Founding Engineer</span><br>
+                <span class="exp-dates">May 2025–December 2025</span>
+            </span>
+        </summary>
+        <ul class="exp-body">
+            <li>Reworked a bespoke, single-customer healthcare voice-agent system into a multitenant platform with organization isolation, configurable agents, phone routing, EHR credentials, and complete white-labeling.</li>
+            <li>Took three medical practices from discovery through agent design, EHR integration, QA, production launch, and ongoing operation.</li>
+            <li>Built voice-agent workflows for scheduling, patient lookup, insurance verification, and outbound patient communication.</li>
+            <li>Built low-latency EHR integrations with caching and advance schedule preloading, so agents could access patient and appointment data during live calls.</li>
+            <li>Developed an internal call-evaluation system that reviewed conversations, generated structured criticism, retained recurring failure patterns, and informed improvements to agent behavior.</li>
+            <li>Helped hire and operationalize a remote QA team that reviewed production calls and supplied human feedback.</li>
+            <li>Worked across Python, TypeScript, PostgreSQL, Redis, RabbitMQ, AWS, Grafana, database design, queues, deployment, and production reliability.</li>
+            <li>Operated as the principal available engineer during critical periods while remaining directly responsible for customer implementation and support.</li>
+        </ul>
+    </details>
+
+    <details class="exp">
+        <summary>
+            <img class="exp-logo" src="./logos/exp-commure.png" alt="">
+            <span>
+                <span class="exp-role"><a href="https://commure.com" target="_blank">Commure</a> — Software Engineer II</span><br>
+                <span class="exp-dates">June 2024–May 2025</span>
+            </span>
+        </summary>
+        <ul class="exp-body">
+            <li>Built clinical-documentation integrations across about 20 EHRs and 30 practice configurations for the Athelas Scribe product.</li>
+            <li>Expanded the integration platform from generic EHR behavior to configurable, practice-specific workflows.</li>
+            <li>Reduced the execution time of an important RPA-based integration workflow from about 10 minutes to 20 seconds.</li>
+            <li>Built a greenfield React client for a hardware-integrated clinical workflow, developed with a major U.S. health system.</li>
+            <li>Helped migrate the scribing client from Flutter to React Native and package the full application as an embeddable SDK for partner healthcare applications.</li>
+            <li>Built integration infrastructure that let providers launch the complete scribing workflow from within an existing mobile application.</li>
+            <li>Worked on DOM-based Chrome-extension automation across legacy EHR interfaces.</li>
+            <li>Designed and prototyped a domain-specific language for remotely configurable EHR interactions, which reduced dependence on hard-coded extension releases and protected proprietary integration logic.</li>
+        </ul>
+    </details>
+
+    <details class="exp">
+        <summary>
+            <img class="exp-logo" src="./logos/oss-zephyr.png" alt="" style="visibility:hidden;">
+            <span>
+                <span class="exp-role">RISC-V Mentorship — Mentee</span><br>
+                <span class="exp-dates">March 2024–May 2024</span>
+            </span>
+        </summary>
+        <ul class="exp-body">
+            <li>Worked with OCaml, Sail, TypeScript, and React to turn RISC-V specifications into structured, usable developer resources.</li>
+            <li>Built JSON-driven specification conversion and code-generation tooling.</li>
+            <li>Developed an interactive React reference for exploring the RISC-V instruction-set architecture.</li>
+        </ul>
+    </details>
 
     <hr>
 
