@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhinav (August) Srivastava</title>
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="llms.txt">
+    <link rel="author" type="text/markdown" href="/llms.txt">
     <script>
         (function () {
             if (/august/i.test(location.hostname)) {
@@ -326,6 +328,17 @@
             color: #999;
         }
 
+        .exp-body-wrap {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.28s ease;
+        }
+
+        .exp-body-wrap > .exp-body {
+            overflow: hidden;
+            min-height: 0;
+        }
+
         .exp-body {
             margin: 10px 0 4px 38px;
         }
@@ -583,6 +596,40 @@
                 var section = document.getElementById('writing-section');
                 if (section) section.style.display = 'none';
             });
+    })();
+    </script>
+
+    <script>
+    // Smooth open/close for the experience dropdowns. No-JS falls back to a
+    // plain <details> toggle.
+    (function () {
+        document.querySelectorAll('details.exp').forEach(function (d) {
+            var body = d.querySelector('.exp-body');
+            if (!body) return;
+            var wrap = document.createElement('div');
+            wrap.className = 'exp-body-wrap';
+            body.parentNode.insertBefore(wrap, body);
+            wrap.appendChild(body);
+
+            var summary = d.querySelector('summary');
+            summary.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (d.open) {
+                    wrap.style.gridTemplateRows = '0fr';
+                    wrap.addEventListener('transitionend', function h(ev) {
+                        if (ev.propertyName !== 'grid-template-rows') return;
+                        d.open = false;
+                        wrap.removeEventListener('transitionend', h);
+                    });
+                } else {
+                    d.open = true;
+                    wrap.style.gridTemplateRows = '0fr';
+                    requestAnimationFrame(function () {
+                        wrap.style.gridTemplateRows = '1fr';
+                    });
+                }
+            });
+        });
     })();
     </script>
 

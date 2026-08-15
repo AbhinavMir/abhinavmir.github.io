@@ -1,0 +1,118 @@
+# Abhinav (August) Srivastava
+
+> Founding Senior Engineer at Ambra. I build healthcare and revenue-cycle
+> infrastructure end to end: X12/EDI, EHR integrations, voice agents, and the
+> backend/frontend systems around them. Based in the San Francisco Bay Area.
+> Sites: https://abhinavmir.xyz and https://iamaugust.com
+
+## Contact
+
+- Email: august@ambra911.com
+- GitHub: https://github.com/abhinavmir
+- LinkedIn: https://www.linkedin.com/in/abhinavmir/
+- Book a call: https://cal.com/ambra-august
+- Blog: https://august.mataroa.blog
+- Goodreads: https://www.goodreads.com/user/show/163219394-abhinav-srivastava
+
+## Experience
+
+### Ambra — Founding Senior Engineer (December 2025–present)
+
+Ambra (https://ambra911.com) is an autonomous revenue-cycle-management platform
+for EMS agencies: denials management, clean claims, and a voice-first scribe.
+
+- Built Ambra's production platform from its initial prototype. Now lead engineering across denials management, claim status, claims posting, analytics, and AI-assisted EMS documentation.
+- Built the denial workflow end to end: SFTP and file ingestion, data normalization, payer and funding classification, document retrieval, PDF redaction, appeal-packet generation, and mail, fax, and portal submission.
+- Built a TypeScript and React application for dense billing workflows with thousands of payer and denial configurations, live background jobs, large claim queues, and high-resolution medical attachments.
+- Built the core backend in Go and PostgreSQL, with Python and Django services for agent workflows, deployed on GCP and Cloud Run.
+- Integrated X12 transactions, EMS record systems, clearinghouses, payer portals, SFTP sources, telephony systems, and browser automation with Playwright and direct network integrations.
+- Built ephemeral pull-request environments, tenant-aware visual testing, PHI-leak checks, automated migration coordination, and application/database revision gating.
+- Led the company through HIPAA and SOC 2 readiness while owning architecture, infrastructure, customer launches, production support, and a large share of implementation.
+- Managed and hired engineers, designed technical interviews, ran one-on-ones and code reviews, and worked directly with customers from discovery through production.
+
+### Simbie AI — Founding Engineer (May 2025–December 2025)
+
+Simbie AI (https://www.simbie.ai) builds healthcare voice agents.
+
+- Reworked a bespoke, single-customer healthcare voice-agent system into a multitenant platform with organization isolation, configurable agents, phone routing, EHR credentials, and complete white-labeling.
+- Took three medical practices from discovery through agent design, EHR integration, QA, production launch, and ongoing operation.
+- Built voice-agent workflows for scheduling, patient lookup, insurance verification, and outbound patient communication.
+- Built low-latency EHR integrations with caching and advance schedule preloading, so agents could access patient and appointment data during live calls.
+- Developed an internal call-evaluation system that reviewed conversations, generated structured criticism, retained recurring failure patterns, and informed improvements to agent behavior.
+- Helped hire and operationalize a remote QA team that reviewed production calls and supplied human feedback.
+- Worked across Python, TypeScript, PostgreSQL, Redis, RabbitMQ, AWS, Grafana, database design, queues, deployment, and production reliability.
+- Operated as the principal available engineer during critical periods while remaining directly responsible for customer implementation and support.
+
+### Commure — Software Engineer II (June 2024–May 2025)
+
+Commure (https://commure.com) builds healthcare software, including the Athelas Scribe product.
+
+- Built clinical-documentation integrations across about 20 EHRs and 30 practice configurations for the Athelas Scribe product.
+- Expanded the integration platform from generic EHR behavior to configurable, practice-specific workflows.
+- Reduced the execution time of an important RPA-based integration workflow from about 10 minutes to 20 seconds.
+- Built a greenfield React client for a hardware-integrated clinical workflow, developed with a major U.S. health system.
+- Helped migrate the scribing client from Flutter to React Native and package the full application as an embeddable SDK for partner healthcare applications.
+- Built integration infrastructure that let providers launch the complete scribing workflow from within an existing mobile application.
+- Worked on DOM-based Chrome-extension automation across legacy EHR interfaces.
+- Designed and prototyped a domain-specific language for remotely configurable EHR interactions, which reduced dependence on hard-coded extension releases and protected proprietary integration logic.
+
+### RISC-V Mentorship — Mentee (March 2024–May 2024)
+
+- Worked with OCaml, Sail, TypeScript, and React to turn RISC-V specifications into structured, usable developer resources.
+- Built JSON-driven specification conversion and code-generation tooling.
+- Developed an interactive React reference for exploring the RISC-V instruction-set architecture.
+
+## Projects
+
+- Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
+- Copy Doc Comments (https://chromewebstore.google.com/detail/copy-google-doc-comments/cadebokodjohckmnhpgpnemgakjobghl) — A copy-comments button for Google Docs to grab all the comments for LLMs.
+- Hypertext (https://hypertext.one) — Pastebin, but for HTML.
+- ThoughtForest (https://usethoughtforest.com) — A content curation system for YouTube, Substack and Twitter.
+- Couch 2 Court (https://apps.apple.com/app/id6783926816) — A Couch-to-5K for basketball.
+- Cioppino (https://cioppino.xyz) — A weekly AI-tell tracker.
+- Ultraball (https://ultraball.xyz) — An SSH-based multiplayer Pokémon battle system.
+- FHIR.py (https://github.com/abhinavmir/fhir_py) — A FHIR SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
+- Soquel (https://trysoquel.com) — A better Finder.
+- KarlTrain (https://karltrain.com) — A better Caltrain tracking app, built for humans.
+- X12 Viewer — Opens any X12 EDI file.
+- Walk Reminder — A small menu-bar app that gets you to stand up more.
+- Libreprose (https://libreprose.com) — A distraction-free writing environment for long-form work.
+- Vinyl — Generate a looping, spinning-vinyl video from any audio file, in your browser.
+- HAR to cURL — Cleans up HAR files to make them friendlier for LLMs.
+
+### Archived
+
+- ASM Garden (https://asm.garden) — A LeetCode-style playground for x86-64 assembly.
+- Strudel (https://strudel.xyz) — Ephemeral Ethereum testnets for teams.
+- Elcair (https://elcair.sh) — Point at an Ethereum contract ABI, get a typed TypeScript SDK.
+- Profs (https://profs.fyi) — Search university faculty by research interest and recent publications.
+
+## Research
+
+- EmberDB (https://github.com/abhinavmir/emberdb) — FHIR-native time-series storage for critical care, benchmarked against InfluxDB, TimescaleDB, and QuestDB on MIMIC-III data.
+- Healthcare Voice Agent Security — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
+- Privacy-Preserving Healthcare Cost Prediction — Secure multiparty computation for joint model training across hospitals, insurers, and public health agencies without exposing raw data.
+- zkDNA — Zero-knowledge proofs for negative STR DNA match verification in forensic contexts.
+- Formal Verification of FHIR Resources — Lightweight formal methods (Alloy) to verify structural integrity and safety invariants of HL7 FHIR data models.
+- Reading MUMPS at Scale — An open tree-sitter grammar for MUMPS, the language behind the VA's VistA EHR. Parses 98.6% of VistA's 33,951 routines. DOI: https://doi.org/10.5281/zenodo.20782673
+- Published: Nature-Inspired Swarm Optimization in ANNs (IEEE) — https://ieeexplore.ieee.org/document/9395806
+
+## Open source
+
+- Go — cmd/compile: lower float min/max branch idiom to MINSD/MAXSD/FCSEL. https://go-review.googlesource.com/c/go/+/786900
+- Cython — fix a compiler crash on starred names in assignment targets during constant folding. https://github.com/cython/cython/pull/7897
+- Ruff — restrict FURB131 (delete-full-slice) to lists; the dict rewrite was a runtime KeyError. https://github.com/astral-sh/ruff/pull/27711
+- Zephyr — implement POSIX putmsg(). https://github.com/zephyrproject-rtos/zephyr/pull/67711
+- DuckDB — skip top-n window elimination when the limit exceeds the min/max n cap. https://github.com/duckdb/duckdb/pull/24741
+- Apache NuttX — balance connection and buffer references in the Bluetooth HCI ACL receive path. https://github.com/apache/nuttx/pull/19840
+
+## Education
+
+- Boston University — MS Computer Science, CyberSecurity (2024)
+- Vellore Institute of Technology — BS Computer Science (2021)
+
+## Outside work
+
+- Sports, mostly Bay Area — Sharks, Earthquakes, Warriors, Valkyries, Giants, Bay FC, San Francisco Unicorns, USMNT, and the Celtics.
+- Music — makes house, DJs, and plays bass.
+- Science fiction and reading.
