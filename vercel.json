@@ -1,16 +1,16 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "/",
       "has": [
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(?i).*(curl|wget|httpie|HTTPie|lwp-request|python-requests).*"
+          "value": ".*([Cc]url|[Ww]get|[Hh][Tt][Tt][Pp]ie|lwp-request|python-requests).*"
         }
       ],
-      "destination": "/llms.txt"
-    }
+      "dest": "/llms.txt"
+    },
+    { "handle": "filesystem" }
   ]
 }
