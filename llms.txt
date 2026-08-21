@@ -65,18 +65,18 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Projects
 
 - Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
-- Copy Doc Comments (https://chromewebstore.google.com/detail/copy-google-doc-comments/cadebokodjohckmnhpgpnemgakjobghl) — A copy-comments button for Google Docs to grab all the comments for LLMs.
 - Hypertext (https://hypertext.one) — Pastebin, but for HTML.
 - ThoughtForest (https://usethoughtforest.com) — A content curation system for YouTube, Substack and Twitter.
 - Couch 2 Court (https://apps.apple.com/app/id6783926816) — A Couch-to-5K for basketball.
-- Cioppino (https://cioppino.xyz) — A weekly AI-tell tracker.
 - Ultraball (https://ultraball.xyz) — An SSH-based multiplayer Pokémon battle system.
-- FHIR.py (https://github.com/abhinavmir/fhir_py) — A FHIR SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
+- FHIR Connectors (https://github.com/abhinavmir/fhir_py) — A Python SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
+- X12 Viewer (https://abhinavmir.github.io/X12-Viewer-1.0.dmg) — A native macOS viewer for X12 EDI files.
 - Soquel (https://trysoquel.com) — A better Finder.
 - KarlTrain (https://karltrain.com) — A better Caltrain tracking app, built for humans.
-- X12 Viewer — Opens any X12 EDI file.
-- Walk Reminder — A small menu-bar app that gets you to stand up more.
 - Libreprose (https://libreprose.com) — A distraction-free writing environment for long-form work.
+- Cioppino (https://cioppino.xyz) — A weekly AI-tell tracker.
+- Copy Doc Comments (https://chromewebstore.google.com/detail/copy-google-doc-comments/cadebokodjohckmnhpgpnemgakjobghl) — A copy-comments button for Google Docs to grab all the comments for LLMs.
+- Walk Reminder — A small menu-bar app that gets you to stand up more.
 - Vinyl — Generate a looping, spinning-vinyl video from any audio file, in your browser.
 - HAR to cURL — Cleans up HAR files to make them friendlier for LLMs.
 
