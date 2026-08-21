@@ -503,7 +503,7 @@
 
     <div class="project"><img class="project-logo" src="./logos/soquel.png" alt=""> <a href="https://trysoquel.com" target="_blank">Soquel</a> — A better Finder.</div>
 
-    <div class="project"><img class="project-logo" src="./logos/earmark.png" alt=""> <a href="https://abhinavmir.github.io/earmark/" target="_blank">Earmark</a> — A native Mac app for your Audible library.</div>
+    <div class="project"><img class="project-logo" src="./logos/earmarky.png" alt=""> <a href="https://earmarky.com" target="_blank">Earmarky</a> — A native Mac app for your Audible library.</div>
 
     <div class="project"><img class="project-logo" src="./logos/karltrain.png" alt=""> <a href="https://karltrain.com" target="_blank">KarlTrain</a> — A better Caltrain tracking app that knows where you are, built for humans.</div>
 
@@ -661,6 +661,12 @@
 
             var summary = d.querySelector('summary');
             summary.addEventListener('click', function (e) {
+                // A link inside the heading is a link. Without this every
+                // click in the heading is swallowed by the toggle, so the
+                // company name opens nothing.
+                var link = e.target.closest && e.target.closest('a[href]');
+                if (link) return;
+
                 e.preventDefault();
                 if (d.open) {
                     wrap.style.gridTemplateRows = '0fr';
