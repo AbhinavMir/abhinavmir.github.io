@@ -105,6 +105,12 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 - Zephyr — implement POSIX putmsg(). https://github.com/zephyrproject-rtos/zephyr/pull/67711
 - DuckDB — skip top-n window elimination when the limit exceeds the min/max n cap. https://github.com/duckdb/duckdb/pull/24741
 - Apache NuttX — balance connection and buffer references in the Bluetooth HCI ACL receive path. https://github.com/apache/nuttx/pull/19840
+- Zed — add live previews to the project symbols picker. https://github.com/zed-industries/zed/pull/59863
+- Reth — accurately track on-disk blobstore metrics. https://github.com/paradigmxyz/reth/pull/6399
+- tmc/x12 — return an error instead of panicking when Marshal receives a nil ISA header. https://github.com/tmc/x12/pull/10
+- tmc/x12 — support segments larger than 64 KB with a configurable size limit. https://github.com/tmc/x12/pull/15
+- Sail — extract register information in JSON output. https://github.com/ThinkOpenly/sail/pull/27
+- uutils/coreutils — report a missing `date -f` input file instead of panicking. https://github.com/uutils/coreutils/pull/4482
 
 ## Education
 
