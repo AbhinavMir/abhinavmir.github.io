@@ -133,6 +133,105 @@
             margin-bottom: 8px;
         }
 
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .project-card {
+            min-width: 0;
+            overflow: hidden;
+            color: inherit;
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            border-color: #cfcfcf;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            text-decoration: none;
+        }
+
+        .project-card:focus-visible {
+            outline: 3px solid rgba(0, 102, 204, 0.25);
+            outline-offset: 3px;
+        }
+
+        .project-card-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            object-position: top;
+            background: #f3f3f3;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-card-copy {
+            display: block;
+            padding: 13px 14px 15px;
+        }
+
+        .project-card-kicker {
+            display: block;
+            margin-bottom: 3px;
+            color: #888;
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .project-card-title {
+            display: block;
+            margin-bottom: 4px;
+            color: #222;
+            font-size: 16px;
+            font-weight: 650;
+            line-height: 1.25;
+        }
+
+        .project-card-subtitle {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 720px) {
+            .project-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 32px 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .project-card-subtitle {
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-card {
+                transition: none;
+            }
+        }
+
         .project {
             padding: 7px 0;
             border-top: 1px solid #eee;
@@ -475,49 +574,112 @@
 
     <h2>Projects</h2>
 
-    <div class="projects">
+    <div class="project-grid">
+        <a class="project-card" href="https://hamlet.so" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/hamlet.webp" alt="A Hamlet community showing topics, categories, and its knowledge base" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">Community platform</span>
+                <span class="project-card-title">Hamlet</span>
+                <span class="project-card-subtitle">A home for agent communities, with discussions, knowledge bases, and native MCP access.</span>
+            </span>
+        </a>
 
-    <div class="project"><img class="project-logo" src="./logos/hamlet.png" alt=""> <a href="https://hamlet.so" target="_blank">Hamlet</a> — An agent-tech community, a replacement for Discord/Discourse.</div>
+        <a class="project-card" href="https://www.npmjs.com/package/@buildingthefuture/lineage" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/lineage.webp" alt="React Source Lineage tracing a rendered name to two API response fields" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">React developer tool</span>
+                <span class="project-card-title">React Source Lineage</span>
+                <span class="project-card-subtitle">Trace a rendered React value back to the request and response fields that produced it.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🏥</span><a href="https://github.com/AbhinavMir/hospital-gym" target="_blank">Hospital Gym</a> — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.</div>
+        <a class="project-card" href="https://github.com/AbhinavMir/hospital-gym" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/hospital-gym.webp" alt="Hospital Gym live emergency-department simulation board" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">AI benchmarking</span>
+                <span class="project-card-title">Hospital Gym</span>
+                <span class="project-card-subtitle">A deterministic emergency-department simulator for testing AI scheduling and orchestration.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🔌</span><a href="https://github.com/abhinavmir/fhir_py" target="_blank">FHIR Connectors</a> — A Python SDK for real vendor implementations, not just the nominal FHIR spec - eClinicalWorks and Healow scheduling implemented (more to come). Unofficial, unaffiliated.</div>
+        <a class="project-card" href="https://trysoquel.com" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/soquel.webp" alt="Soquel file manager in list view" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">macOS app</span>
+                <span class="project-card-title">Soquel</span>
+                <span class="project-card-subtitle">A faster, keyboard-first file manager with list, icon, column, and disk-map views.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🚑</span><a href="./nemsis-viewer.html" target="_blank">NEMSIS Viewer</a> — A browser-based viewer for NEMSIS 3.x EMS records.</div>
+        <a class="project-card" href="https://earmarky.com" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/earmarky.webp" alt="Earmarky audiobook library with sound controls" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">macOS app</span>
+                <span class="project-card-title">Earmarky</span>
+                <span class="project-card-subtitle">A native player for your Audible library with downloads and detailed sound controls.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🧾</span><a href="./X12-Viewer-1.0.dmg" download>X12 Viewer</a> — A native macOS viewer for X12 EDI files.</div>
+        <a class="project-card" href="https://karltrain.com" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/karltrain.webp" alt="KarlTrain departure board, live train map, and ride tracker" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">iOS app</span>
+                <span class="project-card-title">KarlTrain</span>
+                <span class="project-card-subtitle">Live Caltrain departures and ride tracking that infer where you are and where you are going.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🔀</span><a href="https://github.com/AbhinavMir/dbdiff" target="_blank">dbdiff</a> — A read-only, deterministic Git-style diff of PostgreSQL schemas and data, designed for CI.</div>
+        <a class="project-card" href="https://github.com/AbhinavMir/oat" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/oat.webp" alt="Oat terminal vault listing encrypted one-time passwords" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">Security CLI</span>
+                <span class="project-card-title">Oat</span>
+                <span class="project-card-subtitle">A local, encrypted TOTP vault for the terminal, protected by the operating system keychain.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🔐</span><a href="https://github.com/AbhinavMir/oat" target="_blank">Oat</a> — A local encrypted TOTP vault for the terminal, backed by the OS keychain.</div>
+        <a class="project-card" href="https://github.com/AbhinavMir/dbdiff" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/dbdiff.webp" alt="dbdiff showing PostgreSQL schema and row differences in a terminal" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">Database tooling</span>
+                <span class="project-card-title">dbdiff</span>
+                <span class="project-card-subtitle">A read-only, deterministic Git-style diff for PostgreSQL schemas and data, built for CI.</span>
+            </span>
+        </a>
 
-    <div class="project"><span class="project-emoji" aria-hidden="true">🤖</span><a href="https://github.com/AbhinavMir/domn8n" target="_blank">domn8n</a> — An AI-powered DOM mapper that generates standalone Playwright automation scripts.</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">🌐</span><a href="https://hypertext.one" target="_blank">Hypertext</a> — Pastebin, but for HTML.</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">🌲</span><a href="https://usethoughtforest.com" target="_blank">ThoughtForest</a> — A content curation system for YouTube, Substack and Twitter (more to come).</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">🏀</span><a href="https://apps.apple.com/app/id6783926816" target="_blank">Couch 2 Court</a> — A Couch-to-5K for basketball.</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">⚡</span><a href="https://ultraball.xyz" target="_blank">Ultraball</a> — An SSH-based multiplayer Pokémon battle system.</div>
-
-    <div class="project"><img class="project-logo" src="./logos/soquel.png" alt=""> <a href="https://trysoquel.com" target="_blank">Soquel</a> — A better Finder.</div>
-
-    <div class="project"><img class="project-logo" src="./logos/earmarky.png" alt=""> <a href="https://earmarky.com" target="_blank">Earmarky</a> — A native Mac app for your Audible library.</div>
-
-    <div class="project"><img class="project-logo" src="./logos/karltrain.png" alt=""> <a href="https://karltrain.com" target="_blank">KarlTrain</a> — A better Caltrain tracking app that knows where you are, built for humans.</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">✍️</span><a href="https://libreprose.com" target="_blank">Libreprose</a> — A distraction-free writing environment for long-form work.</div>
-
-    <div class="project"><span class="project-emoji" aria-hidden="true">🐟</span><a href="https://cioppino.xyz" target="_blank">Cioppino</a> — A weekly AI-tell tracker.</div>
-
-    <div class="project"><img class="project-logo" src="./logos/copy-doc-comments.png" alt=""> <a href="https://chromewebstore.google.com/detail/copy-google-doc-comments/cadebokodjohckmnhpgpnemgakjobghl" target="_blank">Copy Doc Comments</a> — A copy-comments button for Google Docs to grab all the comments for LLMs.</div>
-
+        <a class="project-card" href="https://ultraball.xyz" target="_blank" rel="noreferrer">
+            <img class="project-card-image" src="./assets/projects/ultraball.webp" alt="Ultraball terminal battle between Pikachu and Blastoise" loading="lazy">
+            <span class="project-card-copy">
+                <span class="project-card-kicker">Terminal game</span>
+                <span class="project-card-title">Ultraball</span>
+                <span class="project-card-subtitle">A multiplayer Pokémon battle system played entirely over SSH in the terminal.</span>
+            </span>
+        </a>
     </div>
 
     <details class="exp quiet-projects">
-        <summary><span>Less interesting projects</span></summary>
+        <summary><span>More projects</span></summary>
         <div class="projects">
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🔌</span><a href="https://github.com/abhinavmir/fhir_py" target="_blank">FHIR Connectors</a> — A Python SDK for real-world FHIR vendor implementations.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🤖</span><a href="https://github.com/AbhinavMir/domn8n" target="_blank">domn8n</a> — An AI-powered DOM mapper that generates standalone Playwright automation scripts.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🚑</span><a href="./nemsis-viewer.html" target="_blank">NEMSIS Viewer</a> — A browser-based viewer for NEMSIS 3.x EMS records.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🧾</span><a href="./X12-Viewer-1.0.dmg" download>X12 Viewer</a> — A native macOS viewer for X12 EDI files.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🌐</span><a href="https://hypertext.one" target="_blank">Hypertext</a> — Pastebin, but for HTML.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🌲</span><a href="https://usethoughtforest.com" target="_blank">ThoughtForest</a> — A content curation system for YouTube, Substack and Twitter (more to come).</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🏀</span><a href="https://apps.apple.com/app/id6783926816" target="_blank">Couch 2 Court</a> — A Couch-to-5K for basketball.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">✍️</span><a href="https://libreprose.com" target="_blank">Libreprose</a> — A distraction-free writing environment for long-form work.</div>
+
+        <div class="project"><span class="project-emoji" aria-hidden="true">🐟</span><a href="https://cioppino.xyz" target="_blank">Cioppino</a> — A weekly AI-tell tracker.</div>
+
+        <div class="project"><img class="project-logo" src="./logos/copy-doc-comments.png" alt=""> <a href="https://chromewebstore.google.com/detail/copy-google-doc-comments/cadebokodjohckmnhpgpnemgakjobghl" target="_blank">Copy Doc Comments</a> — A copy-comments button for Google Docs to grab all the comments for LLMs.</div>
 
         <div class="project"><span class="project-emoji" aria-hidden="true">🚶</span><a href="./WalkReminder-1.1.dmg" download>Walk Reminder</a> — A small, lightweight menu-bar app that gets you to stand up more.</div>
 
