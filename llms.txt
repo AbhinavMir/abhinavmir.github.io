@@ -65,6 +65,8 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Projects
 
 - Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
+- harnext (https://www.npmjs.com/package/@buildingthefuture/harnext) — An npm package for choosing, transferring, and syncing chats across Claude Code, pi, Oh My Pi, and Codex.
+- React Source Lineage (https://www.npmjs.com/package/@buildingthefuture/lineage) — An npm package for tracing rendered React values back to the request and response fields that produced them.
 - Hospital Gym (https://github.com/AbhinavMir/hospital-gym) — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.
 - FHIR Connectors (https://github.com/abhinavmir/fhir_py) — A Python SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
 - NEMSIS Viewer (https://abhinavmir.github.io/nemsis-viewer.html) — A browser-based viewer for NEMSIS 3.x EMS records.
