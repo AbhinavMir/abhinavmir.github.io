@@ -72,10 +72,6 @@
             letter-spacing: 0.5px;
         }
 
-        h2 {
-            scroll-margin-top: 24px;
-        }
-
         .anchor {
             margin-left: 8px;
             color: #bbb;
@@ -226,6 +222,58 @@
             line-height: 1.45;
         }
 
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: saturate(180%) blur(8px);
+            -webkit-backdrop-filter: saturate(180%) blur(8px);
+            border-bottom: 1px solid #eee;
+            margin: -48px -32px 32px;
+            padding: 10px 32px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            /* one row; scroll instead of wrapping or squashing on narrow screens */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .navbar ul::-webkit-scrollbar {
+            display: none;
+        }
+
+        .navbar li {
+            margin: 0;
+            flex: 0 0 auto;
+        }
+
+        .navbar a {
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .navbar a:hover,
+        .navbar a:focus {
+            color: #222;
+        }
+
+        h2 {
+            scroll-margin-top: 64px;
+        }
+
         @media (max-width: 720px) {
             .project-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -235,6 +283,11 @@
         @media (max-width: 480px) {
             body {
                 padding: 32px 20px;
+            }
+
+            .navbar {
+                margin: -32px -20px 24px;
+                padding: 10px 20px;
             }
 
             .project-grid {
@@ -501,6 +554,17 @@
     </style>
 </head>
 <body>
+    <nav class="navbar" aria-label="Sections">
+        <ul>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#open-source">Open source</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#outside-work">Outside work</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+    </nav>
     <div class="name-row">
         <img class="avatar" src="me.jpg" alt="August">
         <div class="text">
