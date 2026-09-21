@@ -150,5 +150,18 @@
     <p><a href="https://doi.org/10.5281/zenodo.20782673"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.20782673.svg" alt="DOI"></a></p>
   </div>
 
+  <div class="project">
+    <h2>ICD-10 Codes from Visit Dialogues</h2>
+    <p class="tagline">A Framework for Extracting ICD-10 Codes from Visit Dialogues with a System One Model</p>
+    <ul>
+      <li>Assigns one ICD-10-CM code to a doctor-patient dialogue with TypeSafe Jev, a System One model that writes no text and gives a probability for each option in a list</li>
+      <li>Walks down the code tree and keeps the 5 best paths; local steps add candidate codes with no model request; one final question selects the code</li>
+      <li>No task training and no labeled example in the model input</li>
+      <li>On 996 held-out MedSynth dialogues: exact code for 62.0% from the 2,032 benchmark codes and 57.3% from all 74,719 codes; a trained text classifier gives 34.3%</li>
+      <li>With a probability threshold of 0.9, the method accepts 59.2% of the dialogues, and 79.3% of those answers are exact</li>
+    </ul>
+    <p><a href="./papers/icd10-visit-dialogues.pdf">Paper (PDF)</a></p>
+  </div>
+
 </body>
 </html>

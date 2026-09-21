@@ -102,6 +102,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 - zkDNA — Zero-knowledge proofs for negative STR DNA match verification in forensic contexts.
 - Formal Verification of FHIR Resources — Lightweight formal methods (Alloy) to verify structural integrity and safety invariants of HL7 FHIR data models.
 - Reading MUMPS at Scale — An open tree-sitter grammar for MUMPS, the language behind the VA's VistA EHR. Parses 98.6% of VistA's 33,951 routines. DOI: https://doi.org/10.5281/zenodo.20782673
+- ICD-10 Codes from Visit Dialogues — A framework that assigns one ICD-10-CM code to a doctor-patient dialogue with a System One model, with no task training. Exact code for 62.0% of 996 held-out MedSynth dialogues from the 2,032 benchmark codes, and 57.3% from all 74,719 codes. Paper: https://abhinavmir.xyz/papers/icd10-visit-dialogues.pdf
 - Published: Nature-Inspired Swarm Optimization in ANNs (IEEE) — https://ieeexplore.ieee.org/document/9395806
 
 ## Open source
