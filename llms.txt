@@ -97,7 +97,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Research
 
 - EmberDB (https://github.com/abhinavmir/emberdb) — FHIR-native time-series storage for critical care, benchmarked against InfluxDB, TimescaleDB, and QuestDB on MIMIC-III data.
-- Healthcare Voice Agent Security — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
+- Healthcare Voice Agent Security (accepted at HealthSec '26) — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
 - Privacy-Preserving Healthcare Cost Prediction — Secure multiparty computation for joint model training across hospitals, insurers, and public health agencies without exposing raw data.
 - zkDNA — Zero-knowledge proofs for negative STR DNA match verification in forensic contexts.
 - Formal Verification of FHIR Resources — Lightweight formal methods (Alloy) to verify structural integrity and safety invariants of HL7 FHIR data models.
