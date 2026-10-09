@@ -1,6 +1,6 @@
 # Abhinav (August) Srivastava
 
-> Founding Senior Engineer at Ambra. I build healthcare and revenue-cycle
+> Founding Engineer at Ambra. I build healthcare and revenue-cycle
 > infrastructure end to end: X12/EDI, EHR integrations, voice agents, and the
 > backend/frontend systems around them. Based in the San Francisco Bay Area.
 > Sites: https://abhinavmir.xyz and https://iamaugust.com
@@ -15,7 +15,7 @@
 
 ## Experience
 
-### Ambra — Founding Senior Engineer (December 2025–present)
+### Ambra — Founding Engineer (December 2025–present)
 
 Ambra (https://ambra911.com) is an autonomous revenue-cycle-management platform
 for EMS agencies: denials management, clean claims, and a voice-first scribe.
