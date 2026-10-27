@@ -64,6 +64,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Projects
 
 - Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
+- Basketbullshit (https://basketbullshit.com) — Which channel and streaming service carries each NBA and WNBA game, by ZIP code.
 - harnext (https://www.npmjs.com/package/@buildingthefuture/harnext) — An npm package for choosing, transferring, and syncing chats across Claude Code, pi, Oh My Pi, and Codex.
 - React Source Lineage (https://www.npmjs.com/package/@buildingthefuture/lineage) — An npm package for tracing rendered React values back to the request and response fields that produced them.
 - Hospital Gym (https://github.com/AbhinavMir/hospital-gym) — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.
