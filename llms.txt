@@ -1,6 +1,6 @@
 # Abhinav (August) Srivastava
 
-> Founding Engineer at Ambra. I build healthcare and revenue-cycle
+> Working on something new. Previously Founding Engineer at Ambra. I build healthcare and revenue-cycle
 > infrastructure end to end: X12/EDI, EHR integrations, voice agents, and the
 > backend/frontend systems around them. Based in the San Francisco Bay Area.
 > Sites: https://abhinavmir.xyz and https://iamaugust.com
@@ -15,12 +15,12 @@
 
 ## Experience
 
-### Ambra — Founding Engineer (December 2025–present)
+### Ambra — Founding Engineer (December 2025–November 2026)
 
 Ambra (https://ambra911.com) is an autonomous revenue-cycle-management platform
 for EMS agencies: denials management, clean claims, and a voice-first scribe.
 
-- Built Ambra's production platform from its initial prototype. Now lead engineering across denials management, claim status, claims posting, analytics, and AI-assisted EMS documentation.
+- Built Ambra's production platform from its initial prototype. Led engineering across denials management, claim status, claims posting, analytics, and AI-assisted EMS documentation.
 - Built the denial workflow end to end: SFTP and file ingestion, data normalization, payer and funding classification, document retrieval, PDF redaction, appeal-packet generation, and mail, fax, and portal submission.
 - Built a TypeScript and React application for dense billing workflows with thousands of payer and denial configurations, live background jobs, large claim queues, and high-resolution medical attachments.
 - Built the core backend in Go and PostgreSQL, with Python and Django services for agent workflows, deployed on GCP and Cloud Run.
