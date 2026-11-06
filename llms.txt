@@ -15,7 +15,7 @@
 
 ## Experience
 
-### Ambra — Founding Engineer (December 2025–November 2026)
+### Ambra — Founding Engineer (May 2025–November 2026)
 
 Ambra (https://ambra911.com) is an autonomous revenue-cycle-management platform
 for EMS agencies: denials management, clean claims, and a voice-first scribe.
@@ -29,6 +29,7 @@ for EMS agencies: denials management, clean claims, and a voice-first scribe.
 - Led the company through HIPAA and SOC 2 readiness while owning architecture, infrastructure, customer launches, production support, and a large share of implementation.
 - Managed and hired engineers, designed technical interviews, ran one-on-ones and code reviews, and worked directly with customers from discovery through production.
 
+<!--
 ### Simbie AI — Founding Engineer (May 2025–December 2025)
 
 Simbie AI (https://www.simbie.ai) builds healthcare voice agents.
@@ -41,6 +42,7 @@ Simbie AI (https://www.simbie.ai) builds healthcare voice agents.
 - Helped hire and operationalize a remote QA team that reviewed production calls and supplied human feedback.
 - Worked across Python, TypeScript, PostgreSQL, Redis, RabbitMQ, AWS, Grafana, database design, queues, deployment, and production reliability.
 - Operated as the principal available engineer during critical periods while remaining directly responsible for customer implementation and support.
+-->
 
 ### Commure — Software Engineer II (June 2024–May 2025)
 
