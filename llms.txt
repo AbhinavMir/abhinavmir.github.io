@@ -66,14 +66,14 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Projects
 
 - Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
-- Basketbullshit (https://basketbullshit.com) — Which channel and streaming service carries each NBA and WNBA game, by ZIP code.
-- harnext (https://www.npmjs.com/package/@buildingthefuture/harnext) — An npm package for choosing, transferring, and syncing chats across Claude Code, pi, Oh My Pi, and Codex.
+- Basketbullshit (https://basketbullshit.com) — Which platform shows each NBA and WNBA game.
+- Harnext (https://www.npmjs.com/package/@buildingthefuture/harnext) — An npm package for choosing, transferring, and syncing chats across Claude Code, pi, Oh My Pi, and Codex.
 - React Source Lineage (https://www.npmjs.com/package/@buildingthefuture/lineage) — An npm package for tracing rendered React values back to the request and response fields that produced them.
 - Hospital Gym (https://github.com/AbhinavMir/hospital-gym) — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.
 - FHIR Connectors (https://github.com/abhinavmir/fhir_py) — A Python SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
 - NEMSIS Viewer (https://abhinavmir.github.io/nemsis-viewer.html) — A browser-based viewer for NEMSIS 3.x EMS records.
 - X12 Viewer (https://abhinavmir.github.io/X12-Viewer-1.0.dmg) — A native macOS viewer for X12 EDI files.
-- dbdiff (https://github.com/AbhinavMir/dbdiff) — A read-only, deterministic Git-style diff of PostgreSQL schemas and data, designed for CI.
+- DBDiff (https://github.com/AbhinavMir/dbdiff) — A read-only, deterministic Git-style diff of PostgreSQL schemas and data, designed for CI.
 - Oat (https://github.com/AbhinavMir/oat) — A local encrypted TOTP vault for the terminal, backed by the OS keychain.
 - domn8n (https://github.com/AbhinavMir/domn8n) — An AI-powered DOM mapper that generates standalone Playwright automation scripts.
 - Hypertext (https://hypertext.one) — Pastebin, but for HTML.
