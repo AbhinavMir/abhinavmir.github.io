@@ -11,6 +11,12 @@
       ],
       "dest": "/llms.txt"
     },
-    { "handle": "filesystem" }
+    {
+      "src": "/resume",
+      "dest": "/resume.pdf"
+    },
+    {
+      "handle": "filesystem"
+    }
   ]
 }
