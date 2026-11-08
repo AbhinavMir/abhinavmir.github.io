@@ -13,7 +13,7 @@
     },
     {
       "src": "/resume",
-      "dest": "/resume.pdf"
+      "dest": "/resume.html"
     },
     {
       "handle": "filesystem"
