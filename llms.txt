@@ -76,6 +76,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 - DBDiff (https://github.com/AbhinavMir/dbdiff) — A read-only, deterministic Git-style diff of PostgreSQL schemas and data, designed for CI.
 - Oat (https://github.com/AbhinavMir/oat) — A local encrypted TOTP vault for the terminal, backed by the OS keychain.
 - domn8n (https://github.com/AbhinavMir/domn8n) — An AI-powered DOM mapper that generates standalone Playwright automation scripts.
+- Engram (https://github.com/AbhinavMir/engram) — A desktop app for macOS and Windows that inspects and directly edits the weights of Hugging Face language models.
 - Hypertext (https://hypertext.one) — Pastebin, but for HTML.
 - ThoughtForest (https://usethoughtforest.com) — A content curation system for YouTube, Substack and Twitter.
 - Couch 2 Court (https://apps.apple.com/app/id6783926816) — A Couch-to-5K for basketball.
