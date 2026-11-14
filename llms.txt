@@ -100,7 +100,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ### Accepted / Published
 - Every Graph on at Most Ten Vertices Is Representable by Two 2-Uniform Words (accepted at CALDAM '27) — All 12,293,434 isomorphism classes of graphs on at most ten vertices lie in G2, each certified by a solver-free checker; every minimal forbidden induced subgraph has between 11 and 35 vertices.
 - Healthcare Voice Agent Security (accepted at HealthSec '26) — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
-- Nature-Inspired Swarm Optimization in ANNs (published, IEEE) — https://ieeexplore.ieee.org/document/9395806
+- Application of Nature-Inspired Swarm Optimization Algorithms in Artificial Neural Networks (published, IEEE ICAIS '21) — Reviews bacterial foraging, ant colony, and grey wolf optimization and their use in training neural networks. With Puja Chaudhury, 2021 International Conference on Artificial Intelligence and Smart Systems (ICAIS), Coimbatore. https://ieeexplore.ieee.org/document/9395806
 
 ### Pending Reviews
 - Can Weight-Space Programming Lead to Better Outputs in Medical AI? (under review) — One closed-form rank-one edit to one matrix of Qwen2.5-1.5B-Instruct, with no gradient, raises held-out cell accuracy from 0.656 to 0.879 on a symptom-status task.
