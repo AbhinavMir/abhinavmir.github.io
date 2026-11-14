@@ -33,6 +33,12 @@
       margin-bottom: 2.5rem;
       color: #444;
     }
+    h2.group {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 2.5rem 0 1rem;
+    }
     .project {
       margin-bottom: 2rem;
       padding: 1.5rem;
@@ -88,6 +94,8 @@
     models that underpin modern health information exchange.
   </p>
 
+  <h2 class="group">Accepted / Published</h2>
+
   <div class="project">
     <h2>Every Graph on at Most Ten Vertices Is Representable by Two 2-Uniform Words</h2>
     <p class="tagline">Graphs and Double Occurrence Words <img src="https://img.shields.io/badge/presenting-CALDAM%202027-brightgreen.svg" alt="Presenting at CALDAM 2027" style="vertical-align:middle;"></p>
@@ -115,16 +123,31 @@
     <p class="tagline"><a href="https://ieeexplore.ieee.org/document/9395806">IEEE Xplore</a> <img src="https://img.shields.io/badge/published-IEEE-brightgreen.svg" alt="Published in IEEE" style="vertical-align:middle;"></p>
   </div>
 
+  <h2 class="group">Pending Reviews</h2>
+
   <div class="project">
-    <h2>Human Technical Writing Pairs</h2>
-    <p class="tagline">Dataset Building <a href="https://huggingface.co/datasets/augustdeploying/human-technical-prose-pairs"><img src="https://img.shields.io/badge/dataset-Hugging%20Face-yellow.svg" alt="Dataset on Hugging Face" style="vertical-align:middle;"></a></p>
+    <h2>Can Weight-Space Programming Lead to Better Outputs in Medical AI?</h2>
+    <p class="tagline">Weight-Space Programming for Medical AI <img src="https://img.shields.io/badge/status-under%20review-orange.svg" alt="Under review" style="vertical-align:middle;"></p>
     <ul>
-      <li>19,139 pairs (18,660 train, 479 test) of a request and a list of facts with a human-written technical passage of 150 to 600 words</li>
-      <li>For supervised fine-tuning of a model that writes technical prose from a request and a list of facts</li>
-      <li>All targets are human-written and published before 1 November 2022; a model wrote only the request and facts</li>
-      <li>Sources: Stack Exchange answers from 19 technical sites, IETF RFCs, Project Gutenberg, OpenStax, Python 3.10 docs, and FAA handbooks, with licence per row</li>
+      <li>Qwen2.5-1.5B-Instruct reads "denies fever" as "not mentioned" on 78% of denied symptoms in a synthetic symptom-status task</li>
+      <li>One closed-form rank-one change to the layer-20 MLP output projection corrects most of the error, with no gradient computed</li>
+      <li>On 200 held-out notes, cell accuracy rose from 0.656 to 0.879; the denied-as-not-mentioned rate fell from 0.782 to 0.262</li>
+      <li>A repetition penalty, a rules prompt, and activation steering at the same layer gained at most 0.063; the edit rolls back to a residual of 6e-11</li>
     </ul>
   </div>
+
+  <div class="project">
+    <h2>CORAL: A Permissioned Ledger Framework for Jointly Signed Negotiated Rates Between Providers and Payers</h2>
+    <p class="tagline">Jointly Signed Price Transparency Records <img src="https://img.shields.io/badge/status-under%20review-orange.svg" alt="Under review" style="vertical-align:middle;"></p>
+    <ul>
+      <li>Hospitals and insurers each publish negotiated prices in separate files; a 2026 study found both sides published the same price for only about 10% of services</li>
+      <li>CORAL is a permissioned ledger on which the provider and the insurer both sign each negotiated price</li>
+      <li>Each published file is checked against the records; a price that differs marks the file that departs</li>
+      <li>Signed and committed one provider's full public file, and compared five providers' files with one national payer's file</li>
+    </ul>
+  </div>
+
+  <h2 class="group">Unpublished</h2>
 
   <div class="project">
     <h2>EmberDB</h2>
@@ -192,6 +215,19 @@
       <li>With a probability threshold of 0.9, the method accepts 59.2% of the dialogues, and 79.3% of those answers are exact</li>
     </ul>
     <p><a href="./papers/icd10-visit-dialogues.pdf">Paper (PDF)</a></p>
+  </div>
+
+  <h2 class="group">Datasets</h2>
+
+  <div class="project">
+    <h2>Human Technical Writing Pairs</h2>
+    <p class="tagline">Dataset Building <a href="https://huggingface.co/datasets/augustdeploying/human-technical-prose-pairs"><img src="https://img.shields.io/badge/dataset-Hugging%20Face-yellow.svg" alt="Dataset on Hugging Face" style="vertical-align:middle;"></a></p>
+    <ul>
+      <li>19,139 pairs (18,660 train, 479 test) of a request and a list of facts with a human-written technical passage of 150 to 600 words</li>
+      <li>For supervised fine-tuning of a model that writes technical prose from a request and a list of facts</li>
+      <li>All targets are human-written and published before 1 November 2022; a model wrote only the request and facts</li>
+      <li>Sources: Stack Exchange answers from 19 technical sites, IETF RFCs, Project Gutenberg, OpenStax, Python 3.10 docs, and FAA handbooks, with licence per row</li>
+    </ul>
   </div>
 
 </body>

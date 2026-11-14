@@ -97,16 +97,25 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 
 ## Research
 
+### Accepted / Published
 - Every Graph on at Most Ten Vertices Is Representable by Two 2-Uniform Words (presenting at CALDAM 2027) — All 12,293,434 isomorphism classes of graphs on at most ten vertices lie in G2, each certified by a solver-free checker; every minimal forbidden induced subgraph has between 11 and 35 vertices.
 - Healthcare Voice Agent Security (accepted at HealthSec '26) — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
 - Nature-Inspired Swarm Optimization in ANNs (published, IEEE) — https://ieeexplore.ieee.org/document/9395806
-- Human Technical Writing Pairs (https://huggingface.co/datasets/augustdeploying/human-technical-prose-pairs) — Dataset building: 19,139 pairs of a request and a list of facts with a human-written technical passage published before November 2022, for fine-tuning a model to write technical prose.
+
+### Pending Reviews
+- Can Weight-Space Programming Lead to Better Outputs in Medical AI? (under review) — One closed-form rank-one edit to one matrix of Qwen2.5-1.5B-Instruct, with no gradient, raises held-out cell accuracy from 0.656 to 0.879 on a symptom-status task.
+- CORAL: A Permissioned Ledger Framework for Jointly Signed Negotiated Rates Between Providers and Payers (under review) — A permissioned ledger on which provider and payer both sign each negotiated rate, so a published price that differs is traced to the file that departs.
+
+### Unpublished
 - EmberDB (https://github.com/abhinavmir/emberdb) — FHIR-native time-series storage for critical care, benchmarked against InfluxDB, TimescaleDB, and QuestDB on MIMIC-III data.
 - Privacy-Preserving Healthcare Cost Prediction — Secure multiparty computation for joint model training across hospitals, insurers, and public health agencies without exposing raw data.
 - zkDNA — Zero-knowledge proofs for negative STR DNA match verification in forensic contexts.
 - Formal Verification of FHIR Resources — Lightweight formal methods (Alloy) to verify structural integrity and safety invariants of HL7 FHIR data models.
 - Reading MUMPS at Scale — An open tree-sitter grammar for MUMPS, the language behind the VA's VistA EHR. Parses 98.6% of VistA's 33,951 routines.
 - ICD-10 Codes from Visit Dialogues — A framework that assigns one ICD-10-CM code to a doctor-patient dialogue with a System One model, with no task training. Exact code for 62.0% of 996 held-out MedSynth dialogues from the 2,032 benchmark codes, and 57.3% from all 74,719 codes. Paper: https://abhinavmir.xyz/papers/icd10-visit-dialogues.pdf
+
+### Datasets
+- Human Technical Writing Pairs (https://huggingface.co/datasets/augustdeploying/human-technical-prose-pairs) — Dataset building: 19,139 pairs of a request and a list of facts with a human-written technical passage published before November 2022, for fine-tuning a model to write technical prose.
 
 ## Open source
 
