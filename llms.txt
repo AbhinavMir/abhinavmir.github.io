@@ -98,7 +98,7 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 ## Research
 
 ### Accepted / Published
-- Every Graph on at Most Ten Vertices Is Representable by Two 2-Uniform Words (presenting at CALDAM 2027) — All 12,293,434 isomorphism classes of graphs on at most ten vertices lie in G2, each certified by a solver-free checker; every minimal forbidden induced subgraph has between 11 and 35 vertices.
+- Every Graph on at Most Ten Vertices Is Representable by Two 2-Uniform Words (accepted at CALDAM '27) — All 12,293,434 isomorphism classes of graphs on at most ten vertices lie in G2, each certified by a solver-free checker; every minimal forbidden induced subgraph has between 11 and 35 vertices.
 - Healthcare Voice Agent Security (accepted at HealthSec '26) — Evaluating AI voice platforms in healthcare: prompt injection, PHI extraction, and synthetic voice attacks with a FHIR-compliant testing framework.
 - Nature-Inspired Swarm Optimization in ANNs (published, IEEE) — https://ieeexplore.ieee.org/document/9395806
 
