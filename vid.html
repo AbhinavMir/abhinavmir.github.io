@@ -17,6 +17,7 @@ button.rec.on{animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.6}}
 #bar{position:fixed;top:0;left:0;right:0;display:flex;gap:8px;align-items:center;padding:10px 12px;z-index:5;background:linear-gradient(#000a,#0000);transition:opacity .3s}
 #bar .sp{flex:1}
+#seek{flex:1;min-width:80px;accent-color:#fff;cursor:pointer}
 #bar .t{color:var(--mut);font-variant-numeric:tabular-nums}
 body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 #stage{position:fixed;inset:0}
@@ -62,7 +63,7 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <button id="recBtn" class="rec">Record</button>
   <button id="textBtn">Script: on</button>
   <span class="t" id="time">0:00 / 0:00</span>
-  <span class="sp"></span>
+  <input id="seek" type="range" min="0" max="1000" value="0" step="1">
   <button id="setBtn">Settings</button>
 </div>
 
@@ -103,7 +104,7 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <label><span>Countdown</span><input type="checkbox" data-k="countdown"></label>
   <p class="hint">Use headphones, so the video sound does not get into the mic. The teleprompter text is never recorded.</p>
   <p class="hint">Drag your face to move it. Double-click it to center it again.</p>
-  <p class="hint">Keys: Space play/pause, ←/→ blocks, R record, T script on/off, H hide bar, S settings, F full screen.</p>
+  <p class="hint">Pausing the video also pauses the recording. Keys: Space or K play/pause, J/L back/forward 5 s, ←/→ blocks, R record, T script on/off, H hide bar, S settings, F full screen.</p>
 </div>
 <div id="msg"></div>
 
@@ -183,6 +184,7 @@ function layout() {
 
 function tick() {
   $('time').textContent = `${fmt(vid.currentTime)} / ${fmt(vid.duration)}`;
+  if (!seeking && vid.duration) $('seek').value = Math.round(vid.currentTime / vid.duration * 1000);
   if (S.mode === 'time' && blocks.some(b => b.t !== null)) {
     const t = vid.currentTime - (+S.shift || 0);
     let i = -1;
@@ -229,9 +231,15 @@ async function listDevices() {
 }
 
 function togglePlay() { if (!vid.src) return msg('Upload a video first.'); vid.paused ? vid.play() : vid.pause(); }
-vid.addEventListener('play', () => $('playBtn').textContent = 'Pause');
-vid.addEventListener('pause', () => $('playBtn').textContent = 'Play');
-vid.addEventListener('ended', () => { if (rec && rec.state === 'recording') stopRec(); });
+vid.addEventListener('play', () => { $('playBtn').textContent = 'Pause'; if (rec && rec.state === 'paused') rec.resume(); });
+vid.addEventListener('pause', () => { $('playBtn').textContent = 'Play'; if (rec && rec.state === 'recording' && !vid.ended) rec.pause(); });
+let seeking = false;
+const seekTo = () => { if (vid.duration) { vid.currentTime = $('seek').value / 1000 * vid.duration; idx = -2; } };
+$('seek').addEventListener('pointerdown', () => seeking = true);
+$('seek').addEventListener('input', seekTo);
+$('seek').addEventListener('change', () => { seekTo(); seeking = false; });
+const nudge = d => { if (vid.duration) { vid.currentTime = Math.min(Math.max(vid.currentTime + d, 0), vid.duration); idx = -2; } };
+vid.addEventListener('ended', () => { if (rec && rec.state !== 'inactive') stopRec(); });
 
 function step(d) {
   if (!blocks.length) return;
@@ -262,7 +270,7 @@ function mixStream() {
       else g.drawImage(cam, (cw - m) / 2, (ch - m) / 2, m, m, x, y, d, d);
       g.restore();
     }
-    if (rec && rec.state === 'recording') requestAnimationFrame(draw);
+    if (rec && rec.state !== 'inactive') requestAnimationFrame(draw);
   };
   audioCtx = audioCtx || new AudioContext(); audioCtx.resume();
   if (!vidSrc) { vidSrc = audioCtx.createMediaElementSource(vid); vidSrc.connect(audioCtx.destination); }
@@ -307,7 +315,7 @@ async function startRec() {
   $('recBtn').textContent = 'Stop'; $('recBtn').classList.add('on');
 }
 
-function stopRec() { if (rec && rec.state === 'recording') { rec.stop(); vid.pause(); } }
+function stopRec() { if (rec && rec.state !== 'inactive') { const r = rec; rec = null; r.stop(); vid.pause(); rec = r; } }
 
 $('upBtn').onclick = () => $('file').click();
 $('file').onchange = e => {
@@ -316,7 +324,7 @@ $('file').onchange = e => {
   vid.src = URL.createObjectURL(f); vid.load(); idx = -2; layout();
 };
 $('playBtn').onclick = togglePlay;
-$('recBtn').onclick = () => rec && rec.state === 'recording' ? stopRec() : startRec();
+$('recBtn').onclick = () => rec && rec.state !== 'inactive' ? stopRec() : startRec();
 $('textBtn').onclick = () => { S.textOn = !S.textOn; save(); layout(); };
 let drag = null;
 cam.addEventListener('pointerdown', e => { drag = {dx: e.clientX - S.camX * innerWidth, dy: e.clientY - S.camY * innerHeight}; cam.setPointerCapture(e.pointerId); });
@@ -334,6 +342,9 @@ addEventListener('keydown', e => {
   if (k === ' ') { e.preventDefault(); togglePlay(); }
   else if (e.key === 'ArrowRight') step(1);
   else if (e.key === 'ArrowLeft') step(-1);
+  else if (k === 'j' || e.key === ',') nudge(-5);
+  else if (k === 'l' || e.key === '.') nudge(5);
+  else if (k === 'k') togglePlay();
   else if (k === 'r') $('recBtn').click();
   else if (k === 't') $('textBtn').click();
   else if (k === 'h') document.body.classList.toggle('clean');
