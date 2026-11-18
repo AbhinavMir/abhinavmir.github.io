@@ -22,7 +22,8 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 #stage{position:fixed;inset:0}
 #vid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 #dim{position:absolute;inset:0;background:#000;pointer-events:none}
-#cam{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;border:3px solid #fff3;background:#111}
+#cam{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;border:3px solid #fff3;background:#111;cursor:grab;touch-action:none;z-index:2}
+#cam:active{cursor:grabbing}
 #cam.mir{transform:translate(-50%,-50%) scaleX(-1)}
 #txt{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none}
 .blk{position:absolute;left:0;right:0;padding:10px 18px;border-radius:12px;transition:opacity .35s,transform .35s}
@@ -50,7 +51,7 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <div id="dim"></div>
   <video id="cam" autoplay muted playsinline></video>
   <div id="txt"><div id="cur"></div><div id="next"></div></div>
-  <div id="empty">Upload a video and paste your script in Settings.</div>
+  <div id="empty">Drag your face to move it. Upload a video or a script if you want one, or just press Record.</div>
   <div id="count"></div>
 </div>
 
@@ -59,6 +60,7 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <input id="file" type="file" accept="video/*" hidden>
   <button id="playBtn">Play</button>
   <button id="recBtn" class="rec">Record</button>
+  <button id="textBtn">Script: on</button>
   <span class="t" id="time">0:00 / 0:00</span>
   <span class="sp"></span>
   <button id="setBtn">Settings</button>
@@ -100,7 +102,8 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <label><span>Record</span><select data-k="recMode"><option value="cam">Face + mic only</option><option value="mix">Video + face in corner</option></select></label>
   <label><span>Countdown</span><input type="checkbox" data-k="countdown"></label>
   <p class="hint">Use headphones, so the video sound does not get into the mic. The teleprompter text is never recorded.</p>
-  <p class="hint">Keys: Space play/pause, ←/→ blocks, R record, H hide bar, S settings, F full screen.</p>
+  <p class="hint">Drag your face to move it. Double-click it to center it again.</p>
+  <p class="hint">Keys: Space play/pause, ←/→ blocks, R record, T script on/off, H hide bar, S settings, F full screen.</p>
 </div>
 <div id="msg"></div>
 
@@ -109,7 +112,7 @@ const $ = id => document.getElementById(id);
 const vid = $('vid'), cam = $('cam'), cur = $('cur'), next = $('next'), txt = $('txt');
 const DEF = {size:40,width:60,font:'system-ui',weight:'600',color:'#ffffff',box:'#000000',boxOp:55,pos:'above',off:0,preview:true,
   shift:0,mode:'time',camOn:true,camSize:220,mirror:true,vol:100,dim:20,recMode:'cam',countdown:true,
-  script:'0:00 Paste your script here.\n0:05 Each line starts with the time it shows up.\n0:10 The next line pops in on top.'};
+  script:'',textOn:true,camX:.5,camY:.5};
 let S = {...DEF};
 try { Object.assign(S, JSON.parse(localStorage.getItem('tp-settings') || '{}')); } catch {}
 const save = () => { try { localStorage.setItem('tp-settings', JSON.stringify(S)); } catch {} };
@@ -153,6 +156,11 @@ function layout() {
   const W = innerWidth, H = innerHeight, r = S.camSize / 2;
   cam.style.width = cam.style.height = S.camSize + 'px';
   cam.style.display = S.camOn ? 'block' : 'none';
+  const cx = S.camX * W, cy = S.camY * H;
+  cam.style.left = cx + 'px'; cam.style.top = cy + 'px';
+  txt.style.left = cx + 'px';
+  txt.style.display = S.textOn && blocks.length ? 'block' : 'none';
+  $('textBtn').textContent = 'Script: ' + (S.textOn ? 'on' : 'off');
   cam.classList.toggle('mir', S.mirror);
   txt.style.width = S.width + 'vw';
   Object.assign(txt.style, {fontSize: S.size + 'px', fontFamily: S.font, fontWeight: S.weight, color: S.color, lineHeight: 1.25});
@@ -161,16 +169,16 @@ function layout() {
   const gap = (S.camOn ? r : 0) + 24;
   const curH = (cur.querySelector('.blk:not(.out)') || {offsetHeight: S.size * 1.5}).offsetHeight;
   let top;
-  if (S.pos === 'above') top = H / 2 - gap - curH;
-  else if (S.pos === 'below') top = H / 2 + gap;
-  else top = H / 2 - curH / 2;
+  if (S.pos === 'above') top = cy - gap - curH;
+  else if (S.pos === 'below') top = cy + gap;
+  else top = cy - curH / 2;
   top += +S.off;
   txt.style.top = top + 'px';
   cur.querySelectorAll('.blk').forEach(b => b.style.top = '0');
   next.style.top = S.pos === 'above' ? -(next.offsetHeight + 10) + 'px' : (curH + 10) + 'px';
   $('dim').style.opacity = S.dim / 100;
   vid.volume = S.vol / 100;
-  $('empty').style.display = vid.src ? 'none' : 'flex';
+  $('empty').style.display = vid.src || blocks.length ? 'none' : 'flex';
 }
 
 function tick() {
@@ -248,7 +256,7 @@ function mixStream() {
       g.drawImage(vid, (c.width - w) / 2, (c.height - h) / 2, w, h);
     }
     if (cam.videoWidth) {
-      const d = 340, x = c.width - d - 48, y = c.height - d - 48, cw = cam.videoWidth, ch = cam.videoHeight, m = Math.min(cw, ch);
+      const d = 340, x = Math.min(Math.max(S.camX * c.width - d / 2, 0), c.width - d), y = Math.min(Math.max(S.camY * c.height - d / 2, 0), c.height - d), cw = cam.videoWidth, ch = cam.videoHeight, m = Math.min(cw, ch);
       g.save(); g.beginPath(); g.arc(x + d / 2, y + d / 2, d / 2, 0, Math.PI * 2); g.clip();
       if (S.mirror) { g.translate(x + d, y); g.scale(-1, 1); g.drawImage(cam, (cw - m) / 2, (ch - m) / 2, m, m, 0, 0, d, d); }
       else g.drawImage(cam, (cw - m) / 2, (ch - m) / 2, m, m, x, y, d, d);
@@ -309,6 +317,12 @@ $('file').onchange = e => {
 };
 $('playBtn').onclick = togglePlay;
 $('recBtn').onclick = () => rec && rec.state === 'recording' ? stopRec() : startRec();
+$('textBtn').onclick = () => { S.textOn = !S.textOn; save(); layout(); };
+let drag = null;
+cam.addEventListener('pointerdown', e => { drag = {dx: e.clientX - S.camX * innerWidth, dy: e.clientY - S.camY * innerHeight}; cam.setPointerCapture(e.pointerId); });
+cam.addEventListener('pointermove', e => { if (!drag) return; S.camX = Math.min(Math.max((e.clientX - drag.dx) / innerWidth, 0), 1); S.camY = Math.min(Math.max((e.clientY - drag.dy) / innerHeight, 0), 1); layout(); });
+cam.addEventListener('pointerup', () => { if (drag) { drag = null; save(); } });
+cam.addEventListener('dblclick', () => { S.camX = S.camY = .5; save(); layout(); });
 $('setBtn').onclick = () => $('panel').classList.toggle('open');
 $('camSel').onchange = $('micSel').onchange = startCam;
 addEventListener('resize', layout);
@@ -321,6 +335,7 @@ addEventListener('keydown', e => {
   else if (e.key === 'ArrowRight') step(1);
   else if (e.key === 'ArrowLeft') step(-1);
   else if (k === 'r') $('recBtn').click();
+  else if (k === 't') $('textBtn').click();
   else if (k === 'h') document.body.classList.toggle('clean');
   else if (k === 's') $('panel').classList.toggle('open');
   else if (k === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
