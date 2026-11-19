@@ -44,6 +44,10 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 #panel textarea{width:100%;height:220px;background:#0f0f11;border:1px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
 #panel .hint{color:var(--mut);font-size:12px;margin:4px 0 0}
 #msg{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#000c;padding:8px 14px;border-radius:8px;z-index:7;display:none}
+#txt{--tps-active-line:var(--acc);--tps-past-opacity:.6}
+#next .tps-active,#next .tps-past{opacity:1;text-decoration:none}
+#next .blk{position:static;padding:0 18px;animation:none}
+#diag{color:#f5a524;font-size:12px;margin:6px 0 0;white-space:pre-wrap}#diag:empty{display:none}
 </style>
 </head>
 <body>
@@ -70,7 +74,9 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 <div id="panel">
   <h3>Script</h3>
   <textarea id="script" spellcheck="false"></textarea>
-  <p class="hint">One block per line, with a start time: <code>0:12 Your line here</code>. Lines without a time join the block above. With no times at all, use the arrow keys to move between blocks.</p>
+  <p class="hint">Simple: one block per line with a start time, <code>0:12 Your line here</code>. Lines without a time join the block above. With no times at all, use the arrow keys to move between blocks.</p>
+  <p class="hint">Full: a TelepromptScript (<code>.tpmt</code>) script, with <code>@ 0:12 .. 0:20</code> windows, <code>*emphasis*</code>, <code>/</code> pauses and <code>((notes))</code>. Each word is timed and marked as you read. A <code>TELEPROMPTER.txt</code> file (time and label on one line, text below) also works. Drop a script file on the page to load it.</p>
+  <p id="diag"></p>
 
   <h3>Text</h3>
   <label><span>Size</span><input type="range" data-k="size" min="16" max="96"></label>
@@ -83,6 +89,7 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <label><span>Position</span><select data-k="pos"><option value="above">Above face</option><option value="below">Below face</option><option value="over">Over face</option></select></label>
   <label><span>Offset (px)</span><input type="range" data-k="off" min="-300" max="300"></label>
   <label><span>Show next line</span><input type="checkbox" data-k="preview"></label>
+  <label><span>Mark current word</span><input type="checkbox" data-k="mark"></label>
 
   <h3>Timing</h3>
   <label><span>Shift (sec)</span><input type="number" data-k="shift" step="0.1"></label>
@@ -108,43 +115,62 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 </div>
 <div id="msg"></div>
 
-<script>
+<script type="module">
+import { createPlayer, createBlockView, mediaClock, manualClock, offsetClock, injectStyles, escapeText, formatClock, fromTimestampedText } from './assets/js/telepromptscript-dom-0.1.0.js';
 const $ = id => document.getElementById(id);
 const vid = $('vid'), cam = $('cam'), cur = $('cur'), next = $('next'), txt = $('txt');
 const DEF = {size:40,width:60,font:'system-ui',weight:'600',color:'#ffffff',box:'#000000',boxOp:55,pos:'above',off:0,preview:true,
-  shift:0,mode:'time',camOn:true,camSize:220,mirror:true,vol:100,dim:20,recMode:'cam',countdown:true,
+  shift:0,mode:'time',mark:true,camOn:true,camSize:220,mirror:true,vol:100,dim:20,recMode:'cam',countdown:true,
   script:'',textOn:true,camX:.5,camY:.5};
 let S = {...DEF};
 try { Object.assign(S, JSON.parse(localStorage.getItem('tp-settings') || '{}')); } catch {}
 const save = () => { try { localStorage.setItem('tp-settings', JSON.stringify(S)); } catch {} };
 
-let blocks = [], idx = -1, stream = null, rec = null, chunks = [], raf = 0, audioCtx = null, vidSrc = null;
+let player = null, view = null, timed = false, stream = null, rec = null, chunks = [], raf = 0, audioCtx = null, vidSrc = null;
 
 function msg(t, ms = 2500) { const m = $('msg'); m.textContent = t; m.style.display = 'block'; clearTimeout(msg.t); msg.t = setTimeout(() => m.style.display = 'none', ms); }
 const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '0:00';
 
-function parse(src) {
-  const out = [];
-  for (const raw of src.split('\n')) {
-    const line = raw.trim(); if (!line) continue;
-    const m = line.match(/^\[?(?:(\d+):)?(\d+):(\d{1,2}(?:\.\d+)?)\]?\s+(.*)$/);
-    if (m) out.push({t: (+(m[1] || 0)) * 3600 + (+m[2]) * 60 + (+m[3]), text: m[4]});
-    else if (out.length && out[out.length - 1].t !== null) out[out.length - 1].text += ' ' + line;
-    else out.push({t: null, text: line});
+// Scripts are compiled by @telepromptscript/dom. Three formats are accepted:
+// TelepromptScript (.tpmt), TELEPROMPTER.txt ("0:12  label" lines with text below),
+// and the simple format ("0:12 Your line" per block, or lines with no times).
+const TPMT_RE = /^\s*(?:---\s*$|[@~][ \t]*[\d+A-Za-z_]|@include\b)/m;
+const LEGACY_RE = /^\[?(?:(\d+):)?(\d+):(\d{1,2}(?:\.\d+)?)\]?\s+(.*)$/;
+function toTpmt(src) {
+  if (TPMT_RE.test(src)) return {tpmt: src, timed: true};
+  const lines = src.split('\n').map(l => l.trim()).filter(Boolean);
+  const stamps = lines.filter(l => LEGACY_RE.test(l));
+  if (stamps.length >= 2 && stamps.every(l => /^\d+:\d{2}\s+[A-Za-z0-9_][\w.:-]*$/.test(l))) return {tpmt: fromTimestampedText(src), timed: true};
+  const out = []; let hasTime = false;
+  for (const line of lines) {
+    const m = line.match(LEGACY_RE);
+    if (m) { hasTime = true; out.push(`@ ${formatClock(Math.round(((+(m[1] || 0)) * 3600 + (+m[2]) * 60 + (+m[3])) * 1000))}`, escapeText(m[4])); }
+    else if (hasTime) out.push(escapeText(line));
+    else out.push(out.length ? '@ +0s' : '@ 0:00', escapeText(line));
   }
-  return out;
+  return {tpmt: out.join('\n') + '\n', timed: hasTime};
 }
 
-function show(i) {
-  if (i === idx) return;
-  idx = i;
-  const old = cur.querySelector('.blk:not(.out)');
-  if (old) { old.classList.add('out'); setTimeout(() => old.remove(), 400); }
-  if (i >= 0 && blocks[i]) {
-    const d = document.createElement('div'); d.className = 'blk in'; d.textContent = blocks[i].text;
-    styleBlk(d); cur.appendChild(d);
-  }
-  next.textContent = S.preview && blocks[i + 1] ? blocks[i + 1].text : '';
+const manual = () => S.mode === 'manual' || !timed;
+const nBlocks = () => (player && player.ir ? player.ir.blocks.length : 0);
+
+// Builds the player and the block view from the script and the settings.
+function rebuild() {
+  const keep = view ? view.index : 0;
+  if (view) view.destroy();
+  if (player) player.destroy();
+  const conv = toTpmt(S.script || '');
+  timed = conv.timed;
+  const clock = manual() ? manualClock() : offsetClock(mediaClock(vid), (+S.shift || 0) * 1000);
+  player = createPlayer({source: conv.tpmt, clock});
+  const errs = player.diagnostics.filter(d => d.severity === 'error');
+  $('diag').textContent = S.script && errs.length ? errs.slice(0, 5).map(d => `Line ${d.line}: ${d.message} (${d.code})`).join('\n') : '';
+  view = createBlockView(player, {
+    current: cur, next: S.preview ? next : null, blockClass: 'blk', inClass: 'in', outClass: 'out', outMs: 400,
+    markWords: S.mark && !manual(), notes: true,
+    onChange: (i, el) => { if (el) styleBlk(el); layout(); },
+  });
+  if (manual() && nBlocks()) player.controls.goToBlock(Math.min(Math.max(keep, 0), nBlocks() - 1));
   layout();
 }
 
@@ -160,7 +186,7 @@ function layout() {
   const cx = S.camX * W, cy = S.camY * H;
   cam.style.left = cx + 'px'; cam.style.top = cy + 'px';
   txt.style.left = cx + 'px';
-  txt.style.display = S.textOn && blocks.length ? 'block' : 'none';
+  txt.style.display = S.textOn && nBlocks() ? 'block' : 'none';
   $('textBtn').textContent = 'Script: ' + (S.textOn ? 'on' : 'off');
   cam.classList.toggle('mir', S.mirror);
   txt.style.width = S.width + 'vw';
@@ -179,18 +205,12 @@ function layout() {
   next.style.top = S.pos === 'above' ? -(next.offsetHeight + 10) + 'px' : (curH + 10) + 'px';
   $('dim').style.opacity = S.dim / 100;
   vid.volume = S.vol / 100;
-  $('empty').style.display = vid.src || blocks.length ? 'none' : 'flex';
+  $('empty').style.display = vid.src || nBlocks() ? 'none' : 'flex';
 }
 
 function tick() {
   $('time').textContent = `${fmt(vid.currentTime)} / ${fmt(vid.duration)}`;
   if (!seeking && vid.duration) $('seek').value = Math.round(vid.currentTime / vid.duration * 1000);
-  if (S.mode === 'time' && blocks.some(b => b.t !== null)) {
-    const t = vid.currentTime - (+S.shift || 0);
-    let i = -1;
-    for (let k = 0; k < blocks.length; k++) if (blocks[k].t !== null && blocks[k].t <= t) i = k;
-    show(i);
-  }
   raf = requestAnimationFrame(tick);
 }
 
@@ -200,12 +220,11 @@ function bind() {
     if (el.type === 'checkbox') el.checked = !!S[k]; else el.value = S[k];
     el.addEventListener('input', () => {
       S[k] = el.type === 'checkbox' ? el.checked : el.type === 'range' || el.type === 'number' ? +el.value : el.value;
-      save(); if (k === 'preview' || k === 'mode') { const i = idx; idx = -2; show(i); } layout();
+      save(); if (k === 'preview' || k === 'mode' || k === 'shift' || k === 'mark') rebuild(); layout();
     });
   });
   const ta = $('script'); ta.value = S.script;
-  ta.addEventListener('input', () => { S.script = ta.value; save(); blocks = parse(ta.value); const i = Math.max(idx, 0); idx = -2; show(S.mode === 'manual' ? Math.min(i, blocks.length - 1) : -1); });
-  blocks = parse(S.script);
+  ta.addEventListener('input', () => { S.script = ta.value; save(); rebuild(); });
 }
 
 async function startCam() {
@@ -234,18 +253,17 @@ function togglePlay() { if (!vid.src) return msg('Upload a video first.'); vid.p
 vid.addEventListener('play', () => { $('playBtn').textContent = 'Pause'; if (rec && rec.state === 'paused') rec.resume(); });
 vid.addEventListener('pause', () => { $('playBtn').textContent = 'Play'; if (rec && rec.state === 'recording' && !vid.ended) rec.pause(); });
 let seeking = false;
-const seekTo = () => { if (vid.duration) { vid.currentTime = $('seek').value / 1000 * vid.duration; idx = -2; } };
+const seekTo = () => { if (vid.duration) vid.currentTime = $('seek').value / 1000 * vid.duration; };
 $('seek').addEventListener('pointerdown', () => seeking = true);
 $('seek').addEventListener('input', seekTo);
 $('seek').addEventListener('change', () => { seekTo(); seeking = false; });
-const nudge = d => { if (vid.duration) { vid.currentTime = Math.min(Math.max(vid.currentTime + d, 0), vid.duration); idx = -2; } };
+const nudge = d => { if (vid.duration) vid.currentTime = Math.min(Math.max(vid.currentTime + d, 0), vid.duration); };
 vid.addEventListener('ended', () => { if (rec && rec.state !== 'inactive') stopRec(); });
 
 function step(d) {
-  if (!blocks.length) return;
-  const i = Math.min(Math.max(idx + d, 0), blocks.length - 1);
-  if (S.mode === 'time' && blocks[i].t !== null && vid.src) { vid.currentTime = blocks[i].t + (+S.shift || 0); idx = -2; }
-  show(i);
+  if (!nBlocks()) return;
+  if (!manual() && !vid.src) return;
+  player.controls.goToBlock(Math.min(Math.max(view.index + d, 0), nBlocks() - 1));
 }
 
 function pickMime() {
@@ -308,7 +326,7 @@ async function startRec() {
     a.click(); msg('Saved ' + a.download);
     $('recBtn').textContent = 'Record'; $('recBtn').classList.remove('on');
   };
-  if (vid.src) { vid.currentTime = 0; idx = -2; }
+  if (vid.src) vid.currentTime = 0;
   rec.start(1000);
   if (src._draw) src._draw();
   if (vid.src) vid.play();
@@ -321,7 +339,7 @@ $('upBtn').onclick = () => $('file').click();
 $('file').onchange = e => {
   const f = e.target.files[0]; if (!f) return;
   if (vid.src) URL.revokeObjectURL(vid.src);
-  vid.src = URL.createObjectURL(f); vid.load(); idx = -2; layout();
+  vid.src = URL.createObjectURL(f); vid.load(); layout();
 };
 $('playBtn').onclick = togglePlay;
 $('recBtn').onclick = () => rec && rec.state !== 'inactive' ? stopRec() : startRec();
@@ -335,7 +353,14 @@ $('setBtn').onclick = () => $('panel').classList.toggle('open');
 $('camSel').onchange = $('micSel').onchange = startCam;
 addEventListener('resize', layout);
 addEventListener('dragover', e => e.preventDefault());
-addEventListener('drop', e => { e.preventDefault(); const f = [...e.dataTransfer.files].find(f => f.type.startsWith('video')); if (f) { vid.src = URL.createObjectURL(f); idx = -2; layout(); } });
+addEventListener('drop', async e => {
+  e.preventDefault();
+  const files = [...e.dataTransfer.files];
+  const v = files.find(f => f.type.startsWith('video'));
+  if (v) { vid.src = URL.createObjectURL(v); layout(); }
+  const t = files.find(f => /\.(tpmt|txt)$/i.test(f.name) || f.type.startsWith('text/'));
+  if (t) { S.script = $('script').value = await t.text(); save(); rebuild(); msg('Loaded ' + t.name); }
+});
 addEventListener('keydown', e => {
   if (e.target.matches('textarea,input,select')) return;
   const k = e.key.toLowerCase();
@@ -352,8 +377,7 @@ addEventListener('keydown', e => {
   else if (k === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 });
 
-bind(); layout(); startCam(); tick();
-if (S.mode === 'manual' || !blocks.some(b => b.t !== null)) show(0);
+injectStyles(); bind(); rebuild(); startCam(); tick();
 </script>
 </body>
 </html>
