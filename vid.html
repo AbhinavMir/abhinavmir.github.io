@@ -25,7 +25,11 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
 #dim{position:absolute;inset:0;background:#000;pointer-events:none}
 #cam{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;border:3px solid #fff3;background:#111;cursor:grab;touch-action:none;z-index:2}
 #cam:active{cursor:grabbing}
-#cam.mir{transform:translate(-50%,-50%) scaleX(-1)}
+#cam.full{width:100%!important;height:100%!important;border-radius:0;border:0;object-fit:contain;cursor:default;background:#000}
+#grid{position:absolute;inset:0;pointer-events:none;display:none;z-index:3;background:linear-gradient(90deg,transparent calc(33.33% - .5px),#fff4 calc(33.33% - .5px),#fff4 calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),#fff4 calc(66.66% - .5px),#fff4 calc(66.66% + .5px),transparent calc(66.66% + .5px)),linear-gradient(transparent calc(33.33% - .5px),#fff4 calc(33.33% - .5px),#fff4 calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),#fff4 calc(66.66% - .5px),#fff4 calc(66.66% + .5px),transparent calc(66.66% + .5px))}
+#recTime{color:var(--acc);font-weight:600;font-variant-numeric:tabular-nums;display:none}
+#camInfo{color:var(--mut);font-size:12px}
+#takes a{display:block;color:#8ab4f8;margin:4px 0;word-break:break-all}
 #txt{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none}
 .blk{position:absolute;left:0;right:0;padding:10px 18px;border-radius:12px;transition:opacity .35s,transform .35s}
 .blk.in{animation:pop .35s ease-out}
@@ -56,7 +60,8 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <div id="dim"></div>
   <video id="cam" autoplay muted playsinline></video>
   <div id="txt"><div id="cur"></div><div id="next"></div></div>
-  <div id="empty">Drag your face to move it. Upload a video or a script if you want one, or just press Record.</div>
+  <div id="empty">Press Record (or R) to record. Upload a video or a script if you want one.</div>
+  <div id="grid"></div>
   <div id="count"></div>
 </div>
 
@@ -65,9 +70,13 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <input id="file" type="file" accept="video/*" hidden>
   <button id="playBtn">Play</button>
   <button id="recBtn" class="rec">Record</button>
+  <span id="recTime">0:00</span>
+  <button id="dlBtn" hidden>Download</button>
+  <button id="flipBtn" title="Mirror (M)">Flip</button>
   <button id="textBtn">Script: on</button>
   <span class="t" id="time">0:00 / 0:00</span>
   <input id="seek" type="range" min="0" max="1000" value="0" step="1">
+  <span id="camInfo"></span>
   <button id="setBtn">Settings</button>
 </div>
 
@@ -98,7 +107,14 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <h3>Camera</h3>
   <label><span>Show face</span><input type="checkbox" data-k="camOn"></label>
   <label><span>Size</span><input type="range" data-k="camSize" min="80" max="600"></label>
-  <label><span>Mirror</span><input type="checkbox" data-k="mirror"></label>
+  <label><span>View</span><select data-k="camView"><option value="circle">Circle (draggable)</option><option value="full">Full screen</option></select></label>
+  <label><span>Mirror (flip left-right)</span><input type="checkbox" data-k="mirror"></label>
+  <label><span>Flip upside down</span><input type="checkbox" data-k="flipV"></label>
+  <label><span>Flip the recording too</span><input type="checkbox" data-k="recFlip"></label>
+  <label><span>Framing grid</span><input type="checkbox" data-k="grid"></label>
+  <label><span>Resolution</span><select data-k="res"><option value="3840x2160">4K (3840×2160)</option><option value="2560x1440">1440p</option><option value="1920x1080">1080p</option><option value="1280x720">720p</option></select></label>
+  <label><span>Frame rate</span><select data-k="fps"><option value="30">30 fps</option><option value="60">60 fps</option></select></label>
+  <label><span>Mic cleanup (echo, noise)</span><input type="checkbox" data-k="audioProc"></label>
   <label><span>Camera</span><select id="camSel"></select></label>
   <label><span>Microphone</span><select id="micSel"></select></label>
 
@@ -109,9 +125,13 @@ body.clean #bar{opacity:0}body.clean #bar:hover{opacity:1}
   <h3>Recording</h3>
   <label><span>Record</span><select data-k="recMode"><option value="cam">Face + mic only</option><option value="mix">Video + face in corner</option></select></label>
   <label><span>Countdown</span><input type="checkbox" data-k="countdown"></label>
+  <label><span>Download when stopped</span><input type="checkbox" data-k="autoDl"></label>
   <p class="hint">Use headphones, so the video sound does not get into the mic. The teleprompter text is never recorded.</p>
   <p class="hint">Drag your face to move it. Double-click it to center it again.</p>
-  <p class="hint">Pausing the video also pauses the recording. Keys: Space or K play/pause, J/L back/forward 5 s, ←/→ blocks, R record, T script on/off, H hide bar, S settings, F full screen.</p>
+  <p class="hint">The preview is mirrored like a mirror. The file is saved the way others see you, unless "Flip the recording too" is on. 4K at 30 fps saves about 40 Mbps, about 300 MB a minute.</p>
+  <p class="hint">Pausing the video also pauses the recording. Keys: Space or K play/pause, J/L back/forward 5 s, ←/→ blocks, R record, D download last take, M mirror, G grid, V circle/full view, T script on/off, H hide bar, S settings, F full screen.</p>
+  <h3>Takes</h3>
+  <div id="takes"><p class="hint">No takes yet.</p></div>
 </div>
 <div id="msg"></div>
 
@@ -121,12 +141,13 @@ const $ = id => document.getElementById(id);
 const vid = $('vid'), cam = $('cam'), cur = $('cur'), next = $('next'), txt = $('txt');
 const DEF = {size:40,width:60,font:'system-ui',weight:'600',color:'#ffffff',box:'#000000',boxOp:55,pos:'above',off:0,preview:true,
   shift:0,mode:'time',mark:true,camOn:true,camSize:220,mirror:true,vol:100,dim:20,recMode:'cam',countdown:true,
-  script:'',textOn:true,camX:.5,camY:.5};
+  script:'',textOn:true,camX:.5,camY:.5,camView:'full',flipV:false,recFlip:false,grid:false,res:'3840x2160',fps:30,audioProc:false,autoDl:true};
 let S = {...DEF};
 try { Object.assign(S, JSON.parse(localStorage.getItem('tp-settings') || '{}')); } catch {}
 const save = () => { try { localStorage.setItem('tp-settings', JSON.stringify(S)); } catch {} };
 
 let player = null, view = null, timed = false, stream = null, rec = null, chunks = [], raf = 0, audioCtx = null, vidSrc = null;
+let recAcc = 0, recStart = 0, takes = [];
 
 function msg(t, ms = 2500) { const m = $('msg'); m.textContent = t; m.style.display = 'block'; clearTimeout(msg.t); msg.t = setTimeout(() => m.style.display = 'none', ms); }
 const fmt = s => isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '0:00';
@@ -181,19 +202,23 @@ function styleBlk(d) {
 
 function layout() {
   const W = innerWidth, H = innerHeight, r = S.camSize / 2;
+  const full = S.camView === 'full';
+  cam.classList.toggle('full', full);
   cam.style.width = cam.style.height = S.camSize + 'px';
   cam.style.display = S.camOn ? 'block' : 'none';
-  const cx = S.camX * W, cy = S.camY * H;
-  cam.style.left = cx + 'px'; cam.style.top = cy + 'px';
+  const cx = full ? W / 2 : S.camX * W, cy = full ? H / 2 : S.camY * H;
+  cam.style.left = (full ? 0 : cx) + 'px'; cam.style.top = (full ? 0 : cy) + 'px';
+  cam.style.transform = (full ? '' : 'translate(-50%,-50%) ') + `scale(${S.mirror ? -1 : 1},${S.flipV ? -1 : 1})`;
+  $('grid').style.display = S.grid ? 'block' : 'none';
+  $('flipBtn').textContent = 'Flip: ' + (S.mirror ? 'on' : 'off');
   txt.style.left = cx + 'px';
   txt.style.display = S.textOn && nBlocks() ? 'block' : 'none';
   $('textBtn').textContent = 'Script: ' + (S.textOn ? 'on' : 'off');
-  cam.classList.toggle('mir', S.mirror);
   txt.style.width = S.width + 'vw';
   Object.assign(txt.style, {fontSize: S.size + 'px', fontFamily: S.font, fontWeight: S.weight, color: S.color, lineHeight: 1.25});
   next.style.fontSize = Math.round(S.size * .55) + 'px';
   cur.querySelectorAll('.blk').forEach(styleBlk);
-  const gap = (S.camOn ? r : 0) + 24;
+  const gap = (S.camOn && !full ? r : 0) + 24;
   const curH = (cur.querySelector('.blk:not(.out)') || {offsetHeight: S.size * 1.5}).offsetHeight;
   let top;
   if (S.pos === 'above') top = cy - gap - curH;
@@ -211,6 +236,7 @@ function layout() {
 function tick() {
   $('time').textContent = `${fmt(vid.currentTime)} / ${fmt(vid.duration)}`;
   if (!seeking && vid.duration) $('seek').value = Math.round(vid.currentTime / vid.duration * 1000);
+  if (rec && rec.state !== 'inactive') $('recTime').textContent = '● ' + fmt((recAcc + (rec.state === 'recording' ? Date.now() - recStart : 0)) / 1000);
   raf = requestAnimationFrame(tick);
 }
 
@@ -220,7 +246,10 @@ function bind() {
     if (el.type === 'checkbox') el.checked = !!S[k]; else el.value = S[k];
     el.addEventListener('input', () => {
       S[k] = el.type === 'checkbox' ? el.checked : el.type === 'range' || el.type === 'number' ? +el.value : el.value;
-      save(); if (k === 'preview' || k === 'mode' || k === 'shift' || k === 'mark') rebuild(); layout();
+      if (k === 'fps') S[k] = +el.value;
+      save(); if (k === 'preview' || k === 'mode' || k === 'shift' || k === 'mark') rebuild();
+      if (k === 'res' || k === 'fps' || k === 'audioProc') startCam();
+      layout();
     });
   });
   const ta = $('script'); ta.value = S.script;
@@ -232,11 +261,13 @@ async function startCam() {
   const v = $('camSel').value, a = $('micSel').value;
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: {deviceId: v ? {exact: v} : undefined, width: {ideal: 1920}, height: {ideal: 1080}},
-      audio: {deviceId: a ? {exact: a} : undefined, echoCancellation: true}
+      video: {deviceId: v ? {exact: v} : undefined, width: {ideal: +S.res.split('x')[0]}, height: {ideal: +S.res.split('x')[1]}, frameRate: {ideal: +S.fps}},
+      audio: {deviceId: a ? {exact: a} : undefined, echoCancellation: S.audioProc, noiseSuppression: S.audioProc, autoGainControl: S.audioProc, sampleRate: 48000}
     });
     cam.srcObject = stream;
     await listDevices();
+    const st = stream.getVideoTracks()[0].getSettings();
+    $('camInfo').textContent = `${st.width}×${st.height} · ${Math.round(st.frameRate || 0)} fps`;
   } catch (e) { msg('Camera or mic blocked: ' + e.message, 5000); }
 }
 
@@ -301,6 +332,31 @@ function mixStream() {
   return out;
 }
 
+function bitrate(h) { return h >= 2160 ? 40e6 : h >= 1440 ? 20e6 : h >= 1080 ? 12e6 : 8e6; }
+
+// Draws the camera onto a canvas with the flips applied, so the file matches the preview.
+function flipStream() {
+  const st = stream.getVideoTracks()[0].getSettings();
+  const c = document.createElement('canvas'); c.width = st.width; c.height = st.height;
+  const g = c.getContext('2d');
+  const draw = () => {
+    g.setTransform(S.mirror ? -1 : 1, 0, 0, S.flipV ? -1 : 1, S.mirror ? c.width : 0, S.flipV ? c.height : 0);
+    g.drawImage(cam, 0, 0, c.width, c.height);
+    if (rec && rec.state !== 'inactive') requestAnimationFrame(draw);
+  };
+  const out = c.captureStream(+S.fps || 30);
+  stream.getAudioTracks().forEach(t => out.addTrack(t));
+  out._draw = draw;
+  return out;
+}
+
+function addTake(name, url, size) {
+  takes.unshift({name, url, size});
+  $('takes').innerHTML = takes.map((t, i) => `<a href="${t.url}" download="${t.name}">Take ${takes.length - i}: ${t.name} (${(t.size / 1e6).toFixed(0)} MB)</a>`).join('');
+  $('dlBtn').hidden = false; $('dlBtn').textContent = `Download (${(size / 1e6).toFixed(0)} MB)`;
+}
+function downloadLast() { if (!takes.length) return msg('No take yet.'); const a = document.createElement('a'); a.href = takes[0].url; a.download = takes[0].name; a.click(); }
+
 async function countdown() {
   if (!S.countdown) return;
   const el = $('count'); el.style.display = 'flex';
@@ -313,21 +369,26 @@ async function startRec() {
   if (!stream) return;
   if (S.recMode === 'mix' && !vid.src) return msg('Upload a video to record it with your face.');
   await countdown();
-  const src = S.recMode === 'mix' ? mixStream() : stream;
+  const flip = S.recMode === 'cam' && S.recFlip && (S.mirror || S.flipV);
+  const src = S.recMode === 'mix' ? mixStream() : flip ? flipStream() : stream;
   const mime = pickMime();
-  rec = new MediaRecorder(src, mime ? {mimeType: mime, videoBitsPerSecond: 8e6} : {});
+  const h = S.recMode === 'mix' ? 1080 : stream.getVideoTracks()[0].getSettings().height || 1080;
+  rec = new MediaRecorder(src, mime ? {mimeType: mime, videoBitsPerSecond: bitrate(h), audioBitsPerSecond: 192e3} : {});
   chunks = [];
   rec.ondataavailable = e => e.data.size && chunks.push(e.data);
   rec.onstop = () => {
     const type = rec.mimeType || 'video/webm', ext = type.includes('mp4') ? 'mp4' : 'webm';
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob(chunks, {type}));
-    a.download = `take-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.${ext}`;
-    a.click(); msg('Saved ' + a.download);
-    $('recBtn').textContent = 'Record'; $('recBtn').classList.remove('on');
+    const blob = new Blob(chunks, {type}), name = `take-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.${ext}`;
+    addTake(name, URL.createObjectURL(blob), blob.size);
+    if (S.autoDl) { downloadLast(); msg('Saved ' + name); } else msg('Take ready. Press Download.');
+    $('recBtn').textContent = 'Record'; $('recBtn').classList.remove('on'); $('recTime').style.display = 'none';
   };
   if (vid.src) vid.currentTime = 0;
+  rec.onpause = () => { recAcc += Date.now() - recStart; };
+  rec.onresume = () => { recStart = Date.now(); };
+  recAcc = 0; recStart = Date.now();
   rec.start(1000);
+  $('recTime').textContent = '● 0:00'; $('recTime').style.display = 'inline';
   if (src._draw) src._draw();
   if (vid.src) vid.play();
   $('recBtn').textContent = 'Stop'; $('recBtn').classList.add('on');
@@ -342,10 +403,13 @@ $('file').onchange = e => {
   vid.src = URL.createObjectURL(f); vid.load(); layout();
 };
 $('playBtn').onclick = togglePlay;
+$('dlBtn').onclick = downloadLast;
+const setK = (k, v) => { S[k] = v; save(); const el = document.querySelector(`[data-k="${k}"]`); if (el) el.type === 'checkbox' ? el.checked = v : el.value = v; layout(); };
+$('flipBtn').onclick = () => setK('mirror', !S.mirror);
 $('recBtn').onclick = () => rec && rec.state !== 'inactive' ? stopRec() : startRec();
 $('textBtn').onclick = () => { S.textOn = !S.textOn; save(); layout(); };
 let drag = null;
-cam.addEventListener('pointerdown', e => { drag = {dx: e.clientX - S.camX * innerWidth, dy: e.clientY - S.camY * innerHeight}; cam.setPointerCapture(e.pointerId); });
+cam.addEventListener('pointerdown', e => { if (S.camView === 'full') return; drag = {dx: e.clientX - S.camX * innerWidth, dy: e.clientY - S.camY * innerHeight}; cam.setPointerCapture(e.pointerId); });
 cam.addEventListener('pointermove', e => { if (!drag) return; S.camX = Math.min(Math.max((e.clientX - drag.dx) / innerWidth, 0), 1); S.camY = Math.min(Math.max((e.clientY - drag.dy) / innerHeight, 0), 1); layout(); });
 cam.addEventListener('pointerup', () => { if (drag) { drag = null; save(); } });
 cam.addEventListener('dblclick', () => { S.camX = S.camY = .5; save(); layout(); });
@@ -372,6 +436,10 @@ addEventListener('keydown', e => {
   else if (k === 'k') togglePlay();
   else if (k === 'r') $('recBtn').click();
   else if (k === 't') $('textBtn').click();
+  else if (k === 'd') downloadLast();
+  else if (k === 'm') setK('mirror', !S.mirror);
+  else if (k === 'g') setK('grid', !S.grid);
+  else if (k === 'v') setK('camView', S.camView === 'full' ? 'circle' : 'full');
   else if (k === 'h') document.body.classList.toggle('clean');
   else if (k === 's') $('panel').classList.toggle('open');
   else if (k === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
