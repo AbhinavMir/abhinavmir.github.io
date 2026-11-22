@@ -400,7 +400,8 @@ $('upBtn').onclick = () => $('file').click();
 $('file').onchange = e => {
   const f = e.target.files[0]; if (!f) return;
   if (vid.src) URL.revokeObjectURL(vid.src);
-  vid.src = URL.createObjectURL(f); vid.load(); layout();
+  vid.src = URL.createObjectURL(f); vid.load(); e.target.value = '';
+  if (S.camView === 'full') setK('camView', 'circle'); else layout();
 };
 $('playBtn').onclick = togglePlay;
 $('dlBtn').onclick = downloadLast;
@@ -421,7 +422,7 @@ addEventListener('drop', async e => {
   e.preventDefault();
   const files = [...e.dataTransfer.files];
   const v = files.find(f => f.type.startsWith('video'));
-  if (v) { vid.src = URL.createObjectURL(v); layout(); }
+  if (v) { if (vid.src) URL.revokeObjectURL(vid.src); vid.src = URL.createObjectURL(v); vid.load(); if (S.camView === 'full') setK('camView', 'circle'); else layout(); }
   const t = files.find(f => /\.(tpmt|txt)$/i.test(f.name) || f.type.startsWith('text/'));
   if (t) { S.script = $('script').value = await t.text(); save(); rebuild(); msg('Loaded ' + t.name); }
 });
