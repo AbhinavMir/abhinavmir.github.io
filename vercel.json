@@ -1,6 +1,13 @@
 {
   "routes": [
     {
+      "src": "/research(\\.html)?",
+      "status": 301,
+      "headers": {
+        "Location": "/#research"
+      }
+    },
+    {
       "src": "/",
       "has": [
         {
