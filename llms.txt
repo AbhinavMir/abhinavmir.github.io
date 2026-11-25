@@ -7,10 +7,9 @@
 
 ## Contact
 
-- Email: august@ambra911.com
+- Email: abhinavmirdev@gmail.com
 - GitHub: https://github.com/abhinavmir
 - LinkedIn: https://www.linkedin.com/in/abhinavmir/
-- Book a call: https://cal.com/ambra-august
 - Goodreads: https://www.goodreads.com/user/show/163219394-abhinav-srivastava
 
 ## Experience
@@ -67,7 +66,6 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 
 - Hamlet (https://hamlet.so) — An agent-tech community, a replacement for Discord/Discourse.
 - Harnext (https://www.npmjs.com/package/@buildingthefuture/harnext) — An npm package for choosing, transferring, and syncing chats across Claude Code, pi, Oh My Pi, and Codex.
-- Hospital Gym (https://github.com/AbhinavMir/hospital-gym) — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.
 - FHIR Connectors (https://github.com/abhinavmir/fhir_py) — A Python SDK for real vendor implementations; eClinicalWorks and Healow scheduling implemented. Unofficial, unaffiliated.
 - NEMSIS Viewer (https://abhinavmir.github.io/nemsis-viewer.html) — A browser-based viewer for NEMSIS 3.x EMS records.
 - X12 Viewer (https://abhinavmir.github.io/X12-Viewer-1.0.dmg) — A native macOS viewer for X12 EDI files.
@@ -94,6 +92,9 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 - Strudel (https://strudel.xyz) — Ephemeral Ethereum testnets for teams.
 - Elcair (https://elcair.sh) — Point at an Ethereum contract ABI, get a typed TypeScript SDK.
 - Profs (https://profs.fyi) — Search university faculty by research interest and recent publications.
+- Hospital Gym (https://github.com/AbhinavMir/hospital-gym) — A deterministic emergency-department simulator for benchmarking AI scheduling and orchestration policies.
+- EmberDB (https://github.com/abhinavmir/emberdb) — FHIR-native time-series storage for critical care, benchmarked against InfluxDB, TimescaleDB, and QuestDB on MIMIC-III data.
+- Reading MUMPS at Scale — An open tree-sitter grammar for MUMPS, the language behind the VA's VistA EHR. Parses 98.6% of VistA's 33,951 routines.
 
 ## Research
 
@@ -107,11 +108,9 @@ Commure (https://commure.com) builds healthcare software, including the Athelas 
 - CORAL: A Permissioned Ledger Framework for Jointly Signed Negotiated Rates Between Providers and Payers (under review) — A permissioned ledger on which provider and payer both sign each negotiated rate, so a published price that differs is traced to the file that departs.
 
 ### Unpublished
-- EmberDB (https://github.com/abhinavmir/emberdb) — FHIR-native time-series storage for critical care, benchmarked against InfluxDB, TimescaleDB, and QuestDB on MIMIC-III data.
 - Privacy-Preserving Healthcare Cost Prediction — Secure multiparty computation for joint model training across hospitals, insurers, and public health agencies without exposing raw data.
 - zkDNA — Zero-knowledge proofs for negative STR DNA match verification in forensic contexts.
 - Formal Verification of FHIR Resources — Lightweight formal methods (Alloy) to verify structural integrity and safety invariants of HL7 FHIR data models.
-- Reading MUMPS at Scale — An open tree-sitter grammar for MUMPS, the language behind the VA's VistA EHR. Parses 98.6% of VistA's 33,951 routines.
 - ICD-10 Codes from Visit Dialogues — A framework that assigns one ICD-10-CM code to a doctor-patient dialogue with a System One model, with no task training. Exact code for 62.0% of 996 held-out MedSynth dialogues from the 2,032 benchmark codes, and 57.3% from all 74,719 codes. Paper: https://abhinavmir.xyz/papers/icd10-visit-dialogues.pdf
 
 ### Datasets
